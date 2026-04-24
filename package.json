@@ -24,7 +24,10 @@
       "import": "./dist/index.mjs"
     },
     "./package.json": "./package.json",
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/style.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./themes.css": "./dist/themes/index.css",
+    "./components/*": "./dist/components/*"
   },
   "publishConfig": {
     "access": "public"

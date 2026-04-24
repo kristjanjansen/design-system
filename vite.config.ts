@@ -5,6 +5,8 @@ export default defineConfig({
     "*": "vp check --fix",
   },
   pack: {
+    entry: ["src/index.ts", "src/style.css"],
+    unbundle: true,
     dts: {
       tsgo: true,
     },
