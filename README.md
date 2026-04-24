@@ -11,5 +11,5 @@ Create a settings page with name, email (required), bio fields, a "receive notif
 ## For library contributors
 
 ```
-Add a Radio component. Follow the conventions in CLAUDE.md and DESIGN.md. Consult the Checkbox component for patterns. Run vp check and vp test before committing.
+Add a Radio component. Follow the conventions in CLAUDE.md and DESIGN.md. Consult the Checkbox component for patterns.
 ```
