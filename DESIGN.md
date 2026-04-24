@@ -48,20 +48,4 @@
 - Error: `aria-live="polite"` (not `role="alert"`)
 - Accordion: native `<details>` + `interpolate-size`. `name` for exclusive. `variant="ghost|default"`
 
-## Figma
-
-- File: https://www.figma.com/design/NiBvhCdGieWhAcyuwn2K7W/Test
-- Design Tokens collection: 4 modes (brand1-light/dark, brand2-light/dark)
-- Text styles with `fontFamily`/`fontSize`/`fontStyle` bound to variables (Inter ↔ Roboto Flex)
-- Icons from EDS Icon Library (`global/` set)
-
-### Component page rules
-
-1. Component set at x=2000, no background — out of view
-2. 4 themed frames in 2×2 grid (lights top, darks bottom). "All components" page: single row
-3. Frames: 400px wide, equal height, 48px gap, 24px padding, 8px radius, fill bound to `color/page`
-4. Theme label: 11px muted 0.5 opacity. All states shown. Instances fill width
-5. Pages: "All components" first, alphabetical middle, "Icons" last
-6. Disabled/readonly fills: `color/bg` at 0.7 opacity — never hardcoded colors
-7. Labels reflect state (e.g. "Email" for error, "Username" for disabled)
-8. Don't assume Figma API limitations — test before claiming features don't exist
+Figma rules and component page conventions are in [CLAUDE.md](CLAUDE.md).

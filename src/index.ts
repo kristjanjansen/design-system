@@ -11,6 +11,7 @@ export { Checkbox, type CheckboxProps } from "./components/Checkbox/Checkbox.tsx
 export { Switch, type SwitchProps } from "./components/Switch/Switch.tsx";
 export { Textarea, type TextareaProps } from "./components/Textarea/Textarea.tsx";
 export { Input, type InputProps } from "./components/Input/Input.tsx";
+export { InputNumber, type InputNumberProps } from "./components/InputNumber/InputNumber.tsx";
 export {
   InputPassword,
   type InputPasswordProps,

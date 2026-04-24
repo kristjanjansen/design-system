@@ -20,7 +20,8 @@ src/style.css                                           (combined CSS entry)
 - No index files — `Input/Input.tsx` not `Input/index.tsx`
 - Colocated tests — `Input/Input.test.tsx` next to component
 - Internal primitives in `internal/` — not exported from package
-- Icons as TSX components with `fill="currentColor"`
+- Icons centralized in `src/icons/` with barrel `index.ts`. Named `Icon{Name}Sm.tsx`
+- Icons from EDS Figma `global/` set, `fill="currentColor"`
 
 ## Build
 
@@ -36,6 +37,25 @@ src/style.css                                           (combined CSS entry)
 3. Read `src/variables.css` for tokens, `src/themes/` for brand overrides
 4. `value` + `onChange` = controlled. `defaultValue` = uncontrolled. Don't use `value` without `onChange`
 5. `import { Button, Input, ... } from "design-system"` + `import "design-system/css/style.css"`
+
+## Figma MCP
+
+- File: https://www.figma.com/design/NiBvhCdGieWhAcyuwn2K7W/Test
+- **CRITICAL: always set `layoutSizingVertical = "HUG"` on inner frames after creating content.** Frames default to FIXED height after `resize()` — this causes components to render with excess whitespace. Apply HUG to: component variants, input wrappers, triggers, content frames.
+- Text styles support `setBoundVariable()` for `fontFamily`, `fontSize`, `fontStyle` — use STRING vars for family/style, FLOAT for size
+- Don't assume Figma API limitations — test before claiming features don't exist
+- Font style names differ: Inter = "Semi Bold" (space), Roboto Flex = "SemiBold" (no space). Use `listAvailableFontsAsync()` to discover
+- Screenshot individual variants, not component sets (too zoomed out at set level)
+
+### Component page rules
+
+1. Component set at x=2000, no background — out of view
+2. 4 themed frames in 2×2 grid (lights top, darks bottom). "All components" page: single row
+3. Frames: 400px wide, equal height, 48px gap, 24px padding, 8px radius, fill bound to `color/page`
+4. Theme label: 11px muted 0.5 opacity. All states shown. Instances fill width
+5. Pages: "All components" first, alphabetical middle, "Icons" last
+6. Disabled/readonly fills: `color/bg` at 0.7 opacity — never hardcoded colors
+7. Labels reflect state (e.g. "Email" for error, "Username" for disabled)
 
 ---
 
