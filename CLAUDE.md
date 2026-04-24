@@ -118,6 +118,20 @@ When working in a project that uses this design system:
 - Each component page has themed frames in 2×2 grid (lights top, darks bottom)
 - Component sets moved off-canvas (x=2000) — themed frames are the primary view
 
+### Component page rules (every component page must follow)
+
+1. Component set at x=2000, no background fill — out of view
+2. 4 themed frames in 2×2 grid: brand1-light + brand2-light (top row), brand1-dark + brand2-dark (bottom row)
+3. All frames: 400px wide, equal height (max of 4), 24px gap
+4. Frame layout: vertical auto-layout, 24px padding, 16px item spacing, 8px corner radius
+5. Frame fill bound to `color/page` variable
+6. Mode set via `setExplicitVariableModeForCollection`
+7. Theme label: 11px, muted color, 0.5 opacity, first child
+8. All component states shown as instances (default, error, disabled, readonly, hover, focused, required, etc.)
+9. Instances: `layoutSizingHorizontal = "FILL"` after appending
+10. Brand-specific variants where applicable (accordion ghost for brand1, default for brand2)
+11. "All components" page: single horizontal row — brand1-light, brand2-light, brand1-dark, brand2-dark
+
 ## Figma gotchas (lessons learned)
 
 - **Text styles CAN bind to variables** — `fontFamily`, `fontSize`, `fontStyle` all support `setBoundVariable()`. Use STRING variables for fontFamily/fontStyle, FLOAT for fontSize. Do NOT assume Figma features don't exist — test via the API before claiming limitations.
