@@ -1,5 +1,6 @@
 import { useId } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
+import { FieldMessages } from "../internal/FieldMessages.tsx";
 import { useRadioGroup } from "./RadioContext.ts";
 
 export interface RadioProps {
@@ -10,9 +11,10 @@ export interface RadioProps {
   className?: string;
 }
 
-export function Radio({ children, value, disabled, className }: RadioProps) {
+export function Radio({ children, value, description, disabled, className }: RadioProps) {
   const ctx = useRadioGroup();
   const autoId = useId();
+  const descId = description ? `${autoId}-desc` : undefined;
   const isDisabled = disabled || ctx?.disabled;
 
   return (
@@ -25,11 +27,15 @@ export function Radio({ children, value, disabled, className }: RadioProps) {
         className="input"
         checked={ctx?.value !== undefined ? ctx.value === value : undefined}
         disabled={isDisabled}
+        aria-describedby={descId}
         onChange={() => ctx?.onChange?.(value)}
       />
-      <FieldLabel htmlFor={autoId} disabled={isDisabled} inline>
-        {children}
-      </FieldLabel>
+      <div className="radio-content">
+        <FieldLabel htmlFor={autoId} disabled={isDisabled} inline>
+          {children}
+        </FieldLabel>
+        <FieldMessages description={description} descriptionId={descId} />
+      </div>
     </div>
   );
 }
