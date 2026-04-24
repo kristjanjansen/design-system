@@ -25,9 +25,9 @@
     },
     "./package.json": "./package.json",
     "./style.css": "./dist/style.css",
+    "./css/*.css": "./dist/components/*/*.css",
     "./tokens.css": "./dist/tokens.css",
-    "./themes.css": "./dist/themes/index.css",
-    "./components/*": "./dist/components/*"
+    "./themes.css": "./dist/themes/index.css"
   },
   "publishConfig": {
     "access": "public"
