@@ -4,7 +4,8 @@ import "./FieldLabel.css";
 
 export interface FieldLabelProps {
   children?: ReactNode;
-  htmlFor: string;
+  htmlFor?: string;
+  as?: "label" | "legend";
   required?: boolean;
   infoHint?: ReactNode;
   suffix?: ReactNode;
@@ -16,6 +17,7 @@ export interface FieldLabelProps {
 export function FieldLabel({
   children,
   htmlFor,
+  as = "label",
   required,
   infoHint,
   suffix,
@@ -25,9 +27,11 @@ export function FieldLabel({
 }: FieldLabelProps) {
   if (!children) return null;
 
+  const Tag = as;
+
   return (
-    <label
-      htmlFor={htmlFor}
+    <Tag
+      {...(as === "label" && htmlFor ? { htmlFor } : {})}
       className={[
         "ds-field-label",
         inline ? "ds-field-label--inline" : "",
@@ -43,6 +47,6 @@ export function FieldLabel({
         {suffix && <span className="ds-field-label-suffix">{suffix}</span>}
       </span>
       {infoHint && <span className="ds-field-label-hint">{infoHint}</span>}
-    </label>
+    </Tag>
   );
 }

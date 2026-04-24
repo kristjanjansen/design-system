@@ -9,4 +9,6 @@
 @import "./components/Button/Button.css";
 @import "./components/Switch/Switch.css";
 @import "./components/Checkbox/Checkbox.css";
+@import "./components/RadioGroup/RadioGroup.css";
+@import "./components/Select/Select.css";
 @import "./components/Accordion/Accordion.css";
