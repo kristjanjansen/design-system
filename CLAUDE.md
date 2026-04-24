@@ -122,7 +122,7 @@ When working in a project that uses this design system:
 
 1. Component set at x=2000, no background fill — out of view
 2. 4 themed frames in 2×2 grid: brand1-light + brand2-light (top row), brand1-dark + brand2-dark (bottom row)
-3. All frames: 400px wide, equal height (max of 4), 24px gap
+3. All frames: 400px wide, equal height (max of 4), 48px gap between frames
 4. Frame layout: vertical auto-layout, 24px padding, 16px item spacing, 8px corner radius
 5. Frame fill bound to `color/page` variable
 6. Mode set via `setExplicitVariableModeForCollection`
@@ -130,7 +130,10 @@ When working in a project that uses this design system:
 8. All component states shown as instances (default, error, disabled, readonly, hover, focused, required, etc.)
 9. Instances: `layoutSizingHorizontal = "FILL"` after appending
 10. Brand-specific variants where applicable (accordion ghost for brand1, default for brand2)
-11. "All components" page: single horizontal row — brand1-light, brand2-light, brand1-dark, brand2-dark
+11. "All components" page: single horizontal row — brand1-light, brand2-light, brand1-dark, brand2-dark (same 48px gap)
+12. Pages ordered: "All components" first, then alphabetical (Accordion, Button, Checkbox, Input, Switch, Textarea), "Icons" last
+13. Disabled/readonly input fills: use `color/bg` variable with 0.7 opacity — NOT hardcoded colors (breaks dark themes)
+14. Labels in variants should reflect the state (e.g. "Email" for error, "Username" for disabled, "Account ID" for readonly)
 
 ## Figma gotchas (lessons learned)
 
