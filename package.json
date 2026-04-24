@@ -1,16 +1,16 @@
 {
   "name": "system-design",
   "version": "3.0.0",
-  "description": "A starter for creating a TypeScript package.",
-  "homepage": "https://github.com/author/library#readme",
+  "description": "Modern React design system with oklch colors, CSS custom properties, multi-brand theming, and native web platform features.",
+  "homepage": "https://github.com/kristjanjansen/system-design#readme",
   "bugs": {
-    "url": "https://github.com/author/library/issues"
+    "url": "https://github.com/kristjanjansen/system-design/issues"
   },
   "license": "MIT",
-  "author": "Author Name <author.name@mail.com>",
+  "author": "Kristjan Jansen <kristjan.jansen@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/author/library.git"
+    "url": "git+https://github.com/kristjanjansen/system-design.git"
   },
   "files": [
     "dist",
