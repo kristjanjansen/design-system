@@ -69,6 +69,68 @@
       border-color: oklch(from var(--ds-color-error) calc(l - var(--ds-l-focus)) c h);
     }
 
+    /* Wrapper for inputStart/inputEnd slots */
+    .input-wrapper {
+      display: flex;
+      align-items: center;
+      border: var(--ds-border-width) solid var(--ds-color-border);
+      border-radius: var(--ds-radius);
+      background: var(--ds-color-bg);
+      transition-property: border-color, outline-color, background-color;
+      transition-duration: var(--ds-duration-normal);
+      transition-timing-function: var(--ds-easing);
+    }
+
+    .input-wrapper:hover:not(:has(:disabled)) {
+      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-hover)) c h);
+    }
+
+    .input-wrapper:has(:focus-visible) {
+      outline: var(--ds-outline-width) solid var(--ds-color-outline);
+      outline-offset: var(--ds-outline-offset);
+      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-focus)) c h);
+    }
+
+    .input-wrapper:has(:disabled) {
+      background: oklch(from var(--ds-color-bg) calc(l - var(--ds-l-hover)) c h);
+      border-color: oklch(
+        from var(--ds-color-border) calc(l + var(--ds-l-hover)) var(--ds-c-disabled) h
+      );
+    }
+
+    .input-wrapper--error {
+      border-color: var(--ds-color-error);
+    }
+
+    .input-wrapper--error:has(:focus-visible) {
+      outline-color: var(--ds-color-error);
+    }
+
+    .input--slotted {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      background: none;
+      outline: none;
+    }
+
+    .input-start,
+    .input-end {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      color: var(--ds-color-muted);
+      font-size: var(--ds-font-size-lg);
+    }
+
+    .input-start {
+      padding-left: var(--ds-spacing-14);
+    }
+
+    .input-end {
+      padding-right: var(--ds-spacing-14);
+    }
+
     @media (forced-colors: active) {
       .input {
         border-color: ButtonBorder;
