@@ -1,23 +1,32 @@
-# vite-plus-starter
+# system-design
 
-A starter for creating a Vite Plus project.
+Agent-first React design system. oklch colors, CSS custom properties, multi-brand theming, native web platform features.
 
-## Development
+Components: `Input`, `Textarea`, `Button`, `Switch`, `Checkbox`, `Accordion`
 
-- Install dependencies:
+## Setup
 
 ```bash
+brew install vite-plus
 vp install
 ```
 
-- Run the unit tests:
+## Development
 
 ```bash
-vp test
+vp dev          # watch mode
+vp test         # tests
+vp check        # format + lint + types
+vp pack         # build
 ```
 
-- Build the library:
+## Usage
 
-```bash
-vp pack
+```tsx
+import { Button, Input } from "system-design";
+import "system-design/css/style.css";
 ```
+
+## Design
+
+See [DESIGN.md](DESIGN.md) for tokens, theming, and Figma.
