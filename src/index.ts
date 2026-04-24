@@ -1,4 +1,4 @@
-import "./tokens.css";
+import "./variables.css";
 import "./themes/index.css";
 
 export { Accordion, type AccordionProps } from "./components/Accordion/Accordion.tsx";

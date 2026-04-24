@@ -100,7 +100,7 @@ When working in a project that uses this design system:
 2. Read `node_modules/design-system/src/index.ts` for available exports
 3. Read `node_modules/design-system/src/components/{Name}/{Name}.tsx` for props interface and component implementation
 4. Read `node_modules/design-system/src/components/{Name}/{Name}.css` for available CSS classes, states, and tokens used
-5. Read `node_modules/design-system/src/tokens.css` for all design tokens and their default values
+5. Read `node_modules/design-system/src/variables.css` for all design tokens and their default values
 6. Read `node_modules/design-system/src/themes/` for brand-specific token overrides
 7. Controlled fields use `value` + `onChange` together. For static/display values without `onChange`, use `defaultValue` (uncontrolled) or `readOnly` (explicit)
 8. Import components: `import { Accordion, AccordionGroup, Button, Checkbox, Switch, TextArea, TextField } from "design-system"`
