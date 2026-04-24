@@ -6,13 +6,6 @@
       gap: var(--ds-spacing-8);
     }
 
-    .label {
-      font-weight: 600;
-      font-size: var(--ds-font-size-md);
-      color: var(--ds-color-fg);
-      text-wrap: balance;
-    }
-
     .input {
       padding: var(--ds-spacing-10) var(--ds-spacing-14);
       font-size: var(--ds-font-size-lg);
@@ -76,40 +69,6 @@
       border-color: oklch(from var(--ds-color-error) calc(l - var(--ds-l-focus)) c h);
     }
 
-    .error {
-      font-size: var(--ds-font-size-sm);
-      color: var(--ds-color-error);
-      text-wrap: balance;
-      opacity: 1;
-      transform: translateY(0);
-      transition:
-        opacity var(--ds-duration-normal) var(--ds-easing),
-        transform var(--ds-duration-normal) var(--ds-easing);
-    }
-
-    @starting-style {
-      .error {
-        opacity: 0;
-        transform: translateY(-4px);
-      }
-    }
-
-    .description {
-      font-size: var(--ds-font-size-sm);
-      color: var(--ds-color-muted);
-      text-wrap: balance;
-    }
-
-    :scope:has(:disabled) .label {
-      color: oklch(from var(--ds-color-fg) calc(l + var(--ds-l-disabled)) c h);
-    }
-
-    :scope:has(:disabled) .description {
-      color: oklch(
-        from var(--ds-color-muted) calc(l + var(--ds-l-muted-disabled)) var(--ds-c-disabled) h
-      );
-    }
-
     @media (forced-colors: active) {
       .input {
         border-color: ButtonBorder;
@@ -121,26 +80,10 @@
         border-color: GrayText;
         color: GrayText;
       }
-
-      .label {
-        color: CanvasText;
-      }
-
-      .error {
-        color: LinkText;
-      }
-
-      .description {
-        color: GrayText;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .input {
-        transition: none;
-      }
-
-      .error {
         transition: none;
       }
     }

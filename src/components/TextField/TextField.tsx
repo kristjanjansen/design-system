@@ -1,53 +1,49 @@
-import { type InputHTMLAttributes, forwardRef, useId } from "react";
+import { type InputHTMLAttributes, type ReactNode, forwardRef, useId } from "react";
+import { FieldLabel } from "../internal/FieldLabel.tsx";
+import { FieldMessages } from "../internal/FieldMessages.tsx";
 import "./TextField.css";
 
-export interface TextFieldProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "onChange" | "type"
-> {
+export interface TextFieldProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "type"> {
   label?: string;
   description?: string;
   error?: string;
   type?: "text" | "email" | "password" | "url" | "tel" | "search";
+  infoHint?: ReactNode;
+  suffix?: ReactNode;
   onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function TextField(
-  { label, description, error, onChange, id, className, ...rest },
-  ref,
-) {
-  const autoId = useId();
-  const inputId = id ?? autoId;
-  const errorId = error ? `${inputId}-error` : undefined;
-  const descId = description ? `${inputId}-desc` : undefined;
-  const describedBy = [errorId, descId].filter(Boolean).join(" ") || undefined;
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+  function TextField(
+    { label, description, error, onChange, id, className, required, infoHint, suffix, disabled, ...rest },
+    ref,
+  ) {
+    const autoId = useId();
+    const inputId = id ?? autoId;
+    const errorId = error ? `${inputId}-error` : undefined;
+    const descId = description ? `${inputId}-desc` : undefined;
+    const describedBy = [errorId, descId].filter(Boolean).join(" ") || undefined;
 
-  return (
-    <div className={["ds-text-field", className].filter(Boolean).join(" ")}>
-      {label && (
-        <label htmlFor={inputId} className="label">
+    return (
+      <div className={["ds-text-field", className].filter(Boolean).join(" ")}>
+        <FieldLabel htmlFor={inputId} required={required} infoHint={infoHint} suffix={suffix} disabled={disabled}>
           {label}
-        </label>
-      )}
-      <input
-        ref={ref}
-        id={inputId}
-        className="input"
-        aria-invalid={error ? true : undefined}
-        aria-describedby={describedBy}
-        onChange={onChange ? (e) => onChange(e.target.value, e) : undefined}
-        {...rest}
-      />
-      {error && (
-        <span id={errorId} aria-live="polite" className="error">
-          {error}
-        </span>
-      )}
-      {description && !error && (
-        <span id={descId} className="description">
-          {description}
-        </span>
-      )}
-    </div>
-  );
-});
+        </FieldLabel>
+        <input
+          ref={ref}
+          id={inputId}
+          className="input"
+          aria-invalid={error ? true : undefined}
+          required={required}
+          aria-required={required || undefined}
+          aria-describedby={describedBy}
+          disabled={disabled}
+          onChange={onChange ? (e) => onChange(e.target.value, e) : undefined}
+          {...rest}
+        />
+        <FieldMessages error={error} description={description} errorId={errorId} descriptionId={descId} />
+      </div>
+    );
+  },
+);

@@ -77,19 +77,6 @@
       cursor: default;
     }
 
-    .label {
-      font-size: var(--ds-font-size-lg);
-      color: var(--ds-color-fg);
-      cursor: pointer;
-      text-wrap: balance;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    :scope:has(.input:disabled) .label {
-      color: oklch(from var(--ds-color-fg) calc(l + var(--ds-l-disabled)) c h);
-      cursor: default;
-    }
-
     @media (forced-colors: active) {
       .track {
         border-color: ButtonBorder;
@@ -118,9 +105,6 @@
         background: GrayText;
       }
 
-      .label {
-        color: CanvasText;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {

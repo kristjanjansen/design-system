@@ -1,0 +1,37 @@
+@layer ds {
+  .ds-field-messages {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-spacing-8);
+  }
+
+  .ds-field-messages-error {
+    font-size: var(--ds-font-size-sm);
+    color: var(--ds-color-error);
+    text-wrap: balance;
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity var(--ds-duration-normal) var(--ds-easing),
+      transform var(--ds-duration-normal) var(--ds-easing);
+  }
+
+  @starting-style {
+    .ds-field-messages-error {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+
+  .ds-field-messages-description {
+    font-size: var(--ds-font-size-sm);
+    color: var(--ds-color-muted);
+    text-wrap: balance;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ds-field-messages-error {
+      transition: none;
+    }
+  }
+}

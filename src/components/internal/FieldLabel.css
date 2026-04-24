@@ -1,0 +1,35 @@
+@layer ds {
+  .ds-field-label {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-spacing-8);
+    font-weight: 600;
+    font-size: var(--ds-font-size-md);
+    color: var(--ds-color-fg);
+    text-wrap: balance;
+    cursor: pointer;
+  }
+
+  .ds-field-label--disabled {
+    color: oklch(from var(--ds-color-fg) calc(l + var(--ds-l-disabled)) c h);
+    cursor: default;
+  }
+
+  .ds-field-label-suffix {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ds-color-muted);
+  }
+
+  .ds-field-label-hint {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .ds-required {
+    font-size: 0.6em;
+    color: var(--ds-color-error);
+    vertical-align: super;
+    margin-left: 0.125em;
+  }
+}

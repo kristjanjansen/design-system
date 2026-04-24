@@ -54,7 +54,7 @@ test("renders error with aria attributes", () => {
 
 test("renders description", () => {
   const container = render(<Checkbox description="Optional" />);
-  const desc = container.querySelector(".description");
+  const desc = container.querySelector(".ds-field-messages-description");
   expect(desc?.textContent).toBe("Optional");
 });
 
