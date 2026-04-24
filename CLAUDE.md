@@ -85,7 +85,7 @@
 - Build verification tests assert dist files exist, exports are correct, CSS contains all selectors/tokens/themes
 - Component tests include `forwardRef` contract check
 - No hardcoded px values in component CSS — only shape constants (999px pill, 50% circle) and animation transforms
-- Package ships `src/` and `CLAUDE.md` so consumer-side agents can read full source from `node_modules/design-system/src/` and design decisions from `node_modules/design-system/CLAUDE.md`
+- Package ships `src/` and `CLAUDE.md` so consumer-side agents can read full source from `node_modules/system-design/src/` and design decisions from `node_modules/system-design/CLAUDE.md`
 - Accordion uses native `<details>`/`<summary>` with `interpolate-size: allow-keywords` for animated open/close
 - AccordionGroup uses native `name` attribute for exclusive mode — no React state management
 - Accordion has `variant="ghost"` (brand1, divider borders) and `variant="default"` (brand2, boxed with border-radius)
@@ -96,15 +96,15 @@
 
 When working in a project that uses this design system:
 
-1. Read `node_modules/design-system/CLAUDE.md` for design decisions and conventions
-2. Read `node_modules/design-system/src/index.ts` for available exports
-3. Read `node_modules/design-system/src/components/{Name}/{Name}.tsx` for props interface and component implementation
-4. Read `node_modules/design-system/src/components/{Name}/{Name}.css` for available CSS classes, states, and tokens used
-5. Read `node_modules/design-system/src/variables.css` for all design tokens and their default values
-6. Read `node_modules/design-system/src/themes/` for brand-specific token overrides
+1. Read `node_modules/system-design/CLAUDE.md` for design decisions and conventions
+2. Read `node_modules/system-design/src/index.ts` for available exports
+3. Read `node_modules/system-design/src/components/{Name}/{Name}.tsx` for props interface and component implementation
+4. Read `node_modules/system-design/src/components/{Name}/{Name}.css` for available CSS classes, states, and tokens used
+5. Read `node_modules/system-design/src/variables.css` for all design tokens and their default values
+6. Read `node_modules/system-design/src/themes/` for brand-specific token overrides
 7. Controlled fields use `value` + `onChange` together. For static/display values without `onChange`, use `defaultValue` (uncontrolled) or `readOnly` (explicit)
-8. Import components: `import { Accordion, AccordionGroup, Button, Checkbox, Switch, TextArea, TextField } from "design-system"`
-9. Import styles: `import "design-system/style.css"`
+8. Import components: `import { Accordion, AccordionGroup, Button, Checkbox, Switch, TextArea, TextField } from "system-design"`
+9. Import styles: `import "system-design/style.css"`
 
 ## Figma
 
