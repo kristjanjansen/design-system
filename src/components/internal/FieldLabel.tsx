@@ -9,6 +9,7 @@ export interface FieldLabelProps {
   infoHint?: ReactNode;
   suffix?: ReactNode;
   disabled?: boolean;
+  inline?: boolean;
   className?: string;
 }
 
@@ -19,6 +20,7 @@ export function FieldLabel({
   infoHint,
   suffix,
   disabled,
+  inline,
   className,
 }: FieldLabelProps) {
   if (!children) return null;
@@ -26,7 +28,14 @@ export function FieldLabel({
   return (
     <label
       htmlFor={htmlFor}
-      className={["ds-field-label", disabled ? "ds-field-label--disabled" : "", className].filter(Boolean).join(" ")}
+      className={[
+        "ds-field-label",
+        inline ? "ds-field-label--inline" : "",
+        disabled ? "ds-field-label--disabled" : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
     >
       <span className="ds-field-label-text">
         {children}

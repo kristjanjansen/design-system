@@ -1,63 +1,48 @@
-// @vitest-environment jsdom
-import { expect, test, vi } from "vite-plus/test";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
-import { createRoot } from "react-dom/client";
-import { act } from "react";
+import { expect, test, vi } from "vite-plus/test";
 import { Switch } from "./Switch.tsx";
-
-function render(ui: React.ReactElement) {
-  const container = document.createElement("div");
-  document.body.appendChild(container);
-  act(() => {
-    createRoot(container).render(ui);
-  });
-  return container;
-}
 
 test("exports forwardRef component", () => {
   expect(Switch.$$typeof?.toString()).toBe("Symbol(react.forward_ref)");
 });
 
 test("renders a switch input", () => {
-  const container = render(<Switch />);
-  const input = container.querySelector("input");
-  expect(input).not.toBeNull();
-  expect(input?.type).toBe("checkbox");
-  expect(input?.getAttribute("role")).toBe("switch");
+  render(<Switch label="Toggle" />);
+  const input = screen.getByRole("switch");
+  expect(input).toBeInTheDocument();
 });
 
 test("renders label linked to input", () => {
-  const container = render(<Switch label="Dark mode" />);
-  const label = container.querySelector("label");
-  const input = container.querySelector("input");
-  expect(label?.textContent).toBe("Dark mode");
-  expect(label?.htmlFor).toBe(input?.id);
+  render(<Switch label="Dark mode" />);
+  const input = screen.getByLabelText("Dark mode");
+  expect(input).toBeInTheDocument();
 });
 
-test("calls onChange with checked state", () => {
+test("calls onChange with checked state", async () => {
   const handleChange = vi.fn();
-  const container = render(<Switch onChange={handleChange} />);
-  const input = container.querySelector("input")!;
-  act(() => {
-    input.click();
-  });
+  const user = userEvent.setup();
+  render(<Switch label="Toggle" onChange={handleChange} />);
+  const input = screen.getByRole("switch");
+  await user.click(input);
   expect(handleChange).toHaveBeenCalledWith(true, expect.anything());
 });
 
 test("supports disabled", () => {
-  const container = render(<Switch disabled label="Locked" />);
-  const input = container.querySelector("input")!;
-  expect(input.disabled).toBe(true);
+  render(<Switch disabled label="Locked" />);
+  const input = screen.getByRole("switch");
+  expect(input).toBeDisabled();
 });
 
 test("forwards ref to input", () => {
   const ref = createRef<HTMLInputElement>();
-  render(<Switch ref={ref} />);
+  render(<Switch label="Toggle" ref={ref} />);
   expect(ref.current?.type).toBe("checkbox");
 });
 
 test("supports defaultChecked", () => {
-  const container = render(<Switch defaultChecked />);
-  const input = container.querySelector("input")!;
-  expect(input.checked).toBe(true);
+  render(<Switch label="Toggle" defaultChecked />);
+  const input = screen.getByRole("switch");
+  expect(input).toBeChecked();
 });

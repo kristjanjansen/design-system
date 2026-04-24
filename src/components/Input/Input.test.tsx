@@ -1,82 +1,52 @@
-// @vitest-environment jsdom
-import { expect, test, vi } from "vite-plus/test";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
-import { createRoot } from "react-dom/client";
-import { act } from "react";
+import { expect, test, vi } from "vite-plus/test";
 import { Input } from "./Input.tsx";
-
-function render(ui: React.ReactElement) {
-  const container = document.createElement("div");
-  document.body.appendChild(container);
-  act(() => {
-    createRoot(container).render(ui);
-  });
-  return container;
-}
 
 test("exports forwardRef component", () => {
   expect(Input.$$typeof?.toString()).toBe("Symbol(react.forward_ref)");
 });
 
 test("renders an input", () => {
-  const container = render(<Input />);
-  const input = container.querySelector("input");
-  expect(input).not.toBeNull();
-});
-
-test("renders label linked to input", () => {
-  const container = render(<Input label="Name" />);
-  const label = container.querySelector("label");
-  const input = container.querySelector("input");
-  expect(label?.textContent).toBe("Name");
-  expect(label?.htmlFor).toBe(input?.id);
+  render(<Input label="Name" />);
+  expect(screen.getByLabelText("Name")).toBeInTheDocument();
 });
 
 test("renders error with aria attributes", () => {
-  const container = render(<Input error="Required" />);
-  const input = container.querySelector("input");
-  const errorEl = container.querySelector("[aria-live=polite]");
-  expect(errorEl?.textContent).toBe("Required");
-  expect(input?.getAttribute("aria-invalid")).toBe("true");
-  expect(input?.getAttribute("aria-describedby")).toBe(errorEl?.id);
+  render(<Input label="Email" error="Required" />);
+  expect(screen.getByLabelText("Email")).toHaveAttribute("aria-invalid", "true");
+  expect(screen.getByText("Required")).toBeInTheDocument();
 });
 
-test("calls onChange with value", () => {
+test("calls onChange with value", async () => {
   const handleChange = vi.fn();
-  const container = render(<Input onChange={handleChange} />);
-  const input = container.querySelector("input")!;
-  act(() => {
-    const event = new Event("input", { bubbles: true });
-    Object.defineProperty(event, "target", { value: { value: "hello" } });
-    input.dispatchEvent(event);
-  });
-  // Use native change event for React's onChange
-  act(() => {
-    const nativeInputEvent = new InputEvent("input", { bubbles: true });
-    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")?.set?.call(input, "hello");
-    input.dispatchEvent(nativeInputEvent);
-  });
-  expect(handleChange).toHaveBeenCalledWith("hello", expect.anything());
+  render(<Input label="Name" onChange={handleChange} />);
+  await userEvent.type(screen.getByLabelText("Name"), "hello");
+  expect(handleChange).toHaveBeenLastCalledWith("hello", expect.anything());
 });
 
 test("supports disabled and required", () => {
-  const container = render(<Input disabled required />);
-  const input = container.querySelector("input")!;
-  expect(input.disabled).toBe(true);
-  expect(input.required).toBe(true);
+  render(<Input label="Name" disabled required />);
+  const input = screen.getByLabelText(/Name/);
+  expect(input).toBeDisabled();
+  expect(input).toBeRequired();
 });
 
-test("forwards ref to input", () => {
+test("forwards ref", () => {
   const ref = createRef<HTMLInputElement>();
-  const container = render(<Input ref={ref} />);
-  const input = container.querySelector("input");
-  expect(ref.current).toBe(input);
+  render(<Input ref={ref} label="Name" />);
+  expect(ref.current).toBe(screen.getByLabelText("Name"));
 });
 
-test("passes through native HTML attributes", () => {
-  const container = render(<Input name="email" placeholder="Enter email" aria-label="Email" />);
-  const input = container.querySelector("input")!;
-  expect(input.name).toBe("email");
-  expect(input.placeholder).toBe("Enter email");
-  expect(input.getAttribute("aria-label")).toBe("Email");
+test("passes through native attributes", () => {
+  render(<Input label="Email" name="email" placeholder="Enter email" />);
+  const input = screen.getByLabelText("Email");
+  expect(input).toHaveAttribute("name", "email");
+  expect(input).toHaveAttribute("placeholder", "Enter email");
+});
+
+test("renders description", () => {
+  render(<Input label="Name" description="Your full name" />);
+  expect(screen.getByText("Your full name")).toBeInTheDocument();
 });

@@ -27,5 +27,9 @@ export default defineConfig({
       typeAware: false,
     },
   },
+  test: {
+    environment: "jsdom",
+    setupFiles: ["src/test-setup.ts"],
+  },
   fmt: {},
 });

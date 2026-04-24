@@ -10,6 +10,10 @@
     cursor: pointer;
   }
 
+  .ds-field-label--inline {
+    font-weight: 400;
+  }
+
   .ds-field-label--disabled {
     color: oklch(from var(--ds-color-fg) calc(l + var(--ds-l-disabled)) c h);
     cursor: default;

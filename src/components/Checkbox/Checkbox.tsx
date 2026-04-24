@@ -68,7 +68,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
             <IconIndeterminateSm />
           </span>
         </span>
-        <FieldLabel htmlFor={inputId} required={required} disabled={disabled}>
+        <FieldLabel htmlFor={inputId} required={required} disabled={disabled} inline>
           {label}
         </FieldLabel>
       </div>

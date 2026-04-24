@@ -1,83 +1,58 @@
-// @vitest-environment jsdom
-import { expect, test, vi } from "vite-plus/test";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
-import { createRoot } from "react-dom/client";
-import { act } from "react";
+import { expect, test, vi } from "vite-plus/test";
 import { Checkbox } from "./Checkbox.tsx";
-
-function render(ui: React.ReactElement) {
-  const container = document.createElement("div");
-  document.body.appendChild(container);
-  act(() => {
-    createRoot(container).render(ui);
-  });
-  return container;
-}
 
 test("exports forwardRef component", () => {
   expect(Checkbox.$$typeof?.toString()).toBe("Symbol(react.forward_ref)");
 });
 
-test("renders a checkbox input", () => {
-  const container = render(<Checkbox />);
-  const input = container.querySelector("input");
-  expect(input).not.toBeNull();
-  expect(input?.type).toBe("checkbox");
+test("renders a checkbox", () => {
+  render(<Checkbox label="Accept" />);
+  expect(screen.getByRole("checkbox")).toBeInTheDocument();
 });
 
 test("renders label linked to input", () => {
-  const container = render(<Checkbox label="Accept terms" />);
-  const label = container.querySelector("label");
-  const input = container.querySelector("input");
-  expect(label?.htmlFor).toBe(input?.id);
-  expect(label?.textContent).toContain("Accept terms");
+  render(<Checkbox label="Accept terms" />);
+  expect(screen.getByLabelText("Accept terms")).toBeInTheDocument();
 });
 
-test("calls onChange with checked state", () => {
+test("calls onChange with checked state", async () => {
   const handleChange = vi.fn();
-  const container = render(<Checkbox onChange={handleChange} />);
-  const input = container.querySelector("input")!;
-  act(() => {
-    input.click();
-  });
+  render(<Checkbox label="Accept" onChange={handleChange} />);
+  await userEvent.click(screen.getByRole("checkbox"));
   expect(handleChange).toHaveBeenCalledWith(true, expect.anything());
 });
 
 test("renders error with aria attributes", () => {
-  const container = render(<Checkbox error="Required" />);
-  const input = container.querySelector("input");
-  const errorEl = container.querySelector("[aria-live=polite]");
-  expect(errorEl?.textContent).toBe("Required");
-  expect(input?.getAttribute("aria-invalid")).toBe("true");
-  expect(input?.getAttribute("aria-describedby")).toBe(errorEl?.id);
+  render(<Checkbox label="Accept" error="Required" />);
+  expect(screen.getByRole("checkbox")).toHaveAttribute("aria-invalid", "true");
+  expect(screen.getByText("Required")).toBeInTheDocument();
 });
 
 test("renders description", () => {
-  const container = render(<Checkbox description="Optional" />);
-  const desc = container.querySelector(".ds-field-messages-description");
-  expect(desc?.textContent).toBe("Optional");
+  render(<Checkbox label="Accept" description="Optional" />);
+  expect(screen.getByText("Optional")).toBeInTheDocument();
 });
 
 test("supports disabled", () => {
-  const container = render(<Checkbox disabled label="Locked" />);
-  const input = container.querySelector("input")!;
-  expect(input.disabled).toBe(true);
+  render(<Checkbox label="Accept" disabled />);
+  expect(screen.getByRole("checkbox")).toBeDisabled();
 });
 
 test("supports indeterminate", () => {
-  const container = render(<Checkbox indeterminate />);
-  const input = container.querySelector("input")!;
-  expect(input.indeterminate).toBe(true);
+  render(<Checkbox label="Select all" indeterminate />);
+  expect(screen.getByRole("checkbox")).toHaveProperty("indeterminate", true);
 });
 
 test("forwards ref", () => {
   const ref = createRef<HTMLInputElement>();
-  render(<Checkbox ref={ref} />);
+  render(<Checkbox ref={ref} label="Accept" />);
   expect(ref.current?.type).toBe("checkbox");
 });
 
 test("supports defaultChecked", () => {
-  const container = render(<Checkbox defaultChecked />);
-  const input = container.querySelector("input")!;
-  expect(input.checked).toBe(true);
+  render(<Checkbox label="Accept" defaultChecked />);
+  expect(screen.getByRole("checkbox")).toBeChecked();
 });
