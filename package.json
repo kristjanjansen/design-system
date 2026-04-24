@@ -15,7 +15,8 @@
   "files": [
     "dist",
     "src",
-    "CLAUDE.md"
+    "CLAUDE.md",
+    "DESIGN.md"
   ],
   "type": "module",
   "exports": {
