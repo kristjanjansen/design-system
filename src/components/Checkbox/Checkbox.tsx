@@ -1,8 +1,8 @@
 import { type InputHTMLAttributes, forwardRef, useId } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";
-import { IconCheckSm } from "../../icons/IconCheckSm.tsx";
-import { IconIndeterminateSm } from "../../icons/IconIndeterminateSm.tsx";
+import { IconCheckSm } from "../../icons/index.ts";
+import { IconIndeterminateSm } from "../../icons/index.ts";
 import "./Checkbox.css";
 
 export interface CheckboxProps extends Omit<

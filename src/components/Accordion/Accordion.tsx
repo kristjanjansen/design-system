@@ -1,6 +1,6 @@
 import { type DetailedHTMLProps, type DetailsHTMLAttributes, type ReactNode } from "react";
 import { useAccordionGroup } from "./AccordionGroup.tsx";
-import { IconChevronDownSm } from "../../icons/IconChevronDownSm.tsx";
+import { IconChevronDownSm } from "../../icons/index.ts";
 import "./Accordion.css";
 
 export interface AccordionProps extends Omit<

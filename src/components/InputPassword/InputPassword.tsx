@@ -1,8 +1,7 @@
 import { type InputHTMLAttributes, type ReactNode, forwardRef, useId, useState } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";
-import { IconEyeSm } from "../../icons/IconEyeSm.tsx";
-import { IconEyeHideSm } from "../../icons/IconEyeHideSm.tsx";
+import { IconEyeHideSm, IconEyeSm } from "../../icons/index.ts";
 import "./InputPassword.css";
 
 export interface InputPasswordProps extends Omit<
