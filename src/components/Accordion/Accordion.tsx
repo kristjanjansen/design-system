@@ -1,6 +1,6 @@
 import { type DetailedHTMLProps, type DetailsHTMLAttributes, type ReactNode } from "react";
 import { useAccordionGroup } from "./AccordionGroup.tsx";
-import { ChevronIcon } from "./icons/ChevronIcon.tsx";
+import { IconChevronDownSm } from "../../icons/IconChevronDownSm.tsx";
 import "./Accordion.css";
 
 export interface AccordionProps extends Omit<
@@ -35,7 +35,9 @@ export function Accordion({
         `ds-accordion--${variant}`,
         disabled ? "ds-accordion--disabled" : "",
         className,
-      ].filter(Boolean).join(" ")}
+      ]
+        .filter(Boolean)
+        .join(" ")}
       open={defaultOpen}
       name={name ?? groupName}
       onToggle={onToggle ? (e) => onToggle((e.target as HTMLDetailsElement).open) : undefined}
@@ -43,7 +45,7 @@ export function Accordion({
     >
       <summary className="trigger" tabIndex={disabled ? -1 : undefined}>
         <span className="icon">
-          <ChevronIcon />
+          <IconChevronDownSm />
         </span>
         <span className="title">{title}</span>
       </summary>
