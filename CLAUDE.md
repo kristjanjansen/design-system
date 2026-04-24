@@ -23,6 +23,16 @@ src/style.css                                           (combined CSS entry)
 - Icons centralized in `src/icons/` with barrel `index.ts`. Named `Icon{Name}Sm.tsx`
 - Icons from EDS Figma `global/` set, `fill="currentColor"`
 
+## When adding a new component
+
+1. Create `src/components/{Name}/{Name}.tsx + .css + .test.tsx`
+2. Export from `src/index.ts`
+3. Add CSS import to `src/style.css`
+4. Update consumer app to show the new component
+5. Add Figma component set + themed frames (follow component page rules below)
+6. Add instance to Figma "All components" page
+7. Run `vp test && vp pack` before committing
+
 ## Build
 
 - `vp pack` with `unbundle: true` — per-component JS for tree-shaking
