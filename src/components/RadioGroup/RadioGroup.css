@@ -29,8 +29,8 @@
 
     .input {
       appearance: none;
-      width: 1.25em;
-      height: 1.25em;
+      width: 1.5em;
+      height: 1.5em;
       flex-shrink: 0;
       border: var(--ds-border-width) solid var(--ds-color-border);
       border-radius: 50%;
@@ -43,7 +43,7 @@
 
     .input:checked {
       border-color: var(--ds-color-accent);
-      border-width: 0.35em;
+      border-width: 5px;
     }
 
     .input:hover:not(:disabled) {
