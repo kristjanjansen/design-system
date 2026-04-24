@@ -30,8 +30,8 @@ interface InputNumberProps extends Omit<
   defaultValue?: number;
   formatOptions?: Intl.NumberFormatOptions;
   locale?: string;
-  prefix?: ReactNode; // visual prefix inside input (€, $)
-  endContent?: ReactNode; // visual suffix inside input (kg, kWh)
+  inputStart?: ReactNode; // visual prefix inside input (€, $)
+  inputEnd?: ReactNode; // visual suffix inside input (kg, kWh)
   onChange?: (value: number | undefined, event?: React.ChangeEvent<HTMLInputElement>) => void;
 }
 ```
@@ -69,8 +69,8 @@ Visual elements inside the input border — like EDS's `inputStart`/`inputEnd` a
 
 Use cases:
 
-- `prefix={<IconEuroSm />}` — icon before value
-- `endContent="kWh"` — unit text after value
+- `inputStart={<IconEuroSm />}` — icon before value
+- `inputEnd="kWh"` — unit text after value
 - `formatOptions={{ style: 'currency', currency: 'EUR' }}` — Intl handles the symbol
 
 ### Arrow key stepping
@@ -123,7 +123,7 @@ export const InputNumber = forwardRef(function InputNumber({ ... }, ref) {
     <div className="ds-input-number">
       <FieldLabel ...>{label}</FieldLabel>
       <div className="input-wrapper">
-        {prefix && <span className="prefix">{prefix}</span>}
+        {inputStart && <span className="input-start">{inputStart}</span>}
         <input
           type="text"
           inputMode="decimal"
@@ -134,7 +134,7 @@ export const InputNumber = forwardRef(function InputNumber({ ... }, ref) {
           onKeyDown={handleKeyDown}
           ...
         />
-        {endContent && <span className="suffix">{endContent}</span>}
+        {inputEnd && <span className="input-end">{inputEnd}</span>}
       </div>
       <FieldMessages ... />
     </div>
@@ -167,7 +167,7 @@ No icons needed (no stepper buttons).
 - onChange returns number
 - Currency formatting: `formatOptions={{ style: 'currency', currency: 'EUR' }}`
 - Locale: `locale="et-EE"` formats with comma decimal, space thousand separator
-- Prefix/suffix rendering
+- inputStart/inputEnd rendering
 - Supports all field props (label, error, description, required, disabled)
 - forwardRef contract check
 
