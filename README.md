@@ -5,7 +5,7 @@ Agent-first React design system. oklch colors, CSS custom properties, multi-bran
 ## For consumers
 
 ```
-Create a settings page with name, email (required), bio fields, a "receive notifications" switch, and save/cancel buttons. Use system-design components. Read node_modules/system-design/CLAUDE.md for conventions.
+Install system-design and create a settings page with name, email (required), bio fields, a "receive notifications" switch, and save/cancel buttons. Read node_modules/system-design/CLAUDE.md for conventions.
 ```
 
 ## For library contributors
