@@ -1,9 +1,9 @@
 import { type InputHTMLAttributes, type ReactNode, forwardRef, useId } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";
-import "./TextField.css";
+import "./Input.css";
 
-export interface TextFieldProps
+export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "type"> {
   label?: string;
   description?: string;
@@ -14,8 +14,8 @@ export interface TextFieldProps
   onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  function TextField(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  function Input(
     { label, description, error, onChange, id, className, required, infoHint, suffix, disabled, ...rest },
     ref,
   ) {
@@ -26,7 +26,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const describedBy = [errorId, descId].filter(Boolean).join(" ") || undefined;
 
     return (
-      <div className={["ds-text-field", className].filter(Boolean).join(" ")}>
+      <div className={["ds-input", className].filter(Boolean).join(" ")}>
         <FieldLabel htmlFor={inputId} required={required} infoHint={infoHint} suffix={suffix} disabled={disabled}>
           {label}
         </FieldLabel>

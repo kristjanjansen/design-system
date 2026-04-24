@@ -1,5 +1,5 @@
 @layer ds {
-  @scope (.ds-text-area) {
+  @scope (.ds-textarea) {
     :scope {
       display: flex;
       flex-direction: column;

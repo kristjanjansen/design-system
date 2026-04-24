@@ -3,7 +3,7 @@ import { expect, test, vi } from "vite-plus/test";
 import { createRef } from "react";
 import { createRoot } from "react-dom/client";
 import { act } from "react";
-import { TextArea } from "./TextArea.tsx";
+import { Textarea } from "./Textarea.tsx";
 
 function render(ui: React.ReactElement) {
   const container = document.createElement("div");
@@ -15,17 +15,17 @@ function render(ui: React.ReactElement) {
 }
 
 test("exports forwardRef component", () => {
-  expect(TextArea.$$typeof?.toString()).toBe("Symbol(react.forward_ref)");
+  expect(Textarea.$$typeof?.toString()).toBe("Symbol(react.forward_ref)");
 });
 
 test("renders a textarea", () => {
-  const container = render(<TextArea />);
+  const container = render(<Textarea />);
   const textarea = container.querySelector("textarea");
   expect(textarea).not.toBeNull();
 });
 
 test("renders label linked to textarea", () => {
-  const container = render(<TextArea label="Bio" />);
+  const container = render(<Textarea label="Bio" />);
   const label = container.querySelector("label");
   const textarea = container.querySelector("textarea");
   expect(label?.textContent).toBe("Bio");
@@ -33,7 +33,7 @@ test("renders label linked to textarea", () => {
 });
 
 test("renders error with aria attributes", () => {
-  const container = render(<TextArea error="Too long" />);
+  const container = render(<Textarea error="Too long" />);
   const textarea = container.querySelector("textarea");
   const errorEl = container.querySelector("[aria-live=polite]");
   expect(errorEl?.textContent).toBe("Too long");
@@ -43,7 +43,7 @@ test("renders error with aria attributes", () => {
 
 test("calls onChange with value", () => {
   const handleChange = vi.fn();
-  const container = render(<TextArea onChange={handleChange} />);
+  const container = render(<Textarea onChange={handleChange} />);
   const textarea = container.querySelector("textarea")!;
   act(() => {
     const nativeInputEvent = new InputEvent("input", { bubbles: true });
@@ -57,7 +57,7 @@ test("calls onChange with value", () => {
 });
 
 test("supports disabled and required", () => {
-  const container = render(<TextArea disabled required />);
+  const container = render(<Textarea disabled required />);
   const textarea = container.querySelector("textarea")!;
   expect(textarea.disabled).toBe(true);
   expect(textarea.required).toBe(true);
@@ -65,13 +65,13 @@ test("supports disabled and required", () => {
 
 test("forwards ref to textarea", () => {
   const ref = createRef<HTMLTextAreaElement>();
-  const container = render(<TextArea ref={ref} />);
+  const container = render(<Textarea ref={ref} />);
   const textarea = container.querySelector("textarea");
   expect(ref.current).toBe(textarea);
 });
 
 test("passes through native HTML attributes", () => {
-  const container = render(<TextArea name="bio" placeholder="Tell us about yourself" rows={4} />);
+  const container = render(<Textarea name="bio" placeholder="Tell us about yourself" rows={4} />);
   const textarea = container.querySelector("textarea")!;
   expect(textarea.name).toBe("bio");
   expect(textarea.placeholder).toBe("Tell us about yourself");

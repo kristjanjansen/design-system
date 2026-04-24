@@ -9,5 +9,5 @@ export {
 export { Button, type ButtonProps } from "./components/Button/Button.tsx";
 export { Checkbox, type CheckboxProps } from "./components/Checkbox/Checkbox.tsx";
 export { Switch, type SwitchProps } from "./components/Switch/Switch.tsx";
-export { TextArea, type TextAreaProps } from "./components/TextArea/TextArea.tsx";
-export { TextField, type TextFieldProps } from "./components/TextField/TextField.tsx";
+export { Textarea, type TextareaProps } from "./components/Textarea/Textarea.tsx";
+export { Input, type InputProps } from "./components/Input/Input.tsx";

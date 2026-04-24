@@ -2,8 +2,8 @@
 @import "./themes/index.css";
 @import "./components/internal/FieldLabel.css";
 @import "./components/internal/FieldMessages.css";
-@import "./components/TextField/TextField.css";
-@import "./components/TextArea/TextArea.css";
+@import "./components/Input/Input.css";
+@import "./components/Textarea/Textarea.css";
 @import "./components/Button/Button.css";
 @import "./components/Switch/Switch.css";
 @import "./components/Checkbox/Checkbox.css";

@@ -1,9 +1,9 @@
 import { type ReactNode, type TextareaHTMLAttributes, forwardRef, useId } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";
-import "./TextArea.css";
+import "./Textarea.css";
 
-export interface TextAreaProps
+export interface TextareaProps
   extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange"> {
   label?: string;
   description?: string;
@@ -13,8 +13,8 @@ export interface TextAreaProps
   onChange?: (value: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  function TextArea(
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  function Textarea(
     { label, description, error, onChange, id, className, required, infoHint, suffix, disabled, ...rest },
     ref,
   ) {
@@ -25,7 +25,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const describedBy = [errorId, descId].filter(Boolean).join(" ") || undefined;
 
     return (
-      <div className={["ds-text-area", className].filter(Boolean).join(" ")}>
+      <div className={["ds-textarea", className].filter(Boolean).join(" ")}>
         <FieldLabel htmlFor={inputId} required={required} infoHint={infoHint} suffix={suffix} disabled={disabled}>
           {label}
         </FieldLabel>

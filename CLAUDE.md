@@ -27,9 +27,9 @@
 - No inline styles in components — use CSS files with class names
 - `@scope` for component CSS encapsulation — inner elements use simple class names (`.label`, `.input`, `.error`) scoped to the component root (`.ds-text-field`, `.ds-switch`, etc.)
 - Class names: root scope per component (`.ds-text-field`, `.ds-accordion`), inner elements use bare names within `@scope`
-- Each component lives in its own subdirectory: `src/components/Switch/`, `src/components/TextField/`, etc.
+- Each component lives in its own subdirectory: `src/components/Switch/`, `src/components/Input/`, etc.
 - Each subdirectory contains `ComponentName.tsx`, `ComponentName.css`, and `ComponentName.test.tsx` (colocated tests)
-- No index files — use explicit names (`TextField/TextField.tsx`, not `TextField/index.tsx`)
+- No index files — use explicit names (`Input/Input.tsx`, not `Input/index.tsx`)
 - Components support `className` passthrough on the wrapper element
 - Style `::placeholder` explicitly (browser defaults vary)
 - Use `:focus-visible` not `:focus` — outline only shows on keyboard navigation, not click
@@ -39,7 +39,7 @@
 - Error border color on focus also darkens from error color
 - `text-wrap: balance` on labels, descriptions, error messages
 - `@starting-style` for error message fade-in animation
-- `field-sizing: content` on TextArea for auto-growing, with `min-height: 4lh`
+- `field-sizing: content` on Textarea for auto-growing, with `min-height: 4lh`
 - `font-stretch: var(--ds-font-stretch)` on inputs explicitly (form elements don't inherit it)
 
 ## Theming
@@ -103,13 +103,13 @@ When working in a project that uses this design system:
 5. Read `node_modules/system-design/src/variables.css` for all design tokens and their default values
 6. Read `node_modules/system-design/src/themes/` for brand-specific token overrides
 7. Controlled fields use `value` + `onChange` together. For static/display values without `onChange`, use `defaultValue` (uncontrolled) or `readOnly` (explicit)
-8. Import components: `import { Accordion, AccordionGroup, Button, Checkbox, Switch, TextArea, TextField } from "system-design"`
+8. Import components: `import { Accordion, AccordionGroup, Button, Checkbox, Switch, Textarea, Input } from "system-design"`
 9. Import styles: `import "system-design/style.css"`
 
 ## Figma
 
 - Figma file: https://www.figma.com/design/NiBvhCdGieWhAcyuwn2K7W/Test
-- Pages: Examples, Button, TextField, Switch, Checkbox, Accordion, Icons
+- Pages: Examples, Button, Input, Switch, Checkbox, Accordion, Icons
 - Design Tokens variable collection with 4 modes: brand1-light, brand1-dark, brand2-light, brand2-dark
 - Variables: colors, spacing, radius, border-width, outline, opacity, button sizing, font family/style/size
 - All component fills/strokes/spacing bound to variables — theme switching via Figma variable modes

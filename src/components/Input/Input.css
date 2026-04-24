@@ -1,5 +1,5 @@
 @layer ds {
-  @scope (.ds-text-field) {
+  @scope (.ds-input) {
     :scope {
       display: flex;
       flex-direction: column;
