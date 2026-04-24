@@ -7,7 +7,7 @@ A visual catalog of components in all states and themes. No props tables, no API
 ## Structure
 
 ```
-system-design/
+design-system/
   src/                    ← library source (existing)
   docs/                   ← visual reference app
     index.html
@@ -57,7 +57,7 @@ The theme switcher stays global (top or sidebar). Switching theme re-renders eve
 
 ## Dev setup
 
-`docs/vite.config.ts` aliases `system-design` to `../src/index.ts` for HMR. No build needed during dev.
+`docs/vite.config.ts` aliases `design-system` to `../src/index.ts` for HMR. No build needed during dev.
 
 ## Scripts
 

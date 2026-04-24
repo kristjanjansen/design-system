@@ -2,7 +2,7 @@
 
 ## Overview
 
-Add a `TextField` React component to the system-design library. This is the first React component, so it also requires setting up React as a peer dependency and configuring the build for JSX.
+Add a `TextField` React component to the design-system library. This is the first React component, so it also requires setting up React as a peer dependency and configuring the build for JSX.
 
 ## Prerequisites
 

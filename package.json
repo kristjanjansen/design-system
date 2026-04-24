@@ -1,16 +1,16 @@
 {
-  "name": "system-design",
+  "name": "@kristjanjansen/design-system",
   "version": "3.0.0",
   "description": "Modern React design system with oklch colors, CSS custom properties, multi-brand theming, and native web platform features.",
-  "homepage": "https://github.com/kristjanjansen/system-design#readme",
+  "homepage": "https://github.com/kristjanjansen/design-system#readme",
   "bugs": {
-    "url": "https://github.com/kristjanjansen/system-design/issues"
+    "url": "https://github.com/kristjanjansen/design-system/issues"
   },
   "license": "MIT",
   "author": "Kristjan Jansen <kristjan.jansen@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kristjanjansen/system-design.git"
+    "url": "git+https://github.com/kristjanjansen/design-system.git"
   },
   "files": [
     "dist",

@@ -1,4 +1,4 @@
-# system-design
+# design-system
 
 For design intent, tokens, theming, and Figma rules, see [DESIGN.md](DESIGN.md).
 
@@ -25,17 +25,17 @@ src/style.css                                           (combined CSS entry)
 ## Build
 
 - `vp pack` with `unbundle: true` — per-component JS for tree-shaking
-- Combined CSS: `system-design/css/style.css`. Per-component: `system-design/css/*.css`
+- Combined CSS: `design-system/css/style.css`. Per-component: `design-system/css/*.css`
 - Linting: oxlint with `jsx-a11y`, `react`, `import` plugins + `sort-imports`
 - `vp check` runs format + lint. `vp test` runs Vitest
 
 ## For consumer-side agents
 
-1. Read `node_modules/system-design/CLAUDE.md` then `DESIGN.md` for design decisions
+1. Read `node_modules/design-system/CLAUDE.md` then `DESIGN.md` for design decisions
 2. Read `src/index.ts` for exports, `src/components/{Name}/{Name}.tsx` for props
 3. Read `src/variables.css` for tokens, `src/themes/` for brand overrides
 4. `value` + `onChange` = controlled. `defaultValue` = uncontrolled. Don't use `value` without `onChange`
-5. `import { Button, Input, ... } from "system-design"` + `import "system-design/css/style.css"`
+5. `import { Button, Input, ... } from "design-system"` + `import "design-system/css/style.css"`
 
 ---
 

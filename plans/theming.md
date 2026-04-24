@@ -127,11 +127,11 @@ Or export themes separately so consumers can pick only what they need:
 
 ```tsx
 // Import base + all themes
-import "system-design/style.css";
+import "design-system/style.css";
 
 // Or import base + specific theme
-import "system-design/style.css";
-import "system-design/themes/brand1-dark.css";
+import "design-system/style.css";
+import "design-system/themes/brand1-dark.css";
 
 // Set theme
 <html data-theme="brand1-dark">
