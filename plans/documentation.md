@@ -81,3 +81,20 @@ The theme switcher stays global (top or sidebar). Switching theme re-renders eve
 - Not API documentation — agents read types
 - Not a playground — just a visual catalog
 - Not generated — hand-curated layouts showing every state
+
+---
+
+## Status: PARTIALLY DONE
+
+Decision: agent-first documentation, no docs site needed. What was done:
+
+- CLAUDE.md + DESIGN.md ship in npm package for consumer-side agents
+- Source code (`src/`) ships in package — agents read types/CSS directly
+- Consumer prompt in README.md shows how to instruct an agent
+- Visual reference via Figma file (not a code-based docs site)
+- No VitePress, no Storybook — source IS the documentation
+
+What was NOT done:
+
+- No visual reference React app (the consumer app exists but is not part of the library)
+- No auto-generated docs from source

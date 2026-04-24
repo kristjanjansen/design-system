@@ -27,35 +27,45 @@ Accordion           ← component + variants + examples
 Create Figma variable collections:
 
 **Colors** (with light/dark modes per brand):
+
 - `color/fg`, `color/muted`, `color/error`, `color/border`, `color/bg`, `color/page`, `color/accent`, `color/outline`
 
 **Spacing:**
+
 - `spacing/8`, `spacing/10`, `spacing/14`
 
 **Sizing:**
+
 - `radius`, `border-width`, `outline-width`, `outline-offset`
 
 **Motion:**
+
 - Not applicable in Figma (static)
 
 ### Components with variants
 
 **TextField:**
+
 - Properties: `state=default|error|disabled|readonly`, `label=string`, `placeholder=string`, `description=string`
 
 **TextArea:**
+
 - Same as TextField
 
 **Button:**
+
 - Properties: `variant=primary|secondary|tertiary`, `size=default|small`, `state=default|disabled`, `label=string`
 
 **Switch:**
+
 - Properties: `checked=true|false`, `state=default|disabled`, `label=string`
 
 **Checkbox:**
+
 - Properties: `checked=true|false|indeterminate`, `state=default|error|disabled`, `label=string`
 
 **Accordion:**
+
 - Properties: `variant=ghost|default`, `open=true|false`, `state=default|disabled`, `title=string`
 
 ### Each component page contains
@@ -80,3 +90,18 @@ Implemented in https://www.figma.com/design/NiBvhCdGieWhAcyuwn2K7W/Test
 - Publish as team library
 - Add Code Connect mappings for Figma Dev Mode
 - Add Accordion component to Figma
+
+---
+
+## Status: DONE
+
+Implemented. Key details:
+
+- File: https://www.figma.com/design/NiBvhCdGieWhAcyuwn2K7W/Test
+- 22+ variables in Design Tokens collection, 4 modes
+- Text styles with variable-bound fontFamily/fontSize/fontStyle
+- Component sets: Button (24 variants), Input (8), Textarea (4), Switch (6), Checkbox (9), Accordion (8)
+- Pages: All components, Accordion, Button, Checkbox, Input, Switch, Textarea, Icons
+- Themed frames: 2×2 grid per component page, single row on All components
+- Icons imported from EDS Icon Library (`global/` set)
+- Code Connect: not yet done (requires library publish)

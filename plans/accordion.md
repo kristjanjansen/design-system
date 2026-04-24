@@ -131,3 +131,16 @@ src/components/
 - ResizeObserver height tracking — unnecessary with `interpolate-size`
 - Custom `selectedKeys` state management — native `name` attribute
 - `useFocusRing` hook (ELV) — `:focus-visible` CSS
+
+---
+
+## Status: DONE
+
+Implemented as planned. Key additions:
+
+- `variant="ghost|default"` prop (ghost=brand1 dividers, default=brand2 boxed)
+- Icons centralized to `src/icons/IconChevronDownSm.tsx`
+- `@starting-style` for content animation
+- `transition-behavior: allow-discrete` for `content-visibility`
+- `forced-colors` support added
+- Chevron does not rotate (static icon, kept simple)

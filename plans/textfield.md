@@ -117,3 +117,16 @@ tsconfig.json                 ← add jsx, dom lib
 package.json                  ← add react peer dep
 vite.config.ts                ← add react external
 ```
+
+---
+
+## Status: DONE
+
+Implemented as `Input` (renamed from TextField to follow NuxtUI conventions). Key differences from plan:
+
+- Component renamed `TextField` → `Input`
+- Shared `FieldLabel` and `FieldMessages` extracted to `internal/` (not planned originally)
+- Added `required`, `infoHint`, `suffix` props via FieldLabel
+- `aria-required` added to input
+- CSS uses `@scope` (not in original plan)
+- Spacing tokens renamed to `--ds-spacing-{px}` format

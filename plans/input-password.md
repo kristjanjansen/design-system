@@ -147,3 +147,14 @@ src/components/InputPassword/
 
 - `aria-describedby` linking toggle button to field label/description — adds complexity, `aria-label` on button is sufficient
 - `showPasswordToggle` prop — always show toggle, use `Input type="password"` if you don't want it
+
+---
+
+## Status: DONE
+
+Implemented as planned. Key details:
+
+- Icons centralized to `src/icons/IconEyeSm.tsx` and `src/icons/IconEyeHideSm.tsx` (from EDS Figma `global/eye`, `global/eye-hide`)
+- Toggle button has `tabIndex={-1}` (focus stays on input, toggle via click only)
+- Uses shared `FieldLabel` and `FieldMessages` from `internal/`
+- 12 tests covering toggle, aria-pressed, aria-label, disabled, required, onChange, ref

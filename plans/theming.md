@@ -168,3 +168,17 @@ This auto-applies dark mode from OS preference but is overridden by any explicit
 - Structural tokens (spacing, radius, font sizes) are NOT themed — override per-brand only if truly needed
 - Dark mode shift tokens may invert direction — document this per theme
 - All themed colors must meet WCAG AA contrast against their corresponding `--ds-color-bg`
+
+---
+
+## Status: DONE
+
+Implemented as planned with improvements:
+
+- `light-dark()` used to merge light+dark into single file per brand (not separate files)
+- `@property` added for smooth color transitions between themes
+- `color-scheme` set per theme
+- `--ds-color-page` added for page backgrounds
+- `--ds-font-family`, `--ds-font-stretch` added as themed tokens
+- Brand2 has different `--ds-radius`, `--ds-border-width`, button sizing tokens
+- Figma: 4 variable modes matching CSS themes, text styles with variable-bound fontFamily
