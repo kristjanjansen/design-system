@@ -2,29 +2,21 @@
 
 Agent-first React design system. oklch colors, CSS custom properties, multi-brand theming, native web platform features.
 
-## Setup
+## For consumers
+
+```
+Use system-design React component library. Read node_modules/system-design/CLAUDE.md for conventions and DESIGN.md for design decisions.
+```
+
+## For library contributors
 
 ```bash
 brew install vite-plus
-vp install
+git clone https://github.com/kristjanjansen/system-design.git
+cd system-design
+claude
 ```
 
-## Development
-
-```bash
-vp dev          # watch mode
-vp test         # tests
-vp check        # format + lint + types
-vp pack         # build
 ```
-
-## Usage
-
-```tsx
-import { Button, Input } from "system-design";
-import "system-design/css/style.css";
+Read CLAUDE.md and DESIGN.md. Run vp install, vp check, vp test to get started.
 ```
-
-## Design
-
-See [DESIGN.md](DESIGN.md) for tokens, theming, and Figma.
