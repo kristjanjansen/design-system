@@ -25,7 +25,8 @@
 
 - All styles wrapped in `@layer ds` so consumers can override without specificity wars
 - No inline styles in components — use CSS files with class names
-- Class names match component: `.ds-text-field`, `.ds-text-field-label`, `.ds-switch`, `.ds-switch-track`, etc.
+- `@scope` for component CSS encapsulation — inner elements use simple class names (`.label`, `.input`, `.error`) scoped to the component root (`.ds-text-field`, `.ds-switch`, etc.)
+- Class names: root scope per component (`.ds-text-field`, `.ds-accordion`), inner elements use bare names within `@scope`
 - Each component lives in its own subdirectory: `src/components/Switch/`, `src/components/TextField/`, etc.
 - Each subdirectory contains `ComponentName.tsx`, `ComponentName.css`, and `ComponentName.test.tsx` (colocated tests)
 - No index files — use explicit names (`TextField/TextField.tsx`, not `TextField/index.tsx`)
@@ -85,6 +86,11 @@
 - Component tests include `forwardRef` contract check
 - No hardcoded px values in component CSS — only shape constants (999px pill, 50% circle) and animation transforms
 - Package ships `src/` and `CLAUDE.md` so consumer-side agents can read full source from `node_modules/design-system/src/` and design decisions from `node_modules/design-system/CLAUDE.md`
+- Accordion uses native `<details>`/`<summary>` with `interpolate-size: allow-keywords` for animated open/close
+- AccordionGroup uses native `name` attribute for exclusive mode — no React state management
+- Accordion has `variant="ghost"` (brand1, divider borders) and `variant="default"` (brand2, boxed with border-radius)
+- Icons sourced from EDS Figma Icon Library (`global/` set) — exported as SVG, used as TSX components with `fill="currentColor"`
+- Linting: oxlint with `jsx-a11y`, `react`, `import` plugins + `sort-imports` (member sort only, `ignoreDeclarationSort: true`)
 
 ## For consumer-side agents
 
@@ -97,8 +103,19 @@ When working in a project that uses this design system:
 5. Read `node_modules/design-system/src/tokens.css` for all design tokens and their default values
 6. Read `node_modules/design-system/src/themes/` for brand-specific token overrides
 7. Controlled fields use `value` + `onChange` together. For static/display values without `onChange`, use `defaultValue` (uncontrolled) or `readOnly` (explicit)
-8. Import components: `import { Button, Switch, TextArea, TextField } from "design-system"`
+8. Import components: `import { Accordion, AccordionGroup, Button, Checkbox, Switch, TextArea, TextField } from "design-system"`
 9. Import styles: `import "design-system/style.css"`
+
+## Figma
+
+- Figma file: https://www.figma.com/design/NiBvhCdGieWhAcyuwn2K7W/Test
+- Pages: Examples, Button, TextField, Switch, Checkbox, Icons
+- Design Tokens variable collection with 4 modes: brand1-light, brand1-dark, brand2-light, brand2-dark
+- 22 variables: 8 colors, 3 spacing, 4 structural, 1 opacity, 6 button-specific
+- All component fills/strokes/spacing bound to variables — theme switching via Figma variable modes
+- Icons imported from EDS Icon Library (`global/check`, `global/chevron-down`)
+- Each component page has themed frames in 2×2 grid (lights top, darks bottom)
+- Component sets moved off-canvas (x=2000) — themed frames are the primary view
 
 ---
 

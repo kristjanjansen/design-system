@@ -79,6 +79,9 @@
     --ds-spacing-10: 0.625em;
     --ds-spacing-14: 0.875em;
 
+    --ds-accordion-style: ghost;
+    --ds-accordion-icon-position: right;
+
     --ds-button-font-size: 1em; /* 16px */
     --ds-button-font-size-sm: 0.875em; /* 14px */
     --ds-button-font-weight: 600;

@@ -10,6 +10,7 @@ export interface AccordionProps extends Omit<
   title: string;
   defaultOpen?: boolean;
   disabled?: boolean;
+  variant?: "ghost" | "default";
   children: ReactNode;
   onToggle?: (open: boolean) => void;
 }
@@ -18,6 +19,7 @@ export function Accordion({
   title,
   defaultOpen,
   disabled,
+  variant = "ghost",
   children,
   onToggle,
   className,
@@ -28,19 +30,22 @@ export function Accordion({
 
   return (
     <details
-      className={["ds-accordion", disabled ? "ds-accordion--disabled" : "", className]
-        .filter(Boolean)
-        .join(" ")}
+      className={[
+        "ds-accordion",
+        `ds-accordion--${variant}`,
+        disabled ? "ds-accordion--disabled" : "",
+        className,
+      ].filter(Boolean).join(" ")}
       open={defaultOpen}
       name={name ?? groupName}
       onToggle={onToggle ? (e) => onToggle((e.target as HTMLDetailsElement).open) : undefined}
       {...rest}
     >
       <summary className="trigger" tabIndex={disabled ? -1 : undefined}>
-        <span className="title">{title}</span>
         <span className="icon">
           <ChevronIcon />
         </span>
+        <span className="title">{title}</span>
       </summary>
       <div className="content">{children}</div>
     </details>

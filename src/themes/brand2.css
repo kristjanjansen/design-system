@@ -25,8 +25,10 @@
     --ds-l-disabled: light-dark(0.35, -0.25);
     --ds-l-muted-disabled: light-dark(0.15, -0.1);
 
-    --ds-radius: 0.125em; /* 2px */
-    --ds-border-width: 1px;
+    --ds-radius: 0.25em; /* 4px */
+    --ds-border-width: 2px;
+    --ds-accordion-style: default;
+    --ds-accordion-icon-position: left;
     --ds-outline-width: 2px;
     --ds-outline-offset: 2px;
 
