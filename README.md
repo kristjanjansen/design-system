@@ -2,8 +2,6 @@
 
 Agent-first React design system. oklch colors, CSS custom properties, multi-brand theming, native web platform features.
 
-Components: `Input`, `Textarea`, `Button`, `Switch`, `Checkbox`, `Accordion`
-
 ## Setup
 
 ```bash
