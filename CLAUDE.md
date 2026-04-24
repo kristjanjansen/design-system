@@ -109,13 +109,24 @@ When working in a project that uses this design system:
 ## Figma
 
 - Figma file: https://www.figma.com/design/NiBvhCdGieWhAcyuwn2K7W/Test
-- Pages: Examples, Button, TextField, Switch, Checkbox, Icons
+- Pages: Examples, Button, TextField, Switch, Checkbox, Accordion, Icons
 - Design Tokens variable collection with 4 modes: brand1-light, brand1-dark, brand2-light, brand2-dark
-- 22 variables: 8 colors, 3 spacing, 4 structural, 1 opacity, 6 button-specific
+- Variables: colors, spacing, radius, border-width, outline, opacity, button sizing, font family/style/size
 - All component fills/strokes/spacing bound to variables — theme switching via Figma variable modes
+- Text styles (`label`, `body`, `description`, `heading`) with `fontFamily`, `fontSize`, `fontStyle` bound to variables — automatically switch between Inter (brand1) and Roboto Flex (brand2) per mode
 - Icons imported from EDS Icon Library (`global/check`, `global/chevron-down`)
 - Each component page has themed frames in 2×2 grid (lights top, darks bottom)
 - Component sets moved off-canvas (x=2000) — themed frames are the primary view
+
+## Figma gotchas (lessons learned)
+
+- **Text styles CAN bind to variables** — `fontFamily`, `fontSize`, `fontStyle` all support `setBoundVariable()`. Use STRING variables for fontFamily/fontStyle, FLOAT for fontSize. Do NOT assume Figma features don't exist — test via the API before claiming limitations.
+- **Component set variant cells share row height** — if some variants are taller, shorter ones get stretched. Arrange variants in rows of similar height, or accept the whitespace.
+- **`layoutSizingVertical = "HUG"` on child frames** — inner frames (like triggers) default to FIXED height after `resize()`. Always set to HUG explicitly after creating content.
+- **`width: 100%` on `<summary>`** — causes overflow past `<details>` border. Remove it; `<summary>` is block-level and fills naturally.
+- **Font style names differ between families** — Inter uses "Semi Bold" (with space), Roboto Flex uses "SemiBold" (no space). Use `listAvailableFontsAsync()` to discover exact style strings.
+- **Always verify via `get_screenshot` after Figma changes** — screenshots at component-set level may be too zoomed out. Screenshot individual variants or themed frames instead.
+- **When unsure if a Figma API feature exists, try it** — don't assume based on documentation or prior knowledge. The API surface is larger than expected.
 
 ---
 
