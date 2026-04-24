@@ -5,11 +5,11 @@ Agent-first React design system. oklch colors, CSS custom properties, multi-bran
 ## For consumers
 
 ```
-Use system-design React component library. Read node_modules/system-design/CLAUDE.md for conventions and DESIGN.md for design decisions.
+Create a settings page with name, email (required), bio fields, a "receive notifications" switch, and save/cancel buttons. Use system-design components. Read node_modules/system-design/CLAUDE.md for conventions.
 ```
 
 ## For library contributors
 
 ```
-Read CLAUDE.md and DESIGN.md. Run vp install, vp check, vp test to get started.
+Add a Radio component. Follow the conventions in CLAUDE.md and DESIGN.md. Consult the Checkbox component for patterns. Run vp check and vp test before committing.
 ```
