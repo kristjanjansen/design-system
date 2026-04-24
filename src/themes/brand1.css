@@ -1,0 +1,40 @@
+@layer ds {
+  [data-theme="brand1-light"] {
+    color-scheme: light;
+  }
+
+  [data-theme="brand1-dark"] {
+    color-scheme: dark;
+  }
+
+  [data-theme="brand1-light"],
+  [data-theme="brand1-dark"] {
+    --ds-font-family: "Inter Variable", system-ui, sans-serif;
+    --ds-font-stretch: 100%;
+    --ds-radius: 0.5em;
+    --ds-border-width: 2px;
+    --ds-outline-width: 2px;
+    --ds-outline-offset: 2px;
+
+    --ds-button-font-size: 1rem;
+    --ds-button-font-size-sm: 0.875rem;
+    --ds-button-font-weight: 600;
+    --ds-button-padding-y: 0.75rem;
+    --ds-button-padding-x: 1.25rem;
+    --ds-button-padding-y-sm: 0.375rem;
+    --ds-button-padding-x-sm: 0.75rem;
+
+    --ds-color-fg: light-dark(oklch(0.15 0 0), oklch(0.93 0 0));
+    --ds-color-muted: light-dark(oklch(0.5 0.02 260), oklch(0.6 0.02 260));
+    --ds-color-error: light-dark(oklch(0.55 0.22 25), oklch(0.65 0.22 25));
+    --ds-color-border: light-dark(oklch(0.87 0.01 260), oklch(0.3 0.01 260));
+    --ds-color-bg: light-dark(oklch(1 0 0), oklch(0.15 0 0));
+    --ds-color-page: light-dark(oklch(1 0 0), oklch(0.13 0 0));
+    --ds-color-accent: light-dark(oklch(0.52 0.17 150), oklch(0.6 0.17 150));
+    --ds-color-outline: light-dark(oklch(0 0 0), oklch(1 0 0));
+
+    --ds-l-focus: light-dark(0.2, 0.15);
+    --ds-l-disabled: light-dark(0.35, -0.25);
+    --ds-l-muted-disabled: light-dark(0.15, -0.1);
+  }
+}

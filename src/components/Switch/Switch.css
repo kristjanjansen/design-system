@@ -1,0 +1,133 @@
+@layer ds {
+  @scope (.ds-switch) {
+    :scope {
+      display: flex;
+      align-items: center;
+      gap: var(--ds-spacing-10);
+    }
+
+    .track {
+      position: relative;
+      width: 2.5em;
+      height: 1.5em;
+      border: var(--ds-border-width) solid var(--ds-color-border);
+      border-radius: 999px;
+      background: var(--ds-color-bg);
+      cursor: pointer;
+      transition-property: border-color, background-color;
+      transition-duration: var(--ds-duration-normal);
+      transition-timing-function: var(--ds-easing);
+      flex-shrink: 0;
+    }
+
+    .input {
+      appearance: none;
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .thumb {
+      position: absolute;
+      top: 50%;
+      left: 0.25em;
+      width: 1em;
+      height: 1em;
+      border-radius: 50%;
+      background: var(--ds-color-muted);
+      transform: translateY(-50%);
+      transition-property: left, background-color;
+      transition-duration: var(--ds-duration-normal);
+      transition-timing-function: var(--ds-easing);
+      pointer-events: none;
+    }
+
+    .input:checked ~ .thumb {
+      left: calc(100% - 1em - 0.25em);
+      background: var(--ds-color-bg);
+    }
+
+    .track:has(.input:checked) {
+      background: var(--ds-color-accent);
+      border-color: var(--ds-color-accent);
+    }
+
+    .track:hover:not(:has(.input:disabled)) {
+      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-hover)) c h);
+    }
+
+    .track:has(.input:checked):hover:not(:has(.input:disabled)) {
+      background: oklch(from var(--ds-color-accent) calc(l - var(--ds-l-hover)) c h);
+      border-color: oklch(from var(--ds-color-accent) calc(l - var(--ds-l-hover)) c h);
+    }
+
+    .track:has(.input:focus-visible) {
+      outline: var(--ds-outline-width) solid var(--ds-color-outline);
+      outline-offset: var(--ds-outline-offset);
+    }
+
+    .track:has(.input:disabled) {
+      opacity: var(--ds-opacity-disabled);
+      cursor: default;
+    }
+
+    .input:disabled {
+      cursor: default;
+    }
+
+    .label {
+      font-size: var(--ds-font-size-lg);
+      color: var(--ds-color-fg);
+      cursor: pointer;
+      text-wrap: balance;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :scope:has(.input:disabled) .label {
+      color: oklch(from var(--ds-color-fg) calc(l + var(--ds-l-disabled)) c h);
+      cursor: default;
+    }
+
+    @media (forced-colors: active) {
+      .track {
+        border-color: ButtonBorder;
+        background: Field;
+      }
+
+      .thumb {
+        background: ButtonText;
+      }
+
+      .track:has(.input:checked) {
+        background: Highlight;
+        border-color: Highlight;
+      }
+
+      .input:checked ~ .thumb {
+        background: HighlightText;
+      }
+
+      .track:has(.input:disabled) {
+        border-color: GrayText;
+        opacity: 1;
+      }
+
+      .track:has(.input:disabled) .thumb {
+        background: GrayText;
+      }
+
+      .label {
+        color: CanvasText;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .thumb,
+      .track {
+        transition: none;
+      }
+    }
+  }
+}
