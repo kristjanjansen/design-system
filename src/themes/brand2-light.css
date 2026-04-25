@@ -2,6 +2,7 @@
   [data-theme="brand2-light"] {
     color-scheme: light;
     --ds-font-family: "Roboto Flex Variable", system-ui, sans-serif;
+
     --ds-radius: 0.25rem;
     --ds-border-width: 2px;
     --ds-outline-width: 2px;
@@ -20,20 +21,5 @@
     --ds-light-focus: 15%;
     --ds-light-disabled: 30%;
     --ds-mix-direction: black;
-    --ds-opacity-disabled: 0.5;
-  }
-
-  [data-theme="brand2-light"] .ds-button {
-    font-weight: 700;
-  }
-
-  [data-theme="brand2-light"] .ds-button--default {
-    padding: calc(0.875rem - 2px) calc(1.75rem - 2px);
-    font-size: var(--ds-font-size-h6);
-  }
-
-  [data-theme="brand2-light"] .ds-button--small {
-    padding: calc(0.75rem - 2px) calc(1.5rem - 2px);
-    font-size: var(--ds-font-size-body);
   }
 }

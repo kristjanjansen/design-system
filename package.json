@@ -25,10 +25,12 @@
       "import": "./dist/index.mjs"
     },
     "./package.json": "./package.json",
-    "./css/style.css": "./dist/style.css",
-    "./css/variables.css": "./dist/variables.css",
-    "./css/themes.css": "./dist/themes/index.css",
-    "./css/*.css": "./dist/components/*/*.css"
+    "./style.css": "./dist/style.css",
+    "./tailwind.css": "./dist/tailwind.css",
+    "./brand1-light.css": "./dist/themes/brand1-light.css",
+    "./brand1-dark.css": "./dist/themes/brand1-dark.css",
+    "./brand2-light.css": "./dist/themes/brand2-light.css",
+    "./brand2-dark.css": "./dist/themes/brand2-dark.css"
   },
   "publishConfig": {
     "access": "public"

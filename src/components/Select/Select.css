@@ -163,7 +163,6 @@
 
       .input option:disabled {
         color: var(--ds-color-muted);
-        opacity: var(--ds-opacity-disabled);
       }
 
       .input option::checkmark {

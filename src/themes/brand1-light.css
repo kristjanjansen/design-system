@@ -1,7 +1,9 @@
 @layer ds {
+  :root,
   [data-theme="brand1-light"] {
     color-scheme: light;
     --ds-font-family: "Inter Variable", system-ui, sans-serif;
+
     --ds-radius: 0.5rem;
     --ds-border-width: 2px;
     --ds-outline-width: 2px;
@@ -20,6 +22,5 @@
     --ds-light-focus: 15%;
     --ds-light-disabled: 30%;
     --ds-mix-direction: black;
-    --ds-opacity-disabled: 0.5;
   }
 }

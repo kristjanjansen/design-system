@@ -166,7 +166,7 @@
 
     :scope.ds-accordion--disabled {
       pointer-events: none;
-      opacity: var(--ds-opacity-disabled);
+      color: var(--ds-color-muted);
     }
 
     @media (forced-colors: active) {

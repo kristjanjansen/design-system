@@ -2,6 +2,7 @@
   [data-theme="brand1-dark"] {
     color-scheme: dark;
     --ds-font-family: "Inter Variable", system-ui, sans-serif;
+
     --ds-radius: 0.5rem;
     --ds-border-width: 2px;
     --ds-outline-width: 2px;
@@ -20,6 +21,5 @@
     --ds-light-focus: 12%;
     --ds-light-disabled: 20%;
     --ds-mix-direction: white;
-    --ds-opacity-disabled: 0.5;
   }
 }

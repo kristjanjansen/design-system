@@ -72,7 +72,6 @@
     }
 
     .indicator:has(.input:disabled) {
-      opacity: var(--ds-opacity-disabled);
       cursor: default;
     }
 
@@ -139,7 +138,6 @@
 
       .indicator:has(.input:disabled) {
         border-color: GrayText;
-        opacity: 1;
       }
     }
 

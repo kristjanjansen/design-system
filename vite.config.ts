@@ -5,7 +5,15 @@ export default defineConfig({
     "*": "vp check --fix",
   },
   pack: {
-    entry: ["src/index.ts", "src/style.css", "src/tailwind.css"],
+    entry: [
+      "src/index.ts",
+      "src/style.css",
+      "src/tailwind.css",
+      "src/themes/brand1-light.css",
+      "src/themes/brand1-dark.css",
+      "src/themes/brand2-light.css",
+      "src/themes/brand2-dark.css",
+    ],
     unbundle: true,
     dts: {
       tsgo: true,

@@ -30,6 +30,9 @@
   --spacing-ds-8: var(--ds-spacing-8);
   --spacing-ds-10: var(--ds-spacing-10);
   --spacing-ds-14: var(--ds-spacing-14);
+  --spacing-ds-20: var(--ds-spacing-20);
+  --spacing-ds-24: var(--ds-spacing-24);
+  --spacing-ds-28: var(--ds-spacing-28);
 
   --radius-ds: var(--ds-radius);
   --border-width-ds: var(--ds-border-width);

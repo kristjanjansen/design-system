@@ -22,34 +22,64 @@
   }
 
   .ds-button:disabled {
-    opacity: var(--ds-opacity-disabled);
     cursor: default;
   }
 
+  .ds-button--primary:disabled {
+    background: color-mix(in oklch, var(--ds-color-accent), transparent 50%);
+    border-color: transparent;
+  }
+
+  .ds-button--secondary:disabled {
+    color: var(--ds-color-muted);
+    border-color: color-mix(in oklch, var(--ds-color-border), transparent 50%);
+  }
+
+  .ds-button--tertiary:disabled {
+    color: var(--ds-color-muted);
+    background: color-mix(in oklch, var(--ds-color-border), transparent 90%);
+  }
+
+  .ds-button--danger:disabled {
+    background: color-mix(in oklch, var(--ds-color-error), transparent 50%);
+    border-color: transparent;
+  }
+
+  .ds-button--ghost:disabled {
+    color: var(--ds-color-muted);
+  }
+
   .ds-button--default {
-    padding: calc(0.75rem - var(--ds-border-width)) calc(1.25rem - var(--ds-border-width));
+    padding: calc(var(--ds-spacing-14) - var(--ds-border-width))
+      calc(var(--ds-spacing-20) - var(--ds-border-width));
     font-size: var(--ds-font-size-body);
   }
 
   .ds-button--small {
-    padding: calc(0.375rem - var(--ds-border-width)) calc(0.75rem - var(--ds-border-width));
+    padding: calc(var(--ds-spacing-8) - var(--ds-border-width))
+      calc(var(--ds-spacing-14) - var(--ds-border-width));
     font-size: var(--ds-font-size-small);
+  }
+
+  /* brand2: larger buttons, bolder weight */
+  :is([data-theme="brand2-light"], [data-theme="brand2-dark"]) .ds-button {
+    font-weight: 700;
+  }
+
+  :is([data-theme="brand2-light"], [data-theme="brand2-dark"]) .ds-button--default {
+    padding: calc(var(--ds-spacing-14) - var(--ds-border-width))
+      calc(var(--ds-spacing-28) - var(--ds-border-width));
+    font-size: var(--ds-font-size-h6);
+  }
+
+  :is([data-theme="brand2-light"], [data-theme="brand2-dark"]) .ds-button--small {
+    padding: calc(var(--ds-spacing-14) - var(--ds-border-width))
+      calc(var(--ds-spacing-24) - var(--ds-border-width));
+    font-size: var(--ds-font-size-body);
   }
 
   .ds-button--full-width {
     width: 100%;
-  }
-
-  .ds-button-icon {
-    display: flex;
-    align-items: center;
-    width: 1.25em;
-    height: 1.25em;
-  }
-
-  .ds-button-icon svg {
-    width: 100%;
-    height: 100%;
   }
 
   /* Primary */
@@ -165,7 +195,6 @@
     background: transparent;
     color: var(--ds-color-accent);
     border-color: transparent;
-    border-radius: var(--ds-radius);
   }
 
   .ds-button--ghost:hover:not(:disabled) {
@@ -200,7 +229,6 @@
     .ds-button:disabled {
       border-color: GrayText;
       color: GrayText;
-      opacity: 1;
     }
   }
 

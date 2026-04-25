@@ -15,7 +15,6 @@
     --ds-light-focus: 15%;
     --ds-light-disabled: 30%;
     --ds-mix-direction: black;
-    --ds-opacity-disabled: 0.5;
 
     --ds-font-family: system-ui, sans-serif;
     --ds-font-size-tiny: 0.75rem;
@@ -51,6 +50,9 @@
     --ds-spacing-8: 0.5rem;
     --ds-spacing-10: 0.625rem;
     --ds-spacing-14: 0.875rem;
+    --ds-spacing-20: 1.25rem;
+    --ds-spacing-24: 1.5rem;
+    --ds-spacing-28: 1.75rem;
 
     --ds-shadow-100: 0 1px 3px oklch(0 0 0 / 0.1), 0 1px 8px oklch(0 0 0 / 0.1);
     --ds-shadow-200: 0 0 4px oklch(0 0 0 / 0.05), 0 8px 24px oklch(0 0 0 / 0.07);

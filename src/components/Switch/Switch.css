@@ -87,7 +87,16 @@
     }
 
     .track:has(.input:disabled) {
-      opacity: var(--ds-opacity-disabled);
+      border-color: color-mix(
+        in oklch,
+        var(--ds-color-border),
+        var(--ds-mix-direction) var(--ds-light-disabled)
+      );
+      background: color-mix(
+        in oklch,
+        var(--ds-color-bg),
+        var(--ds-mix-direction) var(--ds-light-disabled)
+      );
       cursor: default;
     }
 
@@ -116,7 +125,6 @@
 
       .track:has(.input:disabled) {
         border-color: GrayText;
-        opacity: 1;
       }
 
       .track:has(.input:disabled) .thumb {

@@ -74,6 +74,37 @@ Import and use. Icons use `fill="currentColor"` to inherit color from parent.
 - **IconEyeSm** — password toggle (visible)
 - **IconEyeHideSm** — password toggle (hidden)
 
+## pending: icon sizing
+
+current icons use no explicit width/height — they scale with parent font-size via `em` in component CSS (e.g. `width: 1.25em`). this causes parent scaling issues.
+
+proposal: set explicit `width` and `height` on each icon SVG element matching the viewBox:
+
+- Xs icons: `width="16" height="16"`
+- Sm icons: `width="24" height="24"`
+
+consumer overrides size via CSS if needed. avoids unpredictable scaling.
+
+## pending: icon buttons
+
+icon-only button support — removed from Button component, needs its own plan:
+
+- circular button with centered icon
+- sizes: default (2.5rem), small (2rem)
+- requires `aria-label` for accessibility
+- could be a separate `IconButton` component or a Button variant
+- needs tooltip for hover label (see next-components plan)
+
+```tsx
+// option A: prop on Button
+<Button isIcon aria-label="Settings"><IconSunSm /></Button>
+
+// option B: separate component
+<IconButton icon={<IconSunSm />} label="Settings" />
+```
+
+decide when implementing tooltip.
+
 ## EDS library component keys
 
 | Icon                  | Size | Key                                        |
