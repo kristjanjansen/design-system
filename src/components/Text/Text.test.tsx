@@ -9,9 +9,14 @@ test("renders p by default", () => {
   expect(screen.getByText("Hello").tagName).toBe("P");
 });
 
-test("renders correct size class", () => {
-  render(<Text size="sm">Small</Text>);
-  expect(screen.getByText("Small")).toHaveClass("ds-text--sm");
+test("renders correct variant class", () => {
+  render(<Text variant="small">Small</Text>);
+  expect(screen.getByText("Small")).toHaveClass("ds-text--small");
+});
+
+test("default variant is body", () => {
+  render(<Text>Body</Text>);
+  expect(screen.getByText("Body")).toHaveClass("ds-text--body");
 });
 
 test("as prop overrides tag", () => {

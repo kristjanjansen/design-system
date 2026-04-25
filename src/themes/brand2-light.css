@@ -1,0 +1,39 @@
+@layer ds {
+  [data-theme="brand2-light"] {
+    color-scheme: light;
+    --ds-font-family: "Roboto Flex Variable", system-ui, sans-serif;
+    --ds-radius: 0.25rem;
+    --ds-border-width: 2px;
+    --ds-outline-width: 2px;
+    --ds-outline-offset: 2px;
+
+    --ds-color-fg: oklch(0.35 0.06 250);
+    --ds-color-muted: oklch(0.5 0.03 250);
+    --ds-color-error: oklch(0.55 0.2 30);
+    --ds-color-border: oklch(0.85 0.02 250);
+    --ds-color-bg: oklch(1 0 0);
+    --ds-color-page: oklch(0.97 0.005 250);
+    --ds-color-accent: oklch(0.55 0.2 260);
+    --ds-color-outline: oklch(0.55 0.2 260);
+
+    --ds-light-hover: 5%;
+    --ds-light-focus: 15%;
+    --ds-light-disabled: 30%;
+    --ds-mix-direction: black;
+    --ds-opacity-disabled: 0.5;
+  }
+
+  [data-theme="brand2-light"] .ds-button {
+    font-weight: 700;
+  }
+
+  [data-theme="brand2-light"] .ds-button--default {
+    padding: calc(0.875rem - 2px) calc(1.75rem - 2px);
+    font-size: var(--ds-font-size-h6);
+  }
+
+  [data-theme="brand2-light"] .ds-button--small {
+    padding: calc(0.75rem - 2px) calc(1.5rem - 2px);
+    font-size: var(--ds-font-size-body);
+  }
+}

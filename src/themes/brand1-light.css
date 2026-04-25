@@ -1,0 +1,25 @@
+@layer ds {
+  [data-theme="brand1-light"] {
+    color-scheme: light;
+    --ds-font-family: "Inter Variable", system-ui, sans-serif;
+    --ds-radius: 0.5rem;
+    --ds-border-width: 2px;
+    --ds-outline-width: 2px;
+    --ds-outline-offset: 2px;
+
+    --ds-color-fg: oklch(0.35 0.01 260);
+    --ds-color-muted: oklch(0.5 0.02 260);
+    --ds-color-error: oklch(0.55 0.22 25);
+    --ds-color-border: oklch(0.87 0.01 260);
+    --ds-color-bg: oklch(1 0 0);
+    --ds-color-page: oklch(1 0 0);
+    --ds-color-accent: oklch(0.52 0.17 150);
+    --ds-color-outline: oklch(0 0 0);
+
+    --ds-light-hover: 5%;
+    --ds-light-focus: 15%;
+    --ds-light-disabled: 30%;
+    --ds-mix-direction: black;
+    --ds-opacity-disabled: 0.5;
+  }
+}

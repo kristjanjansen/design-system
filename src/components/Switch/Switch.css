@@ -24,8 +24,8 @@
       background: var(--ds-color-bg);
       cursor: pointer;
       transition-property: border-color, background-color;
-      transition-duration: var(--ds-duration-normal);
-      transition-timing-function: var(--ds-easing);
+      transition-duration: var(--ds-duration-200);
+      transition-timing-function: var(--ds-easing-out);
       flex-shrink: 0;
       box-sizing: border-box;
     }
@@ -45,8 +45,8 @@
       border-radius: 50%;
       background: var(--ds-color-muted);
       transition-property: margin, background-color;
-      transition-duration: var(--ds-duration-normal);
-      transition-timing-function: var(--ds-easing);
+      transition-duration: var(--ds-duration-200);
+      transition-timing-function: var(--ds-easing-out);
       pointer-events: none;
     }
 
@@ -61,12 +61,24 @@
     }
 
     .track:hover:not(:has(.input:disabled)) {
-      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-hover)) c h);
+      border-color: color-mix(
+        in oklch,
+        var(--ds-color-border),
+        var(--ds-mix-direction) var(--ds-light-hover)
+      );
     }
 
     .track:has(.input:checked):hover:not(:has(.input:disabled)) {
-      background: oklch(from var(--ds-color-accent) calc(l - var(--ds-l-hover)) c h);
-      border-color: oklch(from var(--ds-color-accent) calc(l - var(--ds-l-hover)) c h);
+      background: color-mix(
+        in oklch,
+        var(--ds-color-accent),
+        var(--ds-mix-direction) var(--ds-light-hover)
+      );
+      border-color: color-mix(
+        in oklch,
+        var(--ds-color-accent),
+        var(--ds-mix-direction) var(--ds-light-hover)
+      );
     }
 
     .track:has(.input:focus-visible) {

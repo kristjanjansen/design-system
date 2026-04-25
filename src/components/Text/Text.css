@@ -4,18 +4,18 @@
     color: var(--ds-color-fg);
   }
 
-  .ds-text--sm {
-    font-size: var(--ds-font-size-sm);
-    line-height: 1.5rem;
+  .ds-text--tiny {
+    font-size: var(--ds-font-size-tiny);
+    line-height: var(--ds-line-height-tiny);
   }
 
-  .ds-text--md {
-    font-size: var(--ds-font-size-md);
-    line-height: 1.5rem;
+  .ds-text--small {
+    font-size: var(--ds-font-size-small);
+    line-height: var(--ds-line-height-small);
   }
 
-  .ds-text--lg {
-    font-size: var(--ds-font-size-lg);
-    line-height: 1.75rem;
+  .ds-text--body {
+    font-size: var(--ds-font-size-body);
+    line-height: var(--ds-line-height-body);
   }
 }

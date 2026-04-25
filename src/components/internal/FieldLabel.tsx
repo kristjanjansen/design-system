@@ -31,7 +31,7 @@ export function FieldLabel({
   return (
     <Text
       as={as as "label"}
-      size="md"
+      variant="body"
       weight={inline ? 400 : 600}
       {...(as === "label" && htmlFor ? { htmlFor } : {})}
       className={["ds-field-label", disabled ? "ds-field-label--disabled" : "", className]

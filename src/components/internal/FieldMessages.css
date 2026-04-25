@@ -11,8 +11,8 @@
     opacity: 1;
     transform: translateY(0);
     transition:
-      opacity var(--ds-duration-normal) var(--ds-easing),
-      transform var(--ds-duration-normal) var(--ds-easing);
+      opacity var(--ds-duration-200) var(--ds-easing-out),
+      transform var(--ds-duration-200) var(--ds-easing-out);
   }
 
   @starting-style {

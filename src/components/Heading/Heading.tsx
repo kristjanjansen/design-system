@@ -19,7 +19,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(function Hea
   return (
     <Tag
       ref={ref as React.Ref<never>}
-      className={[`ds-heading ds-heading--${level}`, className].filter(Boolean).join(" ")}
+      className={[`ds-heading ds-heading--h${level}`, className].filter(Boolean).join(" ")}
       {...rest}
     >
       {children}

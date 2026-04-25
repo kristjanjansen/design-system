@@ -13,24 +13,38 @@
       border-radius: var(--ds-radius);
       background: var(--ds-color-bg);
       transition-property: border-color, outline-color, background-color;
-      transition-duration: var(--ds-duration-normal);
-      transition-timing-function: var(--ds-easing);
+      transition-duration: var(--ds-duration-200);
+      transition-timing-function: var(--ds-easing-out);
     }
 
     .input-wrapper:hover:not(:has(:disabled)) {
-      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-hover)) c h);
+      border-color: color-mix(
+        in oklch,
+        var(--ds-color-border),
+        var(--ds-mix-direction) var(--ds-light-hover)
+      );
     }
 
     .input-wrapper:has(:focus-visible) {
       outline: var(--ds-outline-width) solid var(--ds-color-outline);
       outline-offset: var(--ds-outline-offset);
-      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-focus)) c h);
+      border-color: color-mix(
+        in oklch,
+        var(--ds-color-border),
+        var(--ds-mix-direction) var(--ds-light-focus)
+      );
     }
 
     .input-wrapper:has(:disabled) {
-      background: oklch(from var(--ds-color-bg) calc(l - var(--ds-l-hover)) c h);
-      border-color: oklch(
-        from var(--ds-color-border) calc(l + var(--ds-l-hover)) var(--ds-c-disabled) h
+      background: color-mix(
+        in oklch,
+        var(--ds-color-bg),
+        var(--ds-mix-direction) var(--ds-light-hover)
+      );
+      border-color: color-mix(
+        in oklch,
+        var(--ds-color-border),
+        var(--ds-mix-direction) var(--ds-light-disabled)
       );
       cursor: default;
     }
@@ -47,7 +61,7 @@
       flex: 1;
       min-width: 0;
       padding: var(--ds-spacing-10) var(--ds-spacing-14);
-      font-size: var(--ds-font-size-md);
+      font-size: var(--ds-font-size-body);
       font-family: inherit;
       color: var(--ds-color-fg);
       background: none;
@@ -60,7 +74,7 @@
     }
 
     .input:disabled {
-      color: oklch(from var(--ds-color-fg) calc(l + var(--ds-l-disabled)) c h);
+      color: var(--ds-color-muted);
       cursor: default;
     }
 
@@ -70,7 +84,7 @@
       align-items: center;
       flex-shrink: 0;
       color: var(--ds-color-muted);
-      font-size: var(--ds-font-size-md);
+      font-size: var(--ds-font-size-body);
     }
 
     .input-start {

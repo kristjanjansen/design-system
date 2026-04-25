@@ -25,8 +25,8 @@
       border-radius: calc(var(--ds-radius) * 0.5);
       background: var(--ds-color-bg);
       transition-property: border-color, outline-color, background-color;
-      transition-duration: var(--ds-duration-normal);
-      transition-timing-function: var(--ds-easing);
+      transition-duration: var(--ds-duration-200);
+      transition-timing-function: var(--ds-easing-out);
     }
 
     .indicator:has(:checked),
@@ -50,13 +50,25 @@
     }
 
     .indicator:has(.input:hover:not(:disabled)) {
-      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-hover)) c h);
+      border-color: color-mix(
+        in oklch,
+        var(--ds-color-border),
+        var(--ds-mix-direction) var(--ds-light-hover)
+      );
     }
 
     .indicator:has(:checked:hover:not(:disabled)),
     .indicator:has(:indeterminate:hover:not(:disabled)) {
-      background: oklch(from var(--ds-color-accent) calc(l - var(--ds-l-hover)) c h);
-      border-color: oklch(from var(--ds-color-accent) calc(l - var(--ds-l-hover)) c h);
+      background: color-mix(
+        in oklch,
+        var(--ds-color-accent),
+        var(--ds-mix-direction) var(--ds-light-hover)
+      );
+      border-color: color-mix(
+        in oklch,
+        var(--ds-color-accent),
+        var(--ds-mix-direction) var(--ds-light-hover)
+      );
     }
 
     .indicator:has(.input:disabled) {
@@ -85,7 +97,7 @@
       color: oklch(1 0 0);
       opacity: 0;
       pointer-events: none;
-      transition: opacity var(--ds-duration-normal) var(--ds-easing);
+      transition: opacity var(--ds-duration-200) var(--ds-easing-out);
     }
 
     .icon svg {

@@ -40,8 +40,8 @@
       border-radius: 50%;
       background: var(--ds-color-bg);
       transition-property: border-color, background-color;
-      transition-duration: var(--ds-duration-normal);
-      transition-timing-function: var(--ds-easing);
+      transition-duration: var(--ds-duration-200);
+      transition-timing-function: var(--ds-easing-out);
     }
 
     .input {
@@ -60,7 +60,7 @@
       height: 1rem;
       pointer-events: none;
       color: var(--ds-color-bg);
-      transition: color var(--ds-duration-normal) var(--ds-easing);
+      transition: color var(--ds-duration-200) var(--ds-easing-out);
     }
 
     .icon svg {
@@ -73,7 +73,11 @@
     }
 
     .indicator:has(.input:hover:not(:disabled)) {
-      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-hover)) c h);
+      border-color: color-mix(
+        in oklch,
+        var(--ds-color-border),
+        var(--ds-mix-direction) var(--ds-light-hover)
+      );
     }
 
     .indicator:has(.input:focus-visible) {

@@ -16,7 +16,7 @@ export function FieldMessages({ error, description, errorId, descriptionId }: Fi
       {error && (
         <Text
           as="span"
-          size="sm"
+          variant="small"
           id={errorId}
           aria-live="polite"
           className="ds-field-messages-error"
@@ -25,7 +25,12 @@ export function FieldMessages({ error, description, errorId, descriptionId }: Fi
         </Text>
       )}
       {description && !error && (
-        <Text as="span" size="sm" id={descriptionId} className="ds-field-messages-description">
+        <Text
+          as="span"
+          variant="small"
+          id={descriptionId}
+          className="ds-field-messages-description"
+        >
           {description}
         </Text>
       )}

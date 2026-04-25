@@ -1,0 +1,39 @@
+@layer ds {
+  [data-theme="brand2-dark"] {
+    color-scheme: dark;
+    --ds-font-family: "Roboto Flex Variable", system-ui, sans-serif;
+    --ds-radius: 0.25rem;
+    --ds-border-width: 2px;
+    --ds-outline-width: 2px;
+    --ds-outline-offset: 2px;
+
+    --ds-color-fg: oklch(0.92 0.02 250);
+    --ds-color-muted: oklch(0.68 0.04 250);
+    --ds-color-error: oklch(0.7 0.2 30);
+    --ds-color-border: oklch(0.32 0.04 250);
+    --ds-color-bg: oklch(0.18 0.04 250);
+    --ds-color-page: oklch(0.14 0.04 250);
+    --ds-color-accent: oklch(0.52 0.2 260);
+    --ds-color-outline: oklch(0.7 0.2 260);
+
+    --ds-light-hover: 5%;
+    --ds-light-focus: 12%;
+    --ds-light-disabled: 20%;
+    --ds-mix-direction: white;
+    --ds-opacity-disabled: 0.5;
+  }
+
+  [data-theme="brand2-dark"] .ds-button {
+    font-weight: 700;
+  }
+
+  [data-theme="brand2-dark"] .ds-button--default {
+    padding: calc(0.875rem - 2px) calc(1.75rem - 2px);
+    font-size: var(--ds-font-size-h6);
+  }
+
+  [data-theme="brand2-dark"] .ds-button--small {
+    padding: calc(0.75rem - 2px) calc(1.5rem - 2px);
+    font-size: var(--ds-font-size-body);
+  }
+}

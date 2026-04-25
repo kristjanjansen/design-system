@@ -1,0 +1,48 @@
+@theme {
+  --color-ds-fg: var(--ds-color-fg);
+  --color-ds-muted: var(--ds-color-muted);
+  --color-ds-error: var(--ds-color-error);
+  --color-ds-border: var(--ds-color-border);
+  --color-ds-bg: var(--ds-color-bg);
+  --color-ds-page: var(--ds-color-page);
+  --color-ds-accent: var(--ds-color-accent);
+  --color-ds-outline: var(--ds-color-outline);
+
+  --font-size-ds-tiny: var(--ds-font-size-tiny);
+  --font-size-ds-tiny--line-height: var(--ds-line-height-tiny);
+  --font-size-ds-small: var(--ds-font-size-small);
+  --font-size-ds-small--line-height: var(--ds-line-height-small);
+  --font-size-ds-body: var(--ds-font-size-body);
+  --font-size-ds-body--line-height: var(--ds-line-height-body);
+  --font-size-ds-h6: var(--ds-font-size-h6);
+  --font-size-ds-h6--line-height: var(--ds-line-height-h6);
+  --font-size-ds-h5: var(--ds-font-size-h5);
+  --font-size-ds-h5--line-height: var(--ds-line-height-h5);
+  --font-size-ds-h4: var(--ds-font-size-h4);
+  --font-size-ds-h4--line-height: var(--ds-line-height-h4);
+  --font-size-ds-h3: var(--ds-font-size-h3);
+  --font-size-ds-h3--line-height: var(--ds-line-height-h3);
+  --font-size-ds-h2: var(--ds-font-size-h2);
+  --font-size-ds-h2--line-height: var(--ds-line-height-h2);
+  --font-size-ds-h1: var(--ds-font-size-h1);
+  --font-size-ds-h1--line-height: var(--ds-line-height-h1);
+
+  --spacing-ds-8: var(--ds-spacing-8);
+  --spacing-ds-10: var(--ds-spacing-10);
+  --spacing-ds-14: var(--ds-spacing-14);
+
+  --radius-ds: var(--ds-radius);
+  --border-width-ds: var(--ds-border-width);
+
+  --shadow-ds-100: var(--ds-shadow-100);
+  --shadow-ds-200: var(--ds-shadow-200);
+  --shadow-ds-300: var(--ds-shadow-300);
+  --shadow-ds-400: var(--ds-shadow-400);
+  --shadow-ds-500: var(--ds-shadow-500);
+
+  --duration-ds-100: var(--ds-duration-100);
+  --duration-ds-200: var(--ds-duration-200);
+  --duration-ds-300: var(--ds-duration-300);
+
+  --ease-ds-out: var(--ds-easing-out);
+}

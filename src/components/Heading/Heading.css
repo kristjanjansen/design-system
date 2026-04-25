@@ -6,33 +6,33 @@
     text-wrap: balance;
   }
 
-  .ds-heading--1 {
-    font-size: var(--ds-font-size-5xl);
-    line-height: 3.5rem;
+  .ds-heading--h1 {
+    font-size: var(--ds-font-size-h1);
+    line-height: var(--ds-line-height-h1);
   }
 
-  .ds-heading--2 {
-    font-size: var(--ds-font-size-4xl);
-    line-height: 2.75rem;
+  .ds-heading--h2 {
+    font-size: var(--ds-font-size-h2);
+    line-height: var(--ds-line-height-h2);
   }
 
-  .ds-heading--3 {
-    font-size: var(--ds-font-size-3xl);
-    line-height: 2.25rem;
+  .ds-heading--h3 {
+    font-size: var(--ds-font-size-h3);
+    line-height: var(--ds-line-height-h3);
   }
 
-  .ds-heading--4 {
-    font-size: var(--ds-font-size-2xl);
-    line-height: 2rem;
+  .ds-heading--h4 {
+    font-size: var(--ds-font-size-h4);
+    line-height: var(--ds-line-height-h4);
   }
 
-  .ds-heading--5 {
-    font-size: var(--ds-font-size-xl);
-    line-height: 1.75rem;
+  .ds-heading--h5 {
+    font-size: var(--ds-font-size-h5);
+    line-height: var(--ds-line-height-h5);
   }
 
-  .ds-heading--6 {
-    font-size: var(--ds-font-size-lg);
-    line-height: 1.625rem;
+  .ds-heading--h6 {
+    font-size: var(--ds-font-size-h6);
+    line-height: var(--ds-line-height-h6);
   }
 }

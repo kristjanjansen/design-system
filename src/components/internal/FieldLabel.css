@@ -8,7 +8,7 @@
   }
 
   .ds-field-label--disabled {
-    color: oklch(from var(--ds-color-fg) calc(l + var(--ds-l-disabled)) c h);
+    color: var(--ds-color-muted);
     cursor: default;
   }
 

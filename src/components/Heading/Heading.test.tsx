@@ -21,7 +21,7 @@ test("as prop overrides tag", () => {
     </Heading>,
   );
   expect(container.querySelector("h4")).toBeInTheDocument();
-  expect(container.querySelector("h4")).toHaveClass("ds-heading--2");
+  expect(container.querySelector("h4")).toHaveClass("ds-heading--h2");
 });
 
 test("passes className", () => {

@@ -50,36 +50,31 @@ function parseOklch(str: string): [number, number, number] {
   return [Number(match[1]), Number(match[2]), Number(match[3])];
 }
 
-function parseThemeFile(filePath: string): { light: ThemeColors; dark: ThemeColors } {
+function parseSingleThemeFile(filePath: string): ThemeColors {
   const css = readFileSync(filePath, "utf-8");
   const names: ColorName[] = ["fg", "muted", "error", "border", "bg", "page", "accent", "outline"];
-  const light: Record<string, [number, number, number]> = {};
-  const dark: Record<string, [number, number, number]> = {};
+  const colors: Record<string, [number, number, number]> = {};
 
   for (const name of names) {
-    const re = new RegExp(
-      `--ds-color-${name}:\\s*light-dark\\(\\s*(oklch\\([^)]+\\))\\s*,\\s*(oklch\\([^)]+\\))\\s*\\)`,
-    );
+    const re = new RegExp(`--ds-color-${name}:\\s*(oklch\\([^)]+\\))`);
     const match = css.match(re);
     if (match) {
-      light[name] = parseOklch(match[1].trim());
-      dark[name] = parseOklch(match[2].trim());
+      colors[name] = parseOklch(match[1].trim());
     }
   }
 
-  return { light: light as ThemeColors, dark: dark as ThemeColors };
+  return colors as ThemeColors;
 }
 
 // --- Load themes ---
 
-const brand1 = parseThemeFile(resolve(import.meta.dirname, "themes/brand1.css"));
-const brand2 = parseThemeFile(resolve(import.meta.dirname, "themes/brand2.css"));
+const themesDir = resolve(import.meta.dirname, "themes");
 
 const themes = [
-  { name: "brand1-light", colors: brand1.light },
-  { name: "brand1-dark", colors: brand1.dark },
-  { name: "brand2-light", colors: brand2.light },
-  { name: "brand2-dark", colors: brand2.dark },
+  { name: "brand1-light", colors: parseSingleThemeFile(`${themesDir}/brand1-light.css`) },
+  { name: "brand1-dark", colors: parseSingleThemeFile(`${themesDir}/brand1-dark.css`) },
+  { name: "brand2-light", colors: parseSingleThemeFile(`${themesDir}/brand2-light.css`) },
+  { name: "brand2-dark", colors: parseSingleThemeFile(`${themesDir}/brand2-dark.css`) },
 ];
 
 // --- WCAG 2.x thresholds ---
@@ -123,7 +118,6 @@ for (const { name, colors } of themes) {
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(AA_TEXT);
     });
 
-    // Borders are supplementary (labels provide primary identification). WCAG 1.4.11 exempt.
     test("border on page ≥ 1.4:1", () => {
       const ratio = oklchWcag(...colors.border, ...colors.page);
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(1.4);
