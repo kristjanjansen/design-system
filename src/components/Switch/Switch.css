@@ -2,6 +2,12 @@
   @scope (.ds-switch) {
     :scope {
       display: flex;
+      flex-direction: column;
+      gap: var(--ds-spacing-8);
+    }
+
+    .control {
+      display: flex;
       align-items: center;
       gap: var(--ds-spacing-10);
     }
@@ -104,7 +110,6 @@
       .track:has(.input:disabled) .thumb {
         background: GrayText;
       }
-
     }
 
     @media (prefers-reduced-motion: reduce) {

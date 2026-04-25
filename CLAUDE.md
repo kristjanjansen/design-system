@@ -31,14 +31,153 @@ src/style.css                                           (combined CSS entry)
 4. Update consumer app to show the new component
 5. Add Figma component set + themed frames (follow component page rules below)
 6. Add instance to Figma "All components" page
-7. Run `vp test && vp pack` before committing
+7. Run `vp check && vp test && vp pack` before committing
+
+## Plans
+
+Implementation plans and future work live in `plans/`. Read before starting related work.
+
+## Component template
+
+Every component follows this structure. Use as reference when creating or modifying components.
+
+### TSX pattern
+
+```tsx
+import { type InputHTMLAttributes, type ReactNode, forwardRef, useId } from "react";
+import { FieldLabel } from "../internal/FieldLabel.tsx";
+import { FieldMessages } from "../internal/FieldMessages.tsx";
+import "./ComponentName.css";
+
+export interface ComponentNameProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "onChange" | "type"
+> {
+  label?: string;
+  description?: string;
+  error?: string;
+  required?: boolean;
+  infoHint?: ReactNode;
+  suffix?: ReactNode;
+  onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const ComponentName = forwardRef<HTMLInputElement, ComponentNameProps>(
+  function ComponentName(
+    {
+      label,
+      description,
+      error,
+      onChange,
+      id,
+      className,
+      required,
+      infoHint,
+      suffix,
+      disabled,
+      ...rest
+    },
+    ref,
+  ) {
+    const autoId = useId();
+    const inputId = id ?? autoId;
+    const errorId = error ? `${inputId}-error` : undefined;
+    const descId = description ? `${inputId}-desc` : undefined;
+    const describedBy =
+      [errorId, !error ? descId : undefined].filter(Boolean).join(" ") || undefined;
+
+    return (
+      <div className={["ds-component-name", className].filter(Boolean).join(" ")}>
+        <FieldLabel
+          htmlFor={inputId}
+          required={required}
+          infoHint={infoHint}
+          suffix={suffix}
+          disabled={disabled}
+        >
+          {label}
+        </FieldLabel>
+        {/* input element with ref, id, aria-invalid, aria-required, aria-describedby */}
+        <FieldMessages
+          error={error}
+          description={description}
+          errorId={errorId}
+          descriptionId={descId}
+        />
+      </div>
+    );
+  },
+);
+```
+
+### Rules
+
+- **Always `forwardRef`** — every component forwards a ref to its primary HTML element
+- **`useId()` for auto IDs** — `const autoId = useId(); const inputId = id ?? autoId;`
+- **Named function inside forwardRef** — `forwardRef<El, Props>(function Name(props, ref) { ... })`, not arrow
+- **className on outer div** — `["ds-name", className].filter(Boolean).join(" ")`
+- **Extend native HTML attributes** — `Omit<HTMLAttributes, "onChange">` then provide custom `onChange`
+
+### onChange conventions
+
+| Pattern                | Signature        | Used by                                                  |
+| ---------------------- | ---------------- | -------------------------------------------------------- |
+| Direct input event     | `(value, event)` | Input, InputPassword, Textarea, Select, Checkbox, Switch |
+| Computed/context value | `(value)`        | RadioGroup, InputNumber                                  |
+
+Use `(value, event)` when wrapping a single native event. Use `(value)` when the value is derived from multiple sources (arrow keys, blur clamping) or forwarded through context.
+
+### CSS pattern
+
+```css
+@layer ds {
+  @scope (.ds-component-name) {
+    :scope {
+      /* outer wrapper */
+    }
+    .input {
+      /* the actual form element */
+    }
+
+    @media (forced-colors: active) {
+      /* Windows High Contrast */
+    }
+    @media (prefers-reduced-motion: reduce) {
+      /* disable transitions */
+    }
+  }
+}
+```
+
+- All values via `--ds-*` tokens
+- Dynamic colors via `oklch(from var(--ds-color-*) calc(l - var(--ds-l-hover)) c h)`
+- `@layer ds` for cascade control, `@scope` for class isolation
+
+### Test pattern
+
+Every component test file includes: forwardRef test, label linking, onChange callback, error/aria-invalid, disabled state. Import test utils from `vite-plus/test`, not `vitest`.
+
+### Accessibility checklist
+
+- `aria-invalid` when `error` is truthy
+- `aria-required` when `required` is truthy
+- `aria-describedby` linking to error and description IDs
+- `aria-live="polite"` on error messages (handled by FieldMessages)
+- `forced-colors` media query for Windows High Contrast
+- `prefers-reduced-motion` media query to disable transitions
+
+### Browser support notes
+
+- `field-sizing: content` (Textarea): Chrome 123+, no Firefox/Safari fallback
+- `appearance: base-select` (Select popover): progressive enhancement via `@supports`
+- `::details-content` (Accordion animation): progressive enhancement
 
 ## Build
 
 - `vp pack` with `unbundle: true` — per-component JS for tree-shaking
 - Combined CSS: `design-system/css/style.css`. Per-component: `design-system/css/*.css`
 - Linting: oxlint with `jsx-a11y`, `react`, `import` plugins + `sort-imports`
-- `vp check` runs format + lint. `vp test` runs Vitest
+- `vp check` runs format + lint + type check. `vp test` runs Vitest. Always run both together: `vp check && vp test`
 
 ## For consumer-side agents
 

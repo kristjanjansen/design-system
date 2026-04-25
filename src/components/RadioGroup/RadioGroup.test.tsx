@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { createRef } from "react";
 import { expect, test, vi } from "vite-plus/test";
+import { expectNoAxeViolations } from "../../test-utils.ts";
 import { RadioGroup } from "./RadioGroup.tsx";
 import { Radio } from "./Radio.tsx";
 
@@ -107,4 +109,43 @@ test("required indicator on legend", () => {
     </RadioGroup>,
   );
   expect(screen.getByText("✱")).toBeInTheDocument();
+});
+
+test("RadioGroup forwards ref to fieldset", () => {
+  const ref = createRef<HTMLFieldSetElement>();
+  render(
+    <RadioGroup label="Color" ref={ref}>
+      <Radio value="red">Red</Radio>
+    </RadioGroup>,
+  );
+  expect(ref.current?.tagName).toBe("FIELDSET");
+});
+
+test("Radio forwards ref to input", () => {
+  const ref = createRef<HTMLInputElement>();
+  render(
+    <RadioGroup label="Color">
+      <Radio value="red" ref={ref}>
+        Red
+      </Radio>
+    </RadioGroup>,
+  );
+  expect(ref.current?.type).toBe("radio");
+});
+
+test("has no accessibility violations", async () => {
+  await expectNoAxeViolations(
+    <RadioGroup label="Color">
+      <Radio value="red">Red</Radio>
+      <Radio value="blue">Blue</Radio>
+    </RadioGroup>,
+  );
+});
+
+test("has no accessibility violations in error state", async () => {
+  await expectNoAxeViolations(
+    <RadioGroup label="Color" error="Required">
+      <Radio value="red">Red</Radio>
+    </RadioGroup>,
+  );
 });

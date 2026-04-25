@@ -63,7 +63,7 @@ export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>(functi
   const inputId = id ?? autoId;
   const errorId = error ? `${inputId}-error` : undefined;
   const descId = description ? `${inputId}-desc` : undefined;
-  const describedBy = [errorId, descId].filter(Boolean).join(" ") || undefined;
+  const describedBy = [errorId, !error ? descId : undefined].filter(Boolean).join(" ") || undefined;
 
   const isControlled = controlledValue !== undefined;
   const [internalValue, setInternalValue] = useState<number | undefined>(defaultValue);

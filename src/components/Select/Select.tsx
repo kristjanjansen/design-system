@@ -1,4 +1,10 @@
-import { type ReactNode, type SelectHTMLAttributes, forwardRef, useId } from "react";
+import {
+  type ReactElement,
+  type ReactNode,
+  type SelectHTMLAttributes,
+  forwardRef,
+  useId,
+} from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";
 import { IconChevronDownSm } from "../../icons/index.ts";
@@ -24,7 +30,9 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
   suffix?: ReactNode;
   placeholder?: string;
   options: (SelectOption | SelectOptionGroup)[];
-  onChange?: (value: string) => void;
+  onChange?: (value: string, event: React.ChangeEvent<HTMLSelectElement>) => void;
+  /** Render prop for custom trigger. Receives `<selectedcontent />` to display the selected value. Uses base-select custom button slot. */
+  trigger?: (selectedContent: ReactNode) => ReactElement;
 }
 
 function isOptionGroup(opt: SelectOption | SelectOptionGroup): opt is SelectOptionGroup {
@@ -47,6 +55,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
     options,
     value,
     defaultValue,
+    trigger,
     ...rest
   },
   ref,
@@ -55,10 +64,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
   const selectId = id ?? autoId;
   const errorId = error ? `${selectId}-error` : undefined;
   const descId = description ? `${selectId}-desc` : undefined;
-  const describedBy = [errorId, descId].filter(Boolean).join(" ") || undefined;
+  const describedBy = [errorId, !error ? descId : undefined].filter(Boolean).join(" ") || undefined;
 
   return (
-    <div className={["ds-select", className].filter(Boolean).join(" ")}>
+    <div
+      className={["ds-select", trigger ? "ds-select--custom-trigger" : "", className]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <FieldLabel
         htmlFor={selectId}
         required={required}
@@ -84,11 +97,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
           disabled={disabled}
           value={value}
           defaultValue={defaultValue}
-          onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+          onChange={onChange ? (e) => onChange(e.target.value, e) : undefined}
           {...rest}
         >
+          {trigger && trigger(<selectedcontent />)}
           {placeholder && (
-            <option value="" disabled>
+            <option value="" disabled={!trigger}>
               {placeholder}
             </option>
           )}
@@ -108,9 +122,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
             ),
           )}
         </select>
-        <span className="chevron">
-          <IconChevronDownSm />
-        </span>
+        {!trigger && (
+          <span className="chevron">
+            <IconChevronDownSm />
+          </span>
+        )}
       </div>
       <FieldMessages
         error={error}

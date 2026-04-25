@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vite-plus/test";
+import { expectNoAxeViolations } from "../../test-utils.ts";
 import { InputNumber } from "./InputNumber.tsx";
 
 test("exports forwardRef component", () => {
@@ -120,4 +121,12 @@ test("sets aria-valuemin and aria-valuemax", () => {
   expect(input).toHaveAttribute("aria-valuemin", "0");
   expect(input).toHaveAttribute("aria-valuemax", "100");
   expect(input).toHaveAttribute("aria-valuenow", "50");
+});
+
+test("has no accessibility violations", async () => {
+  await expectNoAxeViolations(<InputNumber label="Amount" />);
+});
+
+test("has no accessibility violations in error state", async () => {
+  await expectNoAxeViolations(<InputNumber label="Amount" error="Required" />);
 });

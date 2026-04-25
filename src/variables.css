@@ -1,7 +1,7 @@
 @property --ds-color-fg {
   syntax: "<color>";
   inherits: true;
-  initial-value: oklch(0.15 0 0);
+  initial-value: oklch(0.35 0.01 260);
 }
 @property --ds-color-muted {
   syntax: "<color>";
@@ -43,7 +43,7 @@
   :root {
     color-scheme: light dark;
 
-    --ds-color-fg: oklch(0.15 0 0);
+    --ds-color-fg: oklch(0.35 0.01 260);
     --ds-color-muted: oklch(0.5 0.02 260);
     --ds-color-error: oklch(0.55 0.22 25);
     --ds-color-border: oklch(0.87 0.01 260);

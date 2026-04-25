@@ -1,5 +1,7 @@
 import { render, screen } from "@testing-library/react";
+import { createRef } from "react";
 import { expect, test } from "vite-plus/test";
+import { expectNoAxeViolations } from "../../test-utils.ts";
 import { Accordion } from "./Accordion.tsx";
 import { AccordionGroup } from "./AccordionGroup.tsx";
 
@@ -89,4 +91,47 @@ test("supports explicit name prop", () => {
     </Accordion>,
   );
   expect(container.querySelector("details")?.getAttribute("name")).toBe("my-group");
+});
+
+test("Accordion forwards ref to details", () => {
+  const ref = createRef<HTMLDetailsElement>();
+  render(
+    <Accordion title="Ref" ref={ref}>
+      Content
+    </Accordion>,
+  );
+  expect(ref.current?.tagName).toBe("DETAILS");
+});
+
+test("AccordionGroup forwards ref to div", () => {
+  const ref = createRef<HTMLDivElement>();
+  render(
+    <AccordionGroup ref={ref}>
+      <Accordion title="One">First</Accordion>
+    </AccordionGroup>,
+  );
+  expect(ref.current?.tagName).toBe("DIV");
+});
+
+test("has no accessibility violations", async () => {
+  await expectNoAxeViolations(<Accordion title="Section">Content</Accordion>);
+});
+
+test("disabled accordion excludes summary from tab order", () => {
+  render(
+    <Accordion title="Disabled" disabled>
+      Content
+    </Accordion>,
+  );
+  const summary = screen.getByText("Disabled").closest("summary");
+  expect(summary).toHaveAttribute("tabindex", "-1");
+});
+
+test("AccordionGroup has no accessibility violations", async () => {
+  await expectNoAxeViolations(
+    <AccordionGroup exclusive>
+      <Accordion title="One">First</Accordion>
+      <Accordion title="Two">Second</Accordion>
+    </AccordionGroup>,
+  );
 });

@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vite-plus/test";
+import { expectNoAxeViolations } from "../../test-utils.ts";
 import { Button } from "./Button.tsx";
 
 test("exports forwardRef component", () => {
@@ -70,4 +71,12 @@ test("passes through native attributes", () => {
   const button = screen.getByRole("button", { name: "Submit form" });
   expect(button).toHaveAttribute("type", "submit");
   expect(button).toHaveAttribute("aria-label", "Submit form");
+});
+
+test("has no accessibility violations", async () => {
+  await expectNoAxeViolations(<Button>Click me</Button>);
+});
+
+test("has no accessibility violations when disabled", async () => {
+  await expectNoAxeViolations(<Button disabled>Disabled</Button>);
 });

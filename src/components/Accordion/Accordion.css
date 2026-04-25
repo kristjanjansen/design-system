@@ -34,9 +34,8 @@
       border-bottom: var(--ds-border-width) solid var(--ds-color-border);
     }
 
-    /* Boxed variant */
+    /* Boxed variant — border lives on trigger/content, not wrapper */
     :scope.ds-accordion--default {
-      border: var(--ds-border-width) solid var(--ds-color-border);
       border-radius: var(--ds-radius);
     }
 
@@ -49,7 +48,7 @@
       font-family: inherit;
       font-stretch: var(--ds-font-stretch);
       font-size: var(--ds-font-size-md);
-      font-weight: 600;
+      font-weight: var(--ds-accordion-font-weight, 600);
       color: var(--ds-color-fg);
       background: none;
       border: none;
@@ -66,21 +65,43 @@
     }
 
     /* Divider: icon on right, no horizontal padding */
-    .ds-accordion--ghost .trigger {
+    :scope.ds-accordion--ghost .trigger {
       padding: 1em 0;
     }
 
-    .ds-accordion--ghost .icon {
+    :scope.ds-accordion--ghost .icon {
       order: 1;
       margin-left: auto;
     }
 
-    /* Boxed: icon on left, accent color */
-    .ds-accordion--default .icon {
-      color: var(--ds-color-accent);
+    :scope.ds-accordion--default .trigger {
+      border: var(--ds-border-width) solid var(--ds-color-border);
+      border-radius: var(--ds-radius);
+      transition: border-color var(--ds-duration-normal) var(--ds-easing);
     }
 
-    :scope:hover {
+    :scope.ds-accordion--default[open] .trigger {
+      border-radius: var(--ds-radius) var(--ds-radius) 0 0;
+      border-bottom-color: var(--ds-color-border);
+    }
+
+    :scope.ds-accordion--default .content {
+      border: var(--ds-border-width) solid var(--ds-color-border);
+      border-top: none;
+      border-radius: 0 0 var(--ds-radius) var(--ds-radius);
+      padding: 1em;
+    }
+
+    /* Boxed: icon on left */
+    :scope.ds-accordion--default .icon {
+      color: var(--ds-accordion-icon-color, var(--ds-color-accent));
+    }
+
+    :scope.ds-accordion--default .trigger:hover {
+      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-focus)) c h);
+    }
+
+    :scope.ds-accordion--ghost:hover {
       border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-focus)) c h);
     }
 
@@ -131,17 +152,13 @@
       }
     }
 
-    .ds-accordion--default .trigger {
-      border-bottom: var(--ds-border-width) solid var(--ds-color-border);
-    }
-
     .content {
       padding: 0 1em 1em;
       font-size: var(--ds-font-size-md);
       color: var(--ds-color-fg);
     }
 
-    .ds-accordion--ghost .content {
+    :scope.ds-accordion--ghost .content {
       padding: 0 0 1em;
     }
 

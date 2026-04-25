@@ -1,0 +1,22 @@
+@layer ds {
+  .ds-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-spacing-8);
+    padding: 0;
+    margin: 0;
+  }
+
+  .ds-checkbox-group .options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-spacing-8);
+    margin-top: var(--ds-spacing-8);
+  }
+
+  .ds-checkbox-group .options[data-direction="horizontal"] {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--ds-spacing-14);
+  }
+}

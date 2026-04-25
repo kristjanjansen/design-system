@@ -1,10 +1,10 @@
 import { type ReactNode, forwardRef, useId, useState } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";
-import { RadioContext } from "./RadioContext.ts";
-import "./RadioGroup.css";
+import { SwitchGroupContext } from "./SwitchContext.ts";
+import "./SwitchGroup.css";
 
-export interface RadioGroupProps {
+export interface SwitchGroupProps {
   children: ReactNode;
   label?: string;
   description?: string;
@@ -12,15 +12,14 @@ export interface RadioGroupProps {
   required?: boolean;
   infoHint?: ReactNode;
   name?: string;
-  value?: string;
-  defaultValue?: string;
-  onChange?: (value: string) => void;
-  direction?: "vertical" | "horizontal";
+  value?: string[];
+  defaultValue?: string[];
+  onChange?: (values: string[]) => void;
   disabled?: boolean;
   className?: string;
 }
 
-export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(function RadioGroup(
+export const SwitchGroup = forwardRef<HTMLFieldSetElement, SwitchGroupProps>(function SwitchGroup(
   {
     children,
     label,
@@ -32,7 +31,6 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(funct
     value: controlledValue,
     defaultValue,
     onChange,
-    direction = "vertical",
     disabled,
     className,
   },
@@ -44,23 +42,23 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(funct
   const descId = description ? `${groupName}-desc` : undefined;
 
   const isControlled = controlledValue !== undefined;
-  const [internalValue, setInternalValue] = useState(defaultValue);
-  const currentValue = isControlled ? controlledValue : internalValue;
+  const [internalValue, setInternalValue] = useState<string[]>(defaultValue ?? []);
+  const currentValues = isControlled ? controlledValue : internalValue;
 
-  const handleChange = (val: string) => {
-    if (!isControlled) setInternalValue(val);
-    onChange?.(val);
+  const handleChange = (val: string, checked: boolean) => {
+    const next = checked ? [...currentValues, val] : currentValues.filter((v) => v !== val);
+    if (!isControlled) setInternalValue(next);
+    onChange?.(next);
   };
 
   return (
-    <RadioContext.Provider
-      value={{ name: groupName, value: currentValue, onChange: handleChange, disabled }}
+    <SwitchGroupContext.Provider
+      value={{ name: groupName, values: currentValues, onChange: handleChange, disabled }}
     >
       <fieldset
         ref={ref}
-        className={["ds-radio-group", className].filter(Boolean).join(" ")}
-        role="radiogroup"
-        aria-invalid={error ? true : undefined}
+        className={["ds-switch-group", className].filter(Boolean).join(" ")}
+        role="group"
         aria-describedby={
           [errorId, !error ? descId : undefined].filter(Boolean).join(" ") || undefined
         }
@@ -68,9 +66,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(funct
         <FieldLabel as="legend" required={required} infoHint={infoHint} disabled={disabled}>
           {label}
         </FieldLabel>
-        <div className="options" data-direction={direction}>
-          {children}
-        </div>
+        <div className="options">{children}</div>
         <FieldMessages
           error={error}
           description={description}
@@ -78,6 +74,6 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(funct
           descriptionId={descId}
         />
       </fieldset>
-    </RadioContext.Provider>
+    </SwitchGroupContext.Provider>
   );
 });

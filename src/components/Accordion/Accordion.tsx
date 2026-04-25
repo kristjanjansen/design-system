@@ -1,4 +1,9 @@
-import { type DetailedHTMLProps, type DetailsHTMLAttributes, type ReactNode } from "react";
+import {
+  type DetailedHTMLProps,
+  type DetailsHTMLAttributes,
+  type ReactNode,
+  forwardRef,
+} from "react";
 import { useAccordionGroup } from "./AccordionGroup.tsx";
 import { IconChevronDownSm } from "../../icons/index.ts";
 import "./Accordion.css";
@@ -15,21 +20,15 @@ export interface AccordionProps extends Omit<
   onToggle?: (open: boolean) => void;
 }
 
-export function Accordion({
-  title,
-  defaultOpen,
-  disabled,
-  variant = "ghost",
-  children,
-  onToggle,
-  className,
-  name,
-  ...rest
-}: AccordionProps) {
+export const Accordion = forwardRef<HTMLDetailsElement, AccordionProps>(function Accordion(
+  { title, defaultOpen, disabled, variant = "ghost", children, onToggle, className, name, ...rest },
+  ref,
+) {
   const groupName = useAccordionGroup();
 
   return (
     <details
+      ref={ref}
       className={[
         "ds-accordion",
         `ds-accordion--${variant}`,
@@ -52,4 +51,4 @@ export function Accordion({
       <div className="content">{children}</div>
     </details>
   );
-}
+});

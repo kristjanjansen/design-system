@@ -6,6 +6,20 @@
       gap: var(--ds-spacing-8);
     }
 
+    :scope.ds-select--custom-trigger .select-wrapper {
+      border: none;
+      background: none;
+      border-radius: 0;
+    }
+
+    :scope.ds-select--custom-trigger .select-wrapper:has(:focus-visible) {
+      outline: none;
+    }
+
+    :scope.ds-select--custom-trigger .input {
+      padding: 0;
+    }
+
     .select-wrapper {
       display: flex;
       align-items: center;
@@ -75,8 +89,80 @@
     }
 
     .chevron svg {
-      width: 1em;
-      height: 1em;
+      width: 1.25em;
+      height: 1.25em;
+    }
+
+    /* Customizable select — progressive enhancement */
+    @supports (appearance: base-select) {
+      .input,
+      .input::picker(select) {
+        appearance: base-select;
+      }
+
+      .input {
+        padding-right: var(--ds-spacing-14);
+      }
+
+      .input::picker-icon {
+        display: none;
+      }
+
+      .input::picker(select) {
+        border: 1px solid var(--ds-color-border);
+        border-radius: var(--ds-radius);
+        background: var(--ds-color-bg);
+        box-shadow:
+          0 4px 24px oklch(0 0 0 / 0.16),
+          0 8px 12px oklch(0 0 0 / 0.13);
+        padding: 0;
+        margin-top: var(--ds-spacing-8);
+        overflow: clip;
+      }
+
+      .input option {
+        padding: var(--ds-spacing-8) var(--ds-spacing-14);
+        font-size: var(--ds-font-size-md);
+        font-family: inherit;
+        font-stretch: var(--ds-font-stretch);
+        color: var(--ds-color-fg);
+        border-radius: 0;
+        transition: background-color var(--ds-duration-fast) var(--ds-easing);
+      }
+
+      .input option + option {
+        border-top: 1px solid oklch(from var(--ds-color-border) l c h / 0.5);
+      }
+
+      .input option:hover {
+        background: oklch(from var(--ds-color-border) l c h / 0.3);
+      }
+
+      .input option:focus-visible {
+        box-shadow: inset 0 0 0 var(--ds-outline-width) var(--ds-color-outline);
+        outline: none;
+      }
+
+      .input option:checked {
+        background: oklch(from var(--ds-color-border) l c h / 0.15);
+      }
+
+      .input option:first-child[value=""] {
+        display: none;
+      }
+
+      .input option:disabled {
+        color: var(--ds-color-muted);
+        opacity: var(--ds-opacity-disabled);
+      }
+
+      .input option::checkmark {
+        display: none;
+      }
+
+      .chevron {
+        pointer-events: none;
+      }
     }
 
     @media (forced-colors: active) {

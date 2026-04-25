@@ -18,7 +18,7 @@ export default defineConfig({
   lint: {
     plugins: ["jsx-a11y", "react", "import"],
     categories: {
-      correctness: "warn",
+      correctness: "error",
     },
     rules: {
       "sort-imports": ["warn", { ignoreDeclarationSort: true }],

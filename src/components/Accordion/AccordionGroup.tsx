@@ -1,4 +1,4 @@
-import { type ReactNode, createContext, useContext, useId } from "react";
+import { type ReactNode, createContext, forwardRef, useContext, useId } from "react";
 
 export const AccordionContext = createContext<string | undefined>(undefined);
 export const useAccordionGroup = () => useContext(AccordionContext);
@@ -9,13 +9,17 @@ export interface AccordionGroupProps {
   children: ReactNode;
 }
 
-export function AccordionGroup({ exclusive, className, children }: AccordionGroupProps) {
-  const groupId = useId();
-  const name = exclusive ? groupId : undefined;
+export const AccordionGroup = forwardRef<HTMLDivElement, AccordionGroupProps>(
+  function AccordionGroup({ exclusive, className, children }, ref) {
+    const groupId = useId();
+    const name = exclusive ? groupId : undefined;
 
-  return (
-    <AccordionContext.Provider value={name}>
-      <div className={["ds-accordion-group", className].filter(Boolean).join(" ")}>{children}</div>
-    </AccordionContext.Provider>
-  );
-}
+    return (
+      <AccordionContext.Provider value={name}>
+        <div ref={ref} className={["ds-accordion-group", className].filter(Boolean).join(" ")}>
+          {children}
+        </div>
+      </AccordionContext.Provider>
+    );
+  },
+);

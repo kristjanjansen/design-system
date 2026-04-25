@@ -40,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const inputId = id ?? autoId;
   const errorId = error ? `${inputId}-error` : undefined;
   const descId = description ? `${inputId}-desc` : undefined;
-  const describedBy = [errorId, descId].filter(Boolean).join(" ") || undefined;
+  const describedBy = [errorId, !error ? descId : undefined].filter(Boolean).join(" ") || undefined;
   const hasSlots = inputStart || inputEnd;
 
   return (

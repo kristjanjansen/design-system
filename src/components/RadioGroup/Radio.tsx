@@ -1,6 +1,7 @@
-import { useId } from "react";
+import { forwardRef, useId } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";
+import { IconRadioSm } from "../../icons/index.ts";
 import { useRadioGroup } from "./RadioContext.ts";
 
 export interface RadioProps {
@@ -11,7 +12,10 @@ export interface RadioProps {
   className?: string;
 }
 
-export function Radio({ children, value, description, disabled, className }: RadioProps) {
+export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
+  { children, value, description, disabled, className },
+  ref,
+) {
   const ctx = useRadioGroup();
   const autoId = useId();
   const descId = description ? `${autoId}-desc` : undefined;
@@ -19,17 +23,23 @@ export function Radio({ children, value, description, disabled, className }: Rad
 
   return (
     <div className={["ds-radio", className].filter(Boolean).join(" ")}>
-      <input
-        type="radio"
-        name={ctx?.name}
-        value={value}
-        id={autoId}
-        className="input"
-        checked={ctx?.value !== undefined ? ctx.value === value : undefined}
-        disabled={isDisabled}
-        aria-describedby={descId}
-        onChange={() => ctx?.onChange?.(value)}
-      />
+      <span className="indicator">
+        <input
+          ref={ref}
+          type="radio"
+          name={ctx?.name}
+          value={value}
+          id={autoId}
+          className="input"
+          checked={ctx?.value !== undefined ? ctx.value === value : undefined}
+          disabled={isDisabled}
+          aria-describedby={descId}
+          onChange={() => ctx?.onChange?.(value)}
+        />
+        <span className="icon" aria-hidden="true">
+          <IconRadioSm />
+        </span>
+      </span>
       <div className="radio-content">
         <FieldLabel htmlFor={autoId} disabled={isDisabled} inline>
           {children}
@@ -38,4 +48,4 @@ export function Radio({ children, value, description, disabled, className }: Rad
       </div>
     </div>
   );
-}
+});

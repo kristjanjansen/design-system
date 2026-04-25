@@ -3,6 +3,7 @@ import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";
 import { IconCheckSm } from "../../icons/index.ts";
 import { IconIndeterminateSm } from "../../icons/index.ts";
+import { useCheckboxGroup } from "./CheckboxContext.ts";
 import "./Checkbox.css";
 
 export interface CheckboxProps extends Omit<
@@ -13,6 +14,8 @@ export interface CheckboxProps extends Omit<
   description?: string;
   error?: string;
   indeterminate?: boolean;
+  /** String value used when inside a CheckboxGroup. */
+  value?: string;
   onChange?: (checked: boolean, event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -29,15 +32,28 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
     defaultChecked,
     required,
     disabled,
+    value,
     ...rest
   },
   ref,
 ) {
   const autoId = useId();
   const inputId = id ?? autoId;
+  const group = useCheckboxGroup();
+
+  const inGroup = group !== undefined && value !== undefined;
+  const isChecked = inGroup ? group.values.includes(value) : checked;
+  const isDisabled = disabled || group?.disabled;
   const errorId = error ? `${inputId}-error` : undefined;
   const descId = description ? `${inputId}-desc` : undefined;
-  const describedBy = [errorId, descId].filter(Boolean).join(" ") || undefined;
+  const describedBy = [errorId, !error ? descId : undefined].filter(Boolean).join(" ") || undefined;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (inGroup) {
+      group.onChange(value, e.target.checked);
+    }
+    onChange?.(e.target.checked, e);
+  };
 
   return (
     <div className={["ds-checkbox", className].filter(Boolean).join(" ")}>
@@ -52,13 +68,15 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
             id={inputId}
             type="checkbox"
             className="input"
-            checked={checked}
-            defaultChecked={defaultChecked}
+            name={inGroup ? group.name : undefined}
+            value={value}
+            checked={inGroup ? isChecked : checked}
+            defaultChecked={inGroup ? undefined : defaultChecked}
             aria-invalid={error ? true : undefined}
             aria-required={required || undefined}
             aria-describedby={describedBy}
-            disabled={disabled}
-            onChange={onChange ? (e) => onChange(e.target.checked, e) : undefined}
+            disabled={isDisabled}
+            onChange={handleChange}
             {...rest}
           />
           <span className="icon icon--check" aria-hidden="true">
@@ -68,7 +86,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
             <IconIndeterminateSm />
           </span>
         </span>
-        <FieldLabel htmlFor={inputId} required={required} disabled={disabled} inline>
+        <FieldLabel htmlFor={inputId} required={required} disabled={isDisabled} inline>
           {label}
         </FieldLabel>
       </div>

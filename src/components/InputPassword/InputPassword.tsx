@@ -41,7 +41,8 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
     const inputId = id ?? autoId;
     const errorId = error ? `${inputId}-error` : undefined;
     const descId = description ? `${inputId}-desc` : undefined;
-    const describedBy = [errorId, descId].filter(Boolean).join(" ") || undefined;
+    const describedBy =
+      [errorId, !error ? descId : undefined].filter(Boolean).join(" ") || undefined;
     const [visible, setVisible] = useState(false);
 
     return (

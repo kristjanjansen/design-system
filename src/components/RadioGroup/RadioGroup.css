@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--ds-spacing-8);
-    border: none;
     padding: 0;
     margin: 0;
   }
@@ -12,6 +11,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--ds-spacing-8);
+    margin-top: var(--ds-spacing-8);
   }
 
   .ds-radio-group .options[data-direction="horizontal"] {
@@ -23,75 +23,108 @@
   @scope (.ds-radio) {
     :scope {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: var(--ds-spacing-10);
     }
 
-    .input {
-      appearance: none;
+    .indicator {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 1.5em;
       height: 1.5em;
       flex-shrink: 0;
+      padding: 2px;
       border: var(--ds-border-width) solid var(--ds-color-border);
       border-radius: 50%;
       background: var(--ds-color-bg);
-      cursor: pointer;
       transition-property: border-color, background-color;
       transition-duration: var(--ds-duration-normal);
       transition-timing-function: var(--ds-easing);
     }
 
-    .input:checked {
-      border-color: var(--ds-color-border);
-      background: radial-gradient(circle, var(--ds-color-accent) 40%, var(--ds-color-bg) 40%);
+    .input {
+      appearance: none;
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      cursor: pointer;
+      outline: none;
+      border-radius: 50%;
     }
 
-    .input:hover:not(:disabled) {
+    .icon {
+      display: flex;
+      width: 1rem;
+      height: 1rem;
+      pointer-events: none;
+      color: var(--ds-color-bg);
+      transition: color var(--ds-duration-normal) var(--ds-easing);
+    }
+
+    .icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .indicator:has(:checked) .icon {
+      color: var(--ds-color-accent);
+    }
+
+    .indicator:has(.input:hover:not(:disabled)) {
       border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-hover)) c h);
     }
 
-    .input:checked:hover:not(:disabled) {
-      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-hover)) c h);
-    }
-
-    .input:focus-visible {
+    .indicator:has(.input:focus-visible) {
       outline: var(--ds-outline-width) solid var(--ds-color-outline);
       outline-offset: var(--ds-outline-offset);
     }
 
-    .input:disabled {
+    .indicator:has(.input:active:not(:disabled)) {
+      background: var(--ds-color-accent);
+      border-color: var(--ds-color-accent);
+    }
+
+    .indicator:has(.input:active:not(:disabled)) .icon {
+      color: oklch(1 0 0);
+    }
+
+    .indicator:has(.input:disabled) {
       opacity: var(--ds-opacity-disabled);
+      cursor: default;
+    }
+
+    .input:disabled {
       cursor: default;
     }
 
     .radio-content {
       display: flex;
       flex-direction: column;
-    }
-
-    .input:active:not(:disabled) {
-      background: var(--ds-color-accent);
-      border-color: var(--ds-color-accent);
+      justify-content: center;
+      min-height: 1.5em;
     }
 
     @media (forced-colors: active) {
-      .input {
+      .indicator {
         border-color: ButtonBorder;
         background: Field;
       }
 
-      .input:checked {
-        border-color: Highlight;
+      .indicator:has(:checked) .icon {
+        color: Highlight;
       }
 
-      .input:disabled {
+      .indicator:has(.input:disabled) {
         border-color: GrayText;
         opacity: 1;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .input {
+      .indicator,
+      .icon {
         transition: none;
       }
     }
