@@ -4,15 +4,15 @@ export const AccordionContext = createContext<string | undefined>(undefined);
 export const useAccordionGroup = () => useContext(AccordionContext);
 
 export interface AccordionGroupProps {
-  exclusive?: boolean;
+  mode?: "single" | "multiple";
   className?: string;
   children: ReactNode;
 }
 
 export const AccordionGroup = forwardRef<HTMLDivElement, AccordionGroupProps>(
-  function AccordionGroup({ exclusive, className, children }, ref) {
+  function AccordionGroup({ mode = "multiple", className, children }, ref) {
     const groupId = useId();
-    const name = exclusive ? groupId : undefined;
+    const name = mode === "single" ? groupId : undefined;
 
     return (
       <AccordionContext.Provider value={name}>

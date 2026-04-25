@@ -3,15 +3,8 @@
     display: flex;
     align-items: center;
     gap: var(--ds-spacing-8);
-    font-weight: 600;
-    font-size: var(--ds-font-size-md);
-    color: var(--ds-color-fg);
     text-wrap: balance;
     cursor: pointer;
-  }
-
-  .ds-field-label--inline {
-    font-weight: 400;
   }
 
   .ds-field-label--disabled {
@@ -19,15 +12,16 @@
     cursor: default;
   }
 
-  .ds-field-label-suffix {
-    font-weight: 400;
-    font-style: italic;
-    color: var(--ds-color-muted);
-  }
-
-  .ds-field-label-hint {
+  .ds-field-label-start {
     display: flex;
     flex-shrink: 0;
+  }
+
+  .ds-field-label-end {
+    display: flex;
+    flex-shrink: 0;
+    font-weight: 400;
+    color: var(--ds-color-muted);
   }
 
   .ds-required {

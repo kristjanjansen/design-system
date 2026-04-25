@@ -1,21 +1,16 @@
 @layer ds {
-  /* Group: ghost style */
-  .ds-accordion-group:has(.ds-accordion--ghost) {
+  /* Ghost group: items separated by bottom borders */
+  .ds-accordion-group:has(.ds-accordion--display) {
     display: flex;
     flex-direction: column;
-    border-top: var(--ds-border-width) solid var(--ds-color-border);
+  }
+
+  .ds-accordion-group:has(.ds-accordion--display) > .ds-accordion {
+    border: none;
     border-bottom: var(--ds-border-width) solid var(--ds-color-border);
   }
 
-  .ds-accordion-group:has(.ds-accordion--ghost) > .ds-accordion + .ds-accordion {
-    border-top: var(--ds-border-width) solid var(--ds-color-border);
-  }
-
-  .ds-accordion-group:has(.ds-accordion--ghost) > .ds-accordion {
-    border: none;
-  }
-
-  /* Group: default style */
+  /* Default group: items spaced with gap */
   .ds-accordion-group:has(.ds-accordion--default) {
     display: flex;
     flex-direction: column;
@@ -28,13 +23,12 @@
       transition: border-color var(--ds-duration-normal) var(--ds-easing);
     }
 
-    /* Divider variant */
-    :scope.ds-accordion--ghost {
-      border-top: var(--ds-border-width) solid var(--ds-color-border);
-      border-bottom: var(--ds-border-width) solid var(--ds-color-border);
+    /* Ghost standalone: no borders */
+    :scope.ds-accordion--display {
+      border: none;
     }
 
-    /* Boxed variant — border lives on trigger/content, not wrapper */
+    /* Default: boxed with rounded corners */
     :scope.ds-accordion--default {
       border-radius: var(--ds-radius);
     }
@@ -47,8 +41,7 @@
       cursor: pointer;
       font-family: inherit;
       font-stretch: var(--ds-font-stretch);
-      font-size: var(--ds-font-size-md);
-      font-weight: var(--ds-accordion-font-weight, 600);
+      font-size: var(--ds-font-size-lg);
       color: var(--ds-color-fg);
       background: none;
       border: none;
@@ -64,17 +57,25 @@
       content: none;
     }
 
-    /* Divider: icon on right, no horizontal padding */
-    :scope.ds-accordion--ghost .trigger {
-      padding: 1em 0;
+    /* Ghost: semi-bold title, icon right, small horizontal padding for outline alignment */
+    :scope.ds-accordion--display .trigger {
+      padding: 1em var(--ds-spacing-8);
+      font-weight: 600;
     }
 
-    :scope.ds-accordion--ghost .icon {
+    :scope.ds-accordion--display .icon {
       order: 1;
       margin-left: auto;
+      color: var(--ds-color-muted);
     }
 
+    :scope.ds-accordion--display:hover {
+      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-hover)) c h);
+    }
+
+    /* Default: regular weight title, icon left, boxed trigger */
     :scope.ds-accordion--default .trigger {
+      font-weight: 400;
       border: var(--ds-border-width) solid var(--ds-color-border);
       border-radius: var(--ds-radius);
       transition: border-color var(--ds-duration-normal) var(--ds-easing);
@@ -92,22 +93,17 @@
       padding: 1em;
     }
 
-    /* Boxed: icon on left */
     :scope.ds-accordion--default .icon {
-      color: var(--ds-accordion-icon-color, var(--ds-color-accent));
+      color: var(--ds-color-fg);
     }
 
     :scope.ds-accordion--default .trigger:hover {
-      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-focus)) c h);
-    }
-
-    :scope.ds-accordion--ghost:hover {
-      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-focus)) c h);
+      border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-hover)) c h);
     }
 
     .trigger:focus-visible {
       outline: var(--ds-outline-width) solid var(--ds-color-outline);
-      outline-offset: calc(var(--ds-outline-offset) * -1);
+      outline-offset: 0px;
     }
 
     .title {
@@ -122,7 +118,6 @@
       width: 1.25em;
       height: 1.25em;
       flex-shrink: 0;
-      color: var(--ds-color-muted);
     }
 
     .icon svg {
@@ -153,13 +148,13 @@
     }
 
     .content {
-      padding: 0 1em 1em;
+      padding: 1em;
       font-size: var(--ds-font-size-md);
       color: var(--ds-color-fg);
     }
 
-    :scope.ds-accordion--ghost .content {
-      padding: 0 0 1em;
+    :scope.ds-accordion--display .content {
+      padding: 0.5em var(--ds-spacing-8) 1em;
     }
 
     :scope.ds-accordion--disabled {

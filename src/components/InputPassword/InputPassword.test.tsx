@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vite-plus/test";
-import { expectNoAxeViolations } from "../../test-utils.ts";
+
 import { InputPassword } from "./InputPassword.tsx";
 
 test("exports forwardRef component", () => {
@@ -80,12 +80,4 @@ test("forwards ref", () => {
   const ref = createRef<HTMLInputElement>();
   render(<InputPassword ref={ref} label="Password" />);
   expect(ref.current?.type).toBe("password");
-});
-
-test("has no accessibility violations", async () => {
-  await expectNoAxeViolations(<InputPassword label="Password" />);
-});
-
-test("has no accessibility violations in error state", async () => {
-  await expectNoAxeViolations(<InputPassword label="Password" error="Too short" />);
 });

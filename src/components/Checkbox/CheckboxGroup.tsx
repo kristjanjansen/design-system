@@ -9,7 +9,7 @@ export interface CheckboxGroupProps {
   description?: string;
   error?: string;
   required?: boolean;
-  infoHint?: ReactNode;
+  labelEnd?: ReactNode;
   name?: string;
   value?: string[];
   defaultValue?: string[];
@@ -27,7 +27,7 @@ export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>
       description,
       error,
       required,
-      infoHint,
+      labelEnd,
       name,
       value: controlledValue,
       defaultValue,
@@ -65,7 +65,7 @@ export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>
             [errorId, !error ? descId : undefined].filter(Boolean).join(" ") || undefined
           }
         >
-          <FieldLabel as="legend" required={required} infoHint={infoHint} disabled={disabled}>
+          <FieldLabel as="legend" required={required} labelEnd={labelEnd} disabled={disabled}>
             {label}
           </FieldLabel>
           <div className="options" data-direction={direction}>

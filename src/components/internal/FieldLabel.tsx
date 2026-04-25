@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import { Text } from "../Text/Text.tsx";
 import { RequiredIndicator } from "./RequiredIndicator.tsx";
 import "./FieldLabel.css";
 
@@ -7,8 +8,8 @@ export interface FieldLabelProps {
   htmlFor?: string;
   as?: "label" | "legend";
   required?: boolean;
-  infoHint?: ReactNode;
-  suffix?: ReactNode;
+  labelStart?: ReactNode;
+  labelEnd?: ReactNode;
   disabled?: boolean;
   inline?: boolean;
   className?: string;
@@ -19,34 +20,30 @@ export function FieldLabel({
   htmlFor,
   as = "label",
   required,
-  infoHint,
-  suffix,
+  labelStart,
+  labelEnd,
   disabled,
   inline,
   className,
 }: FieldLabelProps) {
   if (!children) return null;
 
-  const Tag = as;
-
   return (
-    <Tag
+    <Text
+      as={as as "label"}
+      size="md"
+      weight={inline ? 400 : 600}
       {...(as === "label" && htmlFor ? { htmlFor } : {})}
-      className={[
-        "ds-field-label",
-        inline ? "ds-field-label--inline" : "",
-        disabled ? "ds-field-label--disabled" : "",
-        className,
-      ]
+      className={["ds-field-label", disabled ? "ds-field-label--disabled" : "", className]
         .filter(Boolean)
         .join(" ")}
     >
+      {labelStart && <span className="ds-field-label-start">{labelStart}</span>}
       <span className="ds-field-label-text">
         {children}
         {required && <RequiredIndicator />}
-        {suffix && <span className="ds-field-label-suffix">{suffix}</span>}
       </span>
-      {infoHint && <span className="ds-field-label-hint">{infoHint}</span>}
-    </Tag>
+      {labelEnd && <span className="ds-field-label-end">{labelEnd}</span>}
+    </Text>
   );
 }

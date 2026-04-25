@@ -2,7 +2,7 @@
 
 ## Background
 
-EDS/ELV both use react-aria for radio state/keyboard. We skip react-aria — use native HTML radio inputs with shared `name` attribute (same philosophy as Accordion's native `name` grouping).
+Brand1/Brand2 both use react-aria for radio state/keyboard. We skip react-aria — use native HTML radio inputs with shared `name` attribute (same philosophy as Accordion's native `name` grouping).
 
 ## Components
 

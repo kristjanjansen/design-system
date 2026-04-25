@@ -6,7 +6,6 @@
   }
 
   .ds-field-messages-error {
-    font-size: var(--ds-font-size-sm);
     color: var(--ds-color-error);
     text-wrap: balance;
     opacity: 1;
@@ -24,7 +23,6 @@
   }
 
   .ds-field-messages-description {
-    font-size: var(--ds-font-size-sm);
     color: var(--ds-color-muted);
     text-wrap: balance;
   }

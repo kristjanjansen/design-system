@@ -1,0 +1,39 @@
+@layer ds {
+  .ds-heading {
+    font-family: inherit;
+    font-stretch: var(--ds-font-stretch);
+    font-weight: 600;
+    color: var(--ds-color-fg);
+    text-wrap: balance;
+  }
+
+  .ds-heading--1 {
+    font-size: var(--ds-font-size-5xl);
+    line-height: 3.5rem;
+  }
+
+  .ds-heading--2 {
+    font-size: var(--ds-font-size-4xl);
+    line-height: 2.75rem;
+  }
+
+  .ds-heading--3 {
+    font-size: var(--ds-font-size-3xl);
+    line-height: 2.25rem;
+  }
+
+  .ds-heading--4 {
+    font-size: var(--ds-font-size-2xl);
+    line-height: 2rem;
+  }
+
+  .ds-heading--5 {
+    font-size: var(--ds-font-size-xl);
+    line-height: 1.75rem;
+  }
+
+  .ds-heading--6 {
+    font-size: var(--ds-font-size-lg);
+    line-height: 1.625rem;
+  }
+}

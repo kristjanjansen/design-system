@@ -81,7 +81,7 @@ Implemented in https://www.figma.com/design/NiBvhCdGieWhAcyuwn2K7W/Test
 - Variable collection "Design Tokens" with 4 modes (brand1-light/dark, brand2-light/dark)
 - 22 variables: colors, spacing, radius, border-width, outline, opacity, button sizing
 - All component fills/strokes/spacing bound to variables
-- Icons imported from EDS Icon Library (`global/` set)
+- Icons imported from Brand1 Icon Library (`global/` set)
 - Each page has 2×2 themed example frames
 - Component sets moved off-canvas, themed frames are primary view
 
@@ -103,5 +103,5 @@ Implemented. Key details:
 - Component sets: Button (24 variants), Input (8), Textarea (4), Switch (6), Checkbox (9), Accordion (8)
 - Pages: All components, Accordion, Button, Checkbox, Input, Switch, Textarea, Icons
 - Themed frames: 2×2 grid per component page, single row on All components
-- Icons imported from EDS Icon Library (`global/` set)
+- Icons imported from Brand1 Icon Library (`global/` set)
 - Code Connect: not yet done (requires library publish)

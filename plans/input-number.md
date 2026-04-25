@@ -2,7 +2,7 @@
 
 ## Background
 
-EDS uses `react-number-format` (NumericFormat) inside Textfield. ELV uses `react-aria`'s `useNumberField`. Both render `type="text"`, neither has stepper buttons.
+Brand1 uses `react-number-format` (NumericFormat) inside Textfield. Brand2 uses `react-aria`'s `useNumberField`. Both render `type="text"`, neither has stepper buttons.
 
 We want zero external dependencies. Use native `<input>` with our own formatting.
 
@@ -47,7 +47,7 @@ interface InputNumberProps extends Omit<
 
 ### `onChange` returns `number | undefined`
 
-Following ELV pattern — raw number, not formatted string. `undefined` when field is empty.
+Following Brand2 pattern — raw number, not formatted string. `undefined` when field is empty.
 
 ### `type="text"` with `inputMode="decimal"`
 
@@ -61,11 +61,11 @@ Not `type="number"` because:
 
 - **Focused**: show raw number for easy editing (e.g. `1050.10`)
 - **Blurred**: show formatted display (e.g. `1 050,10 €`)
-- Same pattern as EDS and ELV
+- Same pattern as Brand1 and Brand2
 
 ### Prefix/suffix slots
 
-Visual elements inside the input border — like EDS's `inputStart`/`inputEnd` and ELV's `startContent`/`endContent`. Separate from `Intl.NumberFormat`'s built-in currency/unit symbols.
+Visual elements inside the input border — like Brand1's `inputStart`/`inputEnd` and Brand2's `startContent`/`endContent`. Separate from `Intl.NumberFormat`'s built-in currency/unit symbols.
 
 Use cases:
 
@@ -173,14 +173,14 @@ No icons needed (no stepper buttons).
 
 ## What we skip
 
-- Stepper buttons (neither EDS nor ELV renders them — add later if needed)
+- Stepper buttons (neither Brand1 nor Brand2 renders them — add later if needed)
 - Hidden input for form submission (consumers use controlled state)
-- `inputValueAlign` (ELV) — add later if needed
+- `inputValueAlign` (Brand2) — add later if needed
 - `isAllowed` validation callback (react-number-format) — use `min`/`max` instead
 
 ## Comparison
 
-|               | EDS                 | ELV         | Ours                     |
+|               | Brand1              | Brand2      | Ours                     |
 | ------------- | ------------------- | ----------- | ------------------------ |
 | Library       | react-number-format | react-aria  | none (Intl.NumberFormat) |
 | onChange      | string              | number      | number                   |

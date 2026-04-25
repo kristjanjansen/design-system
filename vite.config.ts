@@ -14,6 +14,9 @@ export default defineConfig({
     deps: {
       neverBundle: ["react", "react-dom", "react/jsx-runtime"],
     },
+    css: {
+      target: ["chrome123", "safari17.5", "firefox128"], // mid-2024 browsers
+    },
   },
   lint: {
     plugins: ["jsx-a11y", "react", "import"],

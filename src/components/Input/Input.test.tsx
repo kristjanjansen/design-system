@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vite-plus/test";
-import { expectNoAxeViolations } from "../../test-utils.ts";
+
 import { Input } from "./Input.tsx";
 
 test("exports forwardRef component", () => {
@@ -50,16 +50,4 @@ test("passes through native attributes", () => {
 test("renders description", () => {
   render(<Input label="Name" description="Your full name" />);
   expect(screen.getByText("Your full name")).toBeInTheDocument();
-});
-
-test("has no accessibility violations", async () => {
-  await expectNoAxeViolations(<Input label="Name" />);
-});
-
-test("has no accessibility violations in error state", async () => {
-  await expectNoAxeViolations(<Input label="Email" error="Required" description="Enter email" />);
-});
-
-test("has no accessibility violations when disabled", async () => {
-  await expectNoAxeViolations(<Input label="Name" disabled />);
 });

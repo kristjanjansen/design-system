@@ -1,7 +1,7 @@
 import { forwardRef, useId } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";
-import { IconRadioSm } from "../../icons/index.ts";
+import { IconRadioXs } from "../../icons/index.ts";
 import { useRadioGroup } from "./RadioContext.ts";
 
 export interface RadioProps {
@@ -37,7 +37,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
           onChange={() => ctx?.onChange?.(value)}
         />
         <span className="icon" aria-hidden="true">
-          <IconRadioSm />
+          <IconRadioXs />
         </span>
       </span>
       <div className="radio-content">

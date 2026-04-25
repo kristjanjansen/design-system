@@ -11,8 +11,7 @@ export interface InputPasswordProps extends Omit<
   label?: string;
   description?: string;
   error?: string;
-  infoHint?: ReactNode;
-  suffix?: ReactNode;
+  labelEnd?: ReactNode;
   inputStart?: ReactNode;
   toggleLabel?: string;
   onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -28,8 +27,7 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
       id,
       className,
       required,
-      infoHint,
-      suffix,
+      labelEnd,
       inputStart,
       disabled,
       toggleLabel = "Toggle password visibility",
@@ -47,13 +45,7 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
 
     return (
       <div className={["ds-input-password", className].filter(Boolean).join(" ")}>
-        <FieldLabel
-          htmlFor={inputId}
-          required={required}
-          infoHint={infoHint}
-          suffix={suffix}
-          disabled={disabled}
-        >
+        <FieldLabel htmlFor={inputId} required={required} labelEnd={labelEnd} disabled={disabled}>
           {label}
         </FieldLabel>
         <div

@@ -10,7 +10,7 @@ export interface SwitchGroupProps {
   description?: string;
   error?: string;
   required?: boolean;
-  infoHint?: ReactNode;
+  labelEnd?: ReactNode;
   name?: string;
   value?: string[];
   defaultValue?: string[];
@@ -26,7 +26,7 @@ export const SwitchGroup = forwardRef<HTMLFieldSetElement, SwitchGroupProps>(fun
     description,
     error,
     required,
-    infoHint,
+    labelEnd,
     name,
     value: controlledValue,
     defaultValue,
@@ -63,7 +63,7 @@ export const SwitchGroup = forwardRef<HTMLFieldSetElement, SwitchGroupProps>(fun
           [errorId, !error ? descId : undefined].filter(Boolean).join(" ") || undefined
         }
       >
-        <FieldLabel as="legend" required={required} infoHint={infoHint} disabled={disabled}>
+        <FieldLabel as="legend" required={required} labelEnd={labelEnd} disabled={disabled}>
           {label}
         </FieldLabel>
         <div className="options">{children}</div>

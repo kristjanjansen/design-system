@@ -37,7 +37,7 @@ interface AccordionProps {
 
 - `<details>` handles open/close state natively — no React state needed for uncontrolled usage
 - `name` prop maps to the native `name` attribute — details elements with the same `name` form an exclusive group (browser-native, no JS needed)
-- No font size change on open (EDS does this — we explicitly skip it)
+- No font size change on open (Brand1 does this — we explicitly skip it)
 - Chevron on the right side, rotates 180° on open
 - Disabled via `pointer-events: none` + opacity
 
@@ -55,7 +55,7 @@ interface AccordionGroupProps {
 
 When `exclusive` is true, generates a unique `name` and passes it to children via context. Each `Accordion` reads context and applies the `name` attribute.
 
-This replaces the EDS/ELV `mode="single"|"multiple"` + selectedKeys + Context state machine — the browser does it natively with the `name` attribute.
+This replaces the Brand1/Brand2 `mode="single"|"multiple"` + selectedKeys + Context state machine — the browser does it natively with the `name` attribute.
 
 ## CSS
 
@@ -86,7 +86,7 @@ No JS height measurement. No ResizeObserver. Browser transitions `height: 0` →
 
 ### Styling
 
-- Bottom border divider between items in a group (like EDS, not boxed like ELV)
+- Bottom border divider between items in a group (like Brand1, not boxed like Brand2)
 - Summary padding: `--ds-spacing-sm` vertical, `--ds-spacing-md` horizontal
 - Content padding: `--ds-spacing-md` top/bottom
 - Chevron: TSX component, right-aligned, rotates with transition
@@ -124,13 +124,13 @@ src/components/
 5. **SEO/accessibility** — content is in the DOM, semantic elements
 6. **Progressive enhancement** — works without JS
 
-## What EDS/ELV do that we skip
+## What Brand1/Brand2 do that we skip
 
-- Font size bump on open title (EDS) — visual noise
-- `inert` attribute on closed panel (ELV) — `<details>` handles this natively
+- Font size bump on open title (Brand1) — visual noise
+- `inert` attribute on closed panel (Brand2) — `<details>` handles this natively
 - ResizeObserver height tracking — unnecessary with `interpolate-size`
 - Custom `selectedKeys` state management — native `name` attribute
-- `useFocusRing` hook (ELV) — `:focus-visible` CSS
+- `useFocusRing` hook (Brand2) — `:focus-visible` CSS
 
 ---
 

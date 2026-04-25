@@ -1,12 +1,13 @@
 @import "./variables.css";
 @import "./themes/index.css";
-@import "./reset.css";
 @import "./components/internal/FieldLabel.css";
 @import "./components/internal/FieldMessages.css";
 @import "./components/Input/Input.css";
 @import "./components/InputNumber/InputNumber.css";
 @import "./components/InputPassword/InputPassword.css";
 @import "./components/Textarea/Textarea.css";
+@import "./components/Heading/Heading.css";
+@import "./components/Text/Text.css";
 @import "./components/Button/Button.css";
 @import "./components/Switch/Switch.css";
 @import "./components/Switch/SwitchGroup.css";

@@ -1,3 +1,4 @@
+import { Text } from "../Text/Text.tsx";
 import "./FieldMessages.css";
 
 export interface FieldMessagesProps {
@@ -13,14 +14,20 @@ export function FieldMessages({ error, description, errorId, descriptionId }: Fi
   return (
     <div className="ds-field-messages">
       {error && (
-        <span id={errorId} aria-live="polite" className="ds-field-messages-error">
+        <Text
+          as="span"
+          size="sm"
+          id={errorId}
+          aria-live="polite"
+          className="ds-field-messages-error"
+        >
           {error}
-        </span>
+        </Text>
       )}
       {description && !error && (
-        <span id={descriptionId} className="ds-field-messages-description">
+        <Text as="span" size="sm" id={descriptionId} className="ds-field-messages-description">
           {description}
-        </span>
+        </Text>
       )}
     </div>
   );

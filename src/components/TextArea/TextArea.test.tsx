@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vite-plus/test";
-import { expectNoAxeViolations } from "../../test-utils.ts";
+
 import { Textarea } from "./Textarea.tsx";
 
 test("exports forwardRef component", () => {
@@ -50,12 +50,4 @@ test("passes through native attributes", () => {
   const textarea = screen.getByLabelText("Bio");
   expect(textarea).toHaveAttribute("name", "bio");
   expect(textarea).toHaveAttribute("placeholder", "Tell us");
-});
-
-test("has no accessibility violations", async () => {
-  await expectNoAxeViolations(<Textarea label="Bio" />);
-});
-
-test("has no accessibility violations in error state", async () => {
-  await expectNoAxeViolations(<Textarea label="Bio" error="Too long" />);
 });

@@ -2,7 +2,7 @@
 
 ## Background
 
-EDS builds password toggle into Textfield via `type="password"` + `showPasswordToggle` prop. ELV has no password toggle — just passes `type="password"` to the browser. We create a dedicated `InputPassword` component following NuxtUI naming.
+Brand1 builds password toggle into Textfield via `type="password"` + `showPasswordToggle` prop. Brand2 has no password toggle — just passes `type="password"` to the browser. We create a dedicated `InputPassword` component following NuxtUI naming.
 
 ## Approach
 
@@ -64,14 +64,14 @@ export function InputPassword({ toggleLabel = "Toggle password visibility", ... 
 - **Toggle always present** — no prop to hide it. Use `<Input type="password">` for no toggle
 - **`aria-pressed`** on the button — announces toggle state. No `aria-live` needed
 - **`toggleLabel` prop** — consumers pass translated string for the button's aria-label
-- **Icons** — `EyeIcon` and `EyeOffIcon` from EDS Figma library (`global/eye`, `global/eye-hide`)
-- **Button inside input border** — flex child, not absolute positioned (matches EDS pattern)
+- **Icons** — `EyeIcon` and `EyeOffIcon` from Brand1 Figma library (`global/eye`, `global/eye-hide`)
+- **Button inside input border** — flex child, not absolute positioned (matches Brand1 pattern)
 - **Focus ring on toggle** — `box-shadow` inset, not outline (stays within the input border)
 - **`type="button"`** on toggle — prevents form submission on click
 
 ## CSS
 
-The input wrapper is a flex container (like EDS):
+The input wrapper is a flex container (like Brand1):
 
 ```css
 .input-wrapper {
@@ -114,7 +114,7 @@ Focus/hover/error states on the wrapper, not the inner input. The wrapper gets t
 
 ## Icons
 
-Import from EDS Figma library:
+Import from Brand1 Figma library:
 
 - `global/eye` (24px) — password hidden, show icon
 - `global/eye-hide` (24px) — password visible, hide icon
@@ -143,7 +143,7 @@ src/components/InputPassword/
 - Forwards ref to the input element
 - forwardRef contract check
 
-## What we skip from EDS
+## What we skip from Brand1
 
 - `aria-describedby` linking toggle button to field label/description — adds complexity, `aria-label` on button is sufficient
 - `showPasswordToggle` prop — always show toggle, use `Input type="password"` if you don't want it
@@ -154,7 +154,7 @@ src/components/InputPassword/
 
 Implemented as planned. Key details:
 
-- Icons centralized to `src/icons/IconEyeSm.tsx` and `src/icons/IconEyeHideSm.tsx` (from EDS Figma `global/eye`, `global/eye-hide`)
+- Icons centralized to `src/icons/IconEyeSm.tsx` and `src/icons/IconEyeHideSm.tsx` (from Brand1 Figma `global/eye`, `global/eye-hide`)
 - Toggle button has `tabIndex={-1}` (focus stays on input, toggle via click only)
 - Uses shared `FieldLabel` and `FieldMessages` from `internal/`
 - 12 tests covering toggle, aria-pressed, aria-label, disabled, required, onChange, ref

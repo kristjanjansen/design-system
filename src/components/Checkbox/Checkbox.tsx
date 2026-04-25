@@ -1,8 +1,8 @@
 import { type InputHTMLAttributes, forwardRef, useId } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";
-import { IconCheckSm } from "../../icons/index.ts";
-import { IconIndeterminateSm } from "../../icons/index.ts";
+import { IconCheckXs } from "../../icons/index.ts";
+import { IconIndeterminateXs } from "../../icons/index.ts";
 import { useCheckboxGroup } from "./CheckboxContext.ts";
 import "./Checkbox.css";
 
@@ -80,10 +80,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
             {...rest}
           />
           <span className="icon icon--check" aria-hidden="true">
-            <IconCheckSm />
+            <IconCheckXs />
           </span>
           <span className="icon icon--indeterminate" aria-hidden="true">
-            <IconIndeterminateSm />
+            <IconIndeterminateXs />
           </span>
         </span>
         <FieldLabel htmlFor={inputId} required={required} disabled={isDisabled} inline>

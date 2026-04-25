@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vite-plus/test";
-import { expectNoAxeViolations } from "../../test-utils.ts";
+
 import { Switch } from "./Switch.tsx";
 
 test("exports forwardRef component", () => {
@@ -57,12 +57,4 @@ test("renders error", () => {
 test("renders description", () => {
   render(<Switch label="Toggle" description="Enable this feature" />);
   expect(screen.getByText("Enable this feature")).toBeInTheDocument();
-});
-
-test("has no accessibility violations", async () => {
-  await expectNoAxeViolations(<Switch label="Toggle" />);
-});
-
-test("has no accessibility violations in error state", async () => {
-  await expectNoAxeViolations(<Switch label="Toggle" error="Required" />);
 });

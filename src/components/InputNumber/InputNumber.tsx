@@ -20,8 +20,7 @@ export interface InputNumberProps extends Omit<
   description?: string;
   error?: string;
   required?: boolean;
-  infoHint?: ReactNode;
-  suffix?: ReactNode;
+  labelEnd?: ReactNode;
   inputStart?: ReactNode;
   inputEnd?: ReactNode;
   min?: number;
@@ -43,8 +42,7 @@ export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>(functi
     id,
     className,
     required,
-    infoHint,
-    suffix,
+    labelEnd,
     inputStart,
     inputEnd,
     disabled,
@@ -144,13 +142,7 @@ export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>(functi
 
   return (
     <div className={["ds-input-number", className].filter(Boolean).join(" ")}>
-      <FieldLabel
-        htmlFor={inputId}
-        required={required}
-        infoHint={infoHint}
-        suffix={suffix}
-        disabled={disabled}
-      >
+      <FieldLabel htmlFor={inputId} required={required} labelEnd={labelEnd} disabled={disabled}>
         {label}
       </FieldLabel>
       <div

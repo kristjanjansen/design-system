@@ -5,23 +5,33 @@ import {
   forwardRef,
 } from "react";
 import { useAccordionGroup } from "./AccordionGroup.tsx";
-import { IconChevronDownSm } from "../../icons/index.ts";
+import { IconChevronDownXs } from "../../icons/index.ts";
 import "./Accordion.css";
 
 export interface AccordionProps extends Omit<
   DetailedHTMLProps<DetailsHTMLAttributes<HTMLDetailsElement>, HTMLDetailsElement>,
   "children"
 > {
-  title: string;
+  title: ReactNode;
   defaultOpen?: boolean;
   disabled?: boolean;
-  variant?: "ghost" | "default";
+  variant?: "display" | "default";
   children: ReactNode;
-  onToggle?: (open: boolean) => void;
+  onChange?: (open: boolean) => void;
 }
 
 export const Accordion = forwardRef<HTMLDetailsElement, AccordionProps>(function Accordion(
-  { title, defaultOpen, disabled, variant = "ghost", children, onToggle, className, name, ...rest },
+  {
+    title,
+    defaultOpen,
+    disabled,
+    variant = "display",
+    children,
+    onChange,
+    className,
+    name,
+    ...rest
+  },
   ref,
 ) {
   const groupName = useAccordionGroup();
@@ -39,12 +49,12 @@ export const Accordion = forwardRef<HTMLDetailsElement, AccordionProps>(function
         .join(" ")}
       open={defaultOpen}
       name={name ?? groupName}
-      onToggle={onToggle ? (e) => onToggle((e.target as HTMLDetailsElement).open) : undefined}
+      onToggle={onChange ? (e) => onChange((e.target as HTMLDetailsElement).open) : undefined}
       {...rest}
     >
       <summary className="trigger" tabIndex={disabled ? -1 : undefined}>
         <span className="icon">
-          <IconChevronDownSm />
+          <IconChevronDownXs />
         </span>
         <span className="title">{title}</span>
       </summary>

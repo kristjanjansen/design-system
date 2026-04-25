@@ -84,7 +84,7 @@ The theme switcher stays global (top or sidebar). Switching theme re-renders eve
 
 ---
 
-## Status: PARTIALLY DONE
+## Status: SUPERSEDED
 
 Decision: agent-first documentation, no docs site needed. What was done:
 

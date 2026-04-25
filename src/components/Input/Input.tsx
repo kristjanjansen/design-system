@@ -11,8 +11,7 @@ export interface InputProps extends Omit<
   description?: string;
   error?: string;
   type?: "text" | "email" | "password" | "url" | "tel" | "search";
-  infoHint?: ReactNode;
-  suffix?: ReactNode;
+  labelEnd?: ReactNode;
   inputStart?: ReactNode;
   inputEnd?: ReactNode;
   onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -27,8 +26,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     id,
     className,
     required,
-    infoHint,
-    suffix,
+    labelEnd,
     disabled,
     inputStart,
     inputEnd,
@@ -45,13 +43,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 
   return (
     <div className={["ds-input", className].filter(Boolean).join(" ")}>
-      <FieldLabel
-        htmlFor={inputId}
-        required={required}
-        infoHint={infoHint}
-        suffix={suffix}
-        disabled={disabled}
-      >
+      <FieldLabel htmlFor={inputId} required={required} labelEnd={labelEnd} disabled={disabled}>
         {label}
       </FieldLabel>
       {hasSlots ? (

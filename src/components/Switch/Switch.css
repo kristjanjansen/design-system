@@ -14,8 +14,11 @@
 
     .track {
       position: relative;
-      width: 2.5em;
-      height: 1.5em;
+      display: flex;
+      align-items: center;
+      width: 2.5rem;
+      height: 1.5rem;
+      padding: 0.1875rem;
       border: var(--ds-border-width) solid var(--ds-color-border);
       border-radius: 999px;
       background: var(--ds-color-bg);
@@ -24,6 +27,7 @@
       transition-duration: var(--ds-duration-normal);
       transition-timing-function: var(--ds-easing);
       flex-shrink: 0;
+      box-sizing: border-box;
     }
 
     .input {
@@ -36,22 +40,18 @@
     }
 
     .thumb {
-      position: absolute;
-      top: 50%;
-      left: 0.25em;
-      width: 1em;
-      height: 1em;
+      width: 1rem;
+      height: 1rem;
       border-radius: 50%;
       background: var(--ds-color-muted);
-      transform: translateY(-50%);
-      transition-property: left, background-color;
+      transition-property: margin, background-color;
       transition-duration: var(--ds-duration-normal);
       transition-timing-function: var(--ds-easing);
       pointer-events: none;
     }
 
     .input:checked ~ .thumb {
-      left: calc(100% - 1em - 0.25em);
+      margin-left: auto;
       background: var(--ds-color-bg);
     }
 

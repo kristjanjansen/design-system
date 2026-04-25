@@ -7,6 +7,8 @@ export {
   type AccordionGroupProps,
 } from "./components/Accordion/AccordionGroup.tsx";
 export { Button, type ButtonProps } from "./components/Button/Button.tsx";
+export { Heading, type HeadingProps } from "./components/Heading/Heading.tsx";
+export { Text, type TextProps } from "./components/Text/Text.tsx";
 export { Checkbox, type CheckboxProps } from "./components/Checkbox/Checkbox.tsx";
 export { CheckboxGroup, type CheckboxGroupProps } from "./components/Checkbox/CheckboxGroup.tsx";
 export { Switch, type SwitchProps } from "./components/Switch/Switch.tsx";

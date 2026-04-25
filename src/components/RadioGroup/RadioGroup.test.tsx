@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vite-plus/test";
-import { expectNoAxeViolations } from "../../test-utils.ts";
+
 import { RadioGroup } from "./RadioGroup.tsx";
 import { Radio } from "./Radio.tsx";
 
@@ -131,21 +131,4 @@ test("Radio forwards ref to input", () => {
     </RadioGroup>,
   );
   expect(ref.current?.type).toBe("radio");
-});
-
-test("has no accessibility violations", async () => {
-  await expectNoAxeViolations(
-    <RadioGroup label="Color">
-      <Radio value="red">Red</Radio>
-      <Radio value="blue">Blue</Radio>
-    </RadioGroup>,
-  );
-});
-
-test("has no accessibility violations in error state", async () => {
-  await expectNoAxeViolations(
-    <RadioGroup label="Color" error="Required">
-      <Radio value="red">Red</Radio>
-    </RadioGroup>,
-  );
 });

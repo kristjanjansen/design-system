@@ -1,0 +1,22 @@
+@layer ds {
+  .ds-text {
+    font-family: inherit;
+    font-stretch: var(--ds-font-stretch);
+    color: var(--ds-color-fg);
+  }
+
+  .ds-text--sm {
+    font-size: var(--ds-font-size-sm);
+    line-height: 1.5rem;
+  }
+
+  .ds-text--md {
+    font-size: var(--ds-font-size-md);
+    line-height: 1.5rem;
+  }
+
+  .ds-text--lg {
+    font-size: var(--ds-font-size-lg);
+    line-height: 1.75rem;
+  }
+}

@@ -21,14 +21,14 @@ src/style.css                                           (combined CSS entry)
 - Colocated tests — `Input/Input.test.tsx` next to component
 - Internal primitives in `internal/` — not exported from package
 - Icons centralized in `src/icons/` with barrel `index.ts`. Named `Icon{Name}Sm.tsx`
-- Icons from EDS Figma `global/` set, `fill="currentColor"`
+- Icons from Brand1 Figma `global/` set, `fill="currentColor"`
 
 ## When adding a new component
 
 1. Create `src/components/{Name}/{Name}.tsx + .css + .test.tsx`
 2. Export from `src/index.ts`
 3. Add CSS import to `src/style.css`
-4. Update consumer app to show the new component
+4. Update example app to show the new component
 5. Add Figma component set + themed frames (follow component page rules below)
 6. Add instance to Figma "All components" page
 7. Run `vp check && vp test && vp pack` before committing
@@ -152,6 +152,7 @@ Use `(value, event)` when wrapping a single native event. Use `(value)` when the
 - All values via `--ds-*` tokens
 - Dynamic colors via `oklch(from var(--ds-color-*) calc(l - var(--ds-l-hover)) c h)`
 - `@layer ds` for cascade control, `@scope` for class isolation
+- **Use rem everywhere** for sizing (font-size, padding, spacing, radius). Exceptions: `em` for values that must scale with parent font-size (e.g. icon size inside text), `px` for borders/outlines
 
 ### Test pattern
 
@@ -179,18 +180,11 @@ Every component test file includes: forwardRef test, label linking, onChange cal
 - Linting: oxlint with `jsx-a11y`, `react`, `import` plugins + `sort-imports`
 - `vp check` runs format + lint + type check. `vp test` runs Vitest. Always run both together: `vp check && vp test`
 
-## For consumer-side agents
-
-1. Read `node_modules/design-system/CLAUDE.md` then `DESIGN.md` for design decisions
-2. Read `src/index.ts` for exports, `src/components/{Name}/{Name}.tsx` for props
-3. Read `src/variables.css` for tokens, `src/themes/` for brand overrides
-4. `value` + `onChange` = controlled. `defaultValue` = uncontrolled. Don't use `value` without `onChange`
-5. `import { Button, Input, ... } from "design-system"` + `import "design-system/css/style.css"`
-
 ## Figma MCP
 
 - File: https://www.figma.com/design/NiBvhCdGieWhAcyuwn2K7W/Test
-- **CRITICAL: always set `layoutSizingVertical = "HUG"` on inner frames after creating content.** Frames default to FIXED height after `resize()` — this causes components to render with excess whitespace. Apply HUG to: component variants, input wrappers, triggers, content frames.
+- **CRITICAL: always resize frames to fit content after changes.** Set `layoutSizingVertical = "HUG"` on all themed frames, component variants, and inner frames after creating or modifying content. Frames default to FIXED height after `resize()` — this causes excess whitespace.
+- **All text must bind `fontFamily` to `font/family` variable** so brand2 renders in Roboto Flex. Semi Bold text must also bind `fontStyle` to `font/style-semibold`
 - Text styles support `setBoundVariable()` for `fontFamily`, `fontSize`, `fontStyle` — use STRING vars for family/style, FLOAT for size
 - Don't assume Figma API limitations — test before claiming features don't exist
 - Font style names differ: Inter = "Semi Bold" (space), Roboto Flex = "SemiBold" (no space). Use `listAvailableFontsAsync()` to discover
@@ -200,7 +194,7 @@ Every component test file includes: forwardRef test, label linking, onChange cal
 
 1. Component set at x=2000, no background — out of view
 2. 4 themed frames in 2×2 grid (lights top, darks bottom). "All components" page: single row
-3. Frames: 400px wide, equal height, 48px gap, 24px padding, 8px radius, fill bound to `color/page`
+3. Frames: 400px wide, HUG height, 48px gap, 24px padding, no corner radius, fill bound to `color/page`
 4. Theme label: 11px muted 0.5 opacity. All states shown. Instances fill width
 5. Pages: "All components" first, alphabetical middle, "Icons" last
 6. Disabled/readonly fills: `color/bg` at 0.7 opacity — never hardcoded colors

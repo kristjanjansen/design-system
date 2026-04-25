@@ -2,7 +2,7 @@
 
 ## Background
 
-EDS/ELV both use react-aria for custom dropdown with portal popover. We can start with native `<select>` and add a custom dropdown later.
+Brand1/Brand2 both use react-aria for custom dropdown with portal popover. We can start with native `<select>` and add a custom dropdown later.
 
 ## Two-phase approach
 
@@ -91,7 +91,7 @@ This is a separate component (`SelectMenu`) — the native `Select` stays for si
 - Works without JS (progressive enhancement)
 - Covers 80% of use cases
 
-ELV's custom select is ~400 lines. Native is ~50 lines.
+Brand2's custom select is ~400 lines. Native is ~50 lines.
 
 ## File structure
 
@@ -152,7 +152,7 @@ src/components/Select/
 
 ## Comparison
 
-|             | EDS               | ELV               | Ours (Phase 1)         |
+|             | Brand1            | Brand2            | Ours (Phase 1)         |
 | ----------- | ----------------- | ----------------- | ---------------------- |
 | Type        | Custom dropdown   | Custom dropdown   | Native select          |
 | Library     | react-aria        | react-aria        | none                   |

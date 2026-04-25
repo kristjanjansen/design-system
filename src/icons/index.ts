@@ -1,6 +1,6 @@
-export { IconCheckSm } from "./IconCheckSm.tsx";
-export { IconChevronDownSm } from "./IconChevronDownSm.tsx";
+export { IconCheckXs } from "./IconCheckXs.tsx";
+export { IconChevronDownXs } from "./IconChevronDownXs.tsx";
 export { IconEyeHideSm } from "./IconEyeHideSm.tsx";
 export { IconEyeSm } from "./IconEyeSm.tsx";
-export { IconIndeterminateSm } from "./IconIndeterminateSm.tsx";
-export { IconRadioSm } from "./IconRadioSm.tsx";
+export { IconIndeterminateXs } from "./IconIndeterminateXs.tsx";
+export { IconRadioXs } from "./IconRadioXs.tsx";

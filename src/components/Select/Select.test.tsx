@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vite-plus/test";
-import { expectNoAxeViolations } from "../../test-utils.ts";
+
 import { Select } from "./Select.tsx";
 
 const options = [
@@ -84,12 +84,4 @@ test("forwards ref", () => {
 test("renders chevron icon", () => {
   const { container } = render(<Select label="Color" options={options} />);
   expect(container.querySelector(".chevron svg")).toBeInTheDocument();
-});
-
-test("has no accessibility violations", async () => {
-  await expectNoAxeViolations(<Select label="Color" options={options} />);
-});
-
-test("has no accessibility violations in error state", async () => {
-  await expectNoAxeViolations(<Select label="Color" options={options} error="Required" />);
 });

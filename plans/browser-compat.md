@@ -1,95 +1,50 @@
-# Plan: Browser Compatibility (2023+)
+# Plan: Browser Compatibility
 
-## Target
+## Status: done
 
-Chrome 110+, Safari 16+, Firefox 110+ (early 2023 browsers).
-
-## Strategy
-
-LightningCSS 1.32 (bundled in vite-plus) for build-time transforms where possible. Manual rewrites for `@scope`. Progressive enhancement for everything else.
-
-## LightningCSS — what it actually does
+Target: **Chrome 123+ / Firefox 128+ / Safari 17.5+** (mid-2024 browsers).
 
 ```ts
 // vite.config.ts
-css: {
-  lightningcss: {
-    targets: browserslistToTargets(browserslist("chrome 110, safari 16, firefox 110")),
+pack: {
+  css: {
+    target: ["chrome123", "safari17.5", "firefox128"], // mid-2024 browsers
   },
-},
-```
-
-**Transpiles (static values only):**
-
-- `oklch(50% 0.1 50)` → `rgb()` fallback (must use percentage L notation, not `oklch(0.5 ...)`)
-- `oklch(from blue calc(l * 0.8) c h)` → static evaluation (literal colors only)
-- `light-dark(#fff, #000)` → separate fallbacks
-- CSS nesting → flat selectors
-- Logical properties → physical
-- Vendor prefixes
-
-**Cannot transpile (parsed, passed through):**
-
-- `oklch(from var(...) ...)` — variables are runtime, can't be evaluated at build time
-- `@layer` — not flattened, just parsed
-- `@scope` — not downleveled
-- `@property` — not polyfilled
-- `@starting-style`, `field-sizing`, `interpolate-size`, `::details-content`
-
-## Manual changes required
-
-### 1. `@scope` → BEM classes
-
-No Firefox support. No build tool can transform it. Revert to BEM-prefixed class names.
-
-```css
-/* Before */
-@scope (.ds-input) {
-  .input { ... }
 }
-
-/* After */
-.ds-input { ... }
-.ds-input__field { ... }
 ```
 
-Biggest change — every component CSS and TSX file. Mechanical find/replace.
+## Why mid-2024
 
-### 2. `oklch(from var(...))` → explicit derived-color tokens
+These targets are the minimum where all our core CSS features work natively:
 
-We use relative oklch with CSS variables for hover/disabled/focus states:
+| Feature        | Chrome | Firefox | Safari | Status |
+| -------------- | ------ | ------- | ------ | ------ |
+| `@scope`       | 118    | 128     | 17.4   | native |
+| `oklch()`      | 111    | 113     | 15.4   | native |
+| `light-dark()` | 123    | 120     | 17.5   | native |
+| `@layer`       | 99     | 97      | 15.4   | native |
+| `@property`    | 85     | 128     | 15.4   | native |
+| CSS nesting    | 120    | 117     | 17.2   | native |
+| `:has()`       | 105    | 121     | 15.4   | native |
 
-```css
-border-color: oklch(from var(--ds-color-border) calc(l - var(--ds-l-hover)) c h);
-```
+Chrome 123 (Mar 2024) is the bottleneck — it's the first version with `light-dark()`.
 
-LightningCSS can't evaluate this — `var()` is runtime. Options:
+## LightningCSS output
 
-- **A. Pre-compute hex fallbacks** — add a fallback line before each oklch line
-- **B. Define derived tokens per theme** — `--ds-color-border-hover`, `--ds-color-border-focus` etc.
+With these targets, almost nothing needs transforming. Output is 130.77 kB (same as raw).
 
-Option B is cleaner: each theme file defines all derived colors, no runtime calculation needed.
+Only transform applied: CSS nesting flattened (Chrome 120 nesting differs slightly from spec).
 
-### 3. `oklch()` base values — use percentage notation
+Everything else passes through as-is: `@scope`, `oklch()`, `light-dark()`, `@layer`, `@property`.
 
-LightningCSS only downlevels oklch with percentage lightness. Our tokens need `oklch(35% 0.01 260)` not `oklch(0.35 0.01 260)`.
+## Progressive enhancement (works but degrades)
 
-## Graceful degradation (acceptable)
-
-| Feature                 | Fallback behavior                                   |
-| ----------------------- | --------------------------------------------------- |
-| `@property`             | Colors snap instead of transitioning between themes |
-| `interpolate-size`      | Accordion opens instantly, no height animation      |
-| `@starting-style`       | Error messages appear instantly, no fade-in         |
-| `field-sizing: content` | Textarea stays fixed height, works with `rows`      |
-| `text-wrap: balance`    | Normal text wrapping                                |
-| `details[name]`         | Exclusive accordion groups don't auto-close         |
-| `::details-content`     | No animated open/close, native details still works  |
-
-## Implementation order
-
-1. **Add LightningCSS targets** in `vite.config.ts` — handles `oklch()` base values, `light-dark()`, nesting, prefixes
-2. **Fix oklch percentage notation** — ensure all base tokens use `oklch(35% ...)` not `oklch(0.35 ...)`
-3. **Replace `@scope` with BEM classes** — manual rewrite
-4. **Add derived-color tokens** — replace `oklch(from var(...))` with explicit theme tokens
-5. **Test in Firefox 110** — strictest target
+| Feature                   | Needs                   | Fallback                                    |
+| ------------------------- | ----------------------- | ------------------------------------------- |
+| `oklch(from var(...))`    | Chrome 122, Safari 18   | No hover/focus color shifts                 |
+| `@starting-style`         | Firefox 129             | No fade-in animations                       |
+| `::details-content`       | Chrome 131, Safari 18.4 | No accordion animation                      |
+| `interpolate-size`        | Chrome 129              | Accordion opens instantly                   |
+| `field-sizing`            | Chrome 123              | Fixed height textarea                       |
+| `details[name]`           | Firefox 130             | No exclusive accordion groups               |
+| `appearance: base-select` | Chrome 134              | Native select (already `@supports`-guarded) |

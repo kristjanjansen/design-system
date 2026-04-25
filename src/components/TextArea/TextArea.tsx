@@ -10,25 +10,12 @@ export interface TextareaProps extends Omit<
   label?: string;
   description?: string;
   error?: string;
-  infoHint?: ReactNode;
-  suffix?: ReactNode;
+  labelEnd?: ReactNode;
   onChange?: (value: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
-  {
-    label,
-    description,
-    error,
-    onChange,
-    id,
-    className,
-    required,
-    infoHint,
-    suffix,
-    disabled,
-    ...rest
-  },
+  { label, description, error, onChange, id, className, required, labelEnd, disabled, ...rest },
   ref,
 ) {
   const autoId = useId();
@@ -39,13 +26,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
 
   return (
     <div className={["ds-textarea", className].filter(Boolean).join(" ")}>
-      <FieldLabel
-        htmlFor={inputId}
-        required={required}
-        infoHint={infoHint}
-        suffix={suffix}
-        disabled={disabled}
-      >
+      <FieldLabel htmlFor={inputId} required={required} labelEnd={labelEnd} disabled={disabled}>
         {label}
       </FieldLabel>
       <textarea

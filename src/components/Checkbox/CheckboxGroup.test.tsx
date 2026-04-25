@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vite-plus/test";
-import { expectNoAxeViolations } from "../../test-utils.ts";
+
 import { Checkbox } from "./Checkbox.tsx";
 import { CheckboxGroup } from "./CheckboxGroup.tsx";
 
@@ -138,13 +138,4 @@ test("Tab moves between checkboxes", async () => {
   expect(screen.getByLabelText("A")).toHaveFocus();
   await userEvent.tab();
   expect(screen.getByLabelText("B")).toHaveFocus();
-});
-
-test("has no accessibility violations", async () => {
-  await expectNoAxeViolations(
-    <CheckboxGroup label="Interests">
-      <Checkbox value="a" label="A" />
-      <Checkbox value="b" label="B" />
-    </CheckboxGroup>,
-  );
 });

@@ -8,7 +8,7 @@
 
     .input {
       padding: var(--ds-spacing-10) var(--ds-spacing-14);
-      font-size: var(--ds-font-size-lg);
+      font-size: var(--ds-font-size-md);
       border: var(--ds-border-width) solid var(--ds-color-border);
       border-radius: var(--ds-radius);
       outline: var(--ds-outline-width) solid transparent;

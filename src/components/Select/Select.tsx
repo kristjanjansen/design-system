@@ -7,7 +7,7 @@ import {
 } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";
-import { IconChevronDownSm } from "../../icons/index.ts";
+import { IconChevronDownXs } from "../../icons/index.ts";
 import "./Select.css";
 
 export interface SelectOption {
@@ -26,8 +26,7 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
   description?: string;
   error?: string;
   required?: boolean;
-  infoHint?: ReactNode;
-  suffix?: ReactNode;
+  labelEnd?: ReactNode;
   placeholder?: string;
   options: (SelectOption | SelectOptionGroup)[];
   onChange?: (value: string, event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -48,8 +47,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
     id,
     className,
     required,
-    infoHint,
-    suffix,
+    labelEnd,
     disabled,
     placeholder,
     options,
@@ -72,13 +70,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
         .filter(Boolean)
         .join(" ")}
     >
-      <FieldLabel
-        htmlFor={selectId}
-        required={required}
-        infoHint={infoHint}
-        suffix={suffix}
-        disabled={disabled}
-      >
+      <FieldLabel htmlFor={selectId} required={required} labelEnd={labelEnd} disabled={disabled}>
         {label}
       </FieldLabel>
       <div
@@ -124,7 +116,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
         </select>
         {!trigger && (
           <span className="chevron">
-            <IconChevronDownSm />
+            <IconChevronDownXs />
           </span>
         )}
       </div>

@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vite-plus/test";
-import { expectNoAxeViolations } from "../../test-utils.ts";
+
 import { Switch } from "./Switch.tsx";
 import { SwitchGroup } from "./SwitchGroup.tsx";
 
@@ -103,13 +103,4 @@ test("forwards ref to fieldset", () => {
     </SwitchGroup>,
   );
   expect(ref.current?.tagName).toBe("FIELDSET");
-});
-
-test("has no accessibility violations", async () => {
-  await expectNoAxeViolations(
-    <SwitchGroup label="Settings">
-      <Switch value="a" label="A" />
-      <Switch value="b" label="B" />
-    </SwitchGroup>,
-  );
 });

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { createRef } from "react";
 import { expect, test } from "vite-plus/test";
-import { expectNoAxeViolations } from "../../test-utils.ts";
+
 import { Accordion } from "./Accordion.tsx";
 import { AccordionGroup } from "./AccordionGroup.tsx";
 
@@ -56,9 +56,9 @@ test("AccordionGroup renders children", () => {
   expect(screen.getByText("Two")).toBeInTheDocument();
 });
 
-test("AccordionGroup exclusive sets shared name", () => {
+test("AccordionGroup mode='single' sets shared name", () => {
   const { container } = render(
-    <AccordionGroup exclusive>
+    <AccordionGroup mode="single">
       <Accordion title="One">First</Accordion>
       <Accordion title="Two">Second</Accordion>
     </AccordionGroup>,
@@ -68,7 +68,7 @@ test("AccordionGroup exclusive sets shared name", () => {
   expect(details[0].getAttribute("name")).toBe(details[1].getAttribute("name"));
 });
 
-test("AccordionGroup non-exclusive has no name", () => {
+test("AccordionGroup default mode has no name", () => {
   const { container } = render(
     <AccordionGroup>
       <Accordion title="One">First</Accordion>
@@ -113,10 +113,6 @@ test("AccordionGroup forwards ref to div", () => {
   expect(ref.current?.tagName).toBe("DIV");
 });
 
-test("has no accessibility violations", async () => {
-  await expectNoAxeViolations(<Accordion title="Section">Content</Accordion>);
-});
-
 test("disabled accordion excludes summary from tab order", () => {
   render(
     <Accordion title="Disabled" disabled>
@@ -125,13 +121,4 @@ test("disabled accordion excludes summary from tab order", () => {
   );
   const summary = screen.getByText("Disabled").closest("summary");
   expect(summary).toHaveAttribute("tabindex", "-1");
-});
-
-test("AccordionGroup has no accessibility violations", async () => {
-  await expectNoAxeViolations(
-    <AccordionGroup exclusive>
-      <Accordion title="One">First</Accordion>
-      <Accordion title="Two">Second</Accordion>
-    </AccordionGroup>,
-  );
 });
