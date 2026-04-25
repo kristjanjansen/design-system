@@ -10,7 +10,6 @@
   [data-theme="brand1-light"],
   [data-theme="brand1-dark"] {
     --ds-font-family: "Inter Variable", system-ui, sans-serif;
-    --ds-font-stretch: 100%;
     --ds-radius: 0.5em;
     --ds-border-width: 2px;
     --ds-outline-width: 2px;

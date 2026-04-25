@@ -1,7 +1,6 @@
 @layer ds {
   .ds-text {
     font-family: inherit;
-    font-stretch: var(--ds-font-stretch);
     color: var(--ds-color-fg);
   }
 

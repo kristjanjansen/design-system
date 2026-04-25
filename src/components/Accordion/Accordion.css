@@ -40,7 +40,6 @@
       padding: 1em;
       cursor: pointer;
       font-family: inherit;
-      font-stretch: var(--ds-font-stretch);
       font-size: var(--ds-font-size-lg);
       color: var(--ds-color-fg);
       background: none;

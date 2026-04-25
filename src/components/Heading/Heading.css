@@ -1,7 +1,6 @@
 @layer ds {
   .ds-heading {
     font-family: inherit;
-    font-stretch: var(--ds-font-stretch);
     font-weight: 600;
     color: var(--ds-color-fg);
     text-wrap: balance;

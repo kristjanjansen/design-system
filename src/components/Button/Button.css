@@ -7,7 +7,6 @@
     border: var(--ds-border-width) solid transparent;
     border-radius: 999px;
     font-family: inherit;
-    font-stretch: var(--ds-font-stretch);
     font-weight: 600;
     cursor: pointer;
     text-wrap: nowrap;

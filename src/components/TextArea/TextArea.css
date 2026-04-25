@@ -19,7 +19,6 @@
       color: var(--ds-color-fg);
       background: var(--ds-color-bg);
       font-family: inherit;
-      font-stretch: var(--ds-font-stretch);
       field-sizing: content;
       min-height: 4lh;
       resize: vertical;

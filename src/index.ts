@@ -7,6 +7,16 @@ export {
   type AccordionGroupProps,
 } from "./components/Accordion/AccordionGroup.tsx";
 export { Button, type ButtonProps } from "./components/Button/Button.tsx";
+export {
+  IconCheckXs,
+  IconChevronDownXs,
+  IconEyeHideSm,
+  IconEyeSm,
+  IconIndeterminateXs,
+  IconMoonSm,
+  IconRadioXs,
+  IconSunSm,
+} from "./icons/index.ts";
 export { Heading, type HeadingProps } from "./components/Heading/Heading.tsx";
 export { Text, type TextProps } from "./components/Text/Text.tsx";
 export { Checkbox, type CheckboxProps } from "./components/Checkbox/Checkbox.tsx";

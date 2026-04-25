@@ -10,7 +10,6 @@
   [data-theme="brand2-light"],
   [data-theme="brand2-dark"] {
     --ds-font-family: "Roboto Flex Variable", system-ui, sans-serif;
-    --ds-font-stretch: 80%;
     --ds-radius: 0.25em;
     --ds-border-width: 2px;
     --ds-outline-width: 2px;
