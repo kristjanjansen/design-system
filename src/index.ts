@@ -5,6 +5,7 @@ export {
   AccordionGroup,
   type AccordionGroupProps,
 } from "./components/Accordion/AccordionGroup.tsx";
+export { Badge, type BadgeProps } from "./components/Badge/Badge.tsx";
 export { Button, type ButtonProps } from "./components/Button/Button.tsx";
 export {
   IconCheckXs,
@@ -37,3 +38,22 @@ export {
   type SelectOption,
   type SelectOptionGroup,
 } from "./components/Select/Select.tsx";
+export {
+  Table,
+  type TableProps,
+  TableHeader,
+  type TableHeaderProps,
+  TableBody,
+  type TableBodyProps,
+  TableFooter,
+  type TableFooterProps,
+  TableRow,
+  type TableRowProps,
+  TableHeaderCell,
+  type TableHeaderCellProps,
+  TableCell,
+  type TableCellProps,
+} from "./components/Table/Table.tsx";
+export { Tabs, type TabsProps } from "./components/Tabs/Tabs.tsx";
+export { Tab, type TabProps } from "./components/Tabs/Tab.tsx";
+export { TabPanel, type TabPanelProps } from "./components/Tabs/TabPanel.tsx";

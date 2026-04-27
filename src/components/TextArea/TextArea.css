@@ -1,121 +1,116 @@
-@layer ds {
-  @scope (.ds-textarea) {
-    :scope {
-      display: flex;
-      flex-direction: column;
-      gap: var(--ds-spacing-8);
-    }
+@scope (.ds-textarea) {
+  :scope {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-spacing-8);
+  }
 
+  .input {
+    padding: var(--ds-spacing-10) var(--ds-spacing-14);
+    font-size: var(--ds-font-size-body);
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-main);
+    outline: var(--ds-outline-width) solid transparent;
+    outline-offset: var(--ds-outline-offset);
+    transition-property: border-color, outline-color, background-color, color;
+    transition-duration: var(--ds-duration-200);
+    transition-timing-function: var(--ds-easing-out);
+    color: var(--ds-color-fg);
+    background: var(--ds-color-bg);
+    font-family: inherit;
+    field-sizing: content;
+    min-height: 4lh;
+    resize: vertical;
+  }
+
+  .input:-webkit-autofill {
+    background-color: var(--ds-color-bg);
+    -webkit-box-shadow: 0 0 0 1000px var(--ds-color-bg) inset;
+    -webkit-text-fill-color: var(--ds-color-fg);
+  }
+
+  .input::placeholder {
+    color: var(--ds-color-fg-muted);
+  }
+
+  .input:hover:not(:disabled) {
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+  }
+
+  .input:focus-visible {
+    outline-color: var(--ds-color-outline);
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border),
+      var(--ds-mix-direction) var(--ds-light-focus)
+    );
+  }
+
+  .input:disabled {
+    color: var(--ds-color-fg-muted);
+    border-color: color-mix(in oklch, var(--ds-color-border), transparent 50%);
+    cursor: default;
+  }
+
+  .input:disabled::placeholder {
+    color: var(--ds-color-fg-muted);
+  }
+
+  .input:read-only:not(:disabled) {
+    background: color-mix(
+      in oklch,
+      var(--ds-color-bg),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border),
+      var(--ds-mix-direction) var(--ds-light-disabled)
+    );
+    cursor: default;
+  }
+
+  .input[aria-invalid="true"] {
+    border-color: var(--ds-color-border-error);
+  }
+
+  .input[aria-invalid="true"]:hover:not(:disabled) {
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border-error),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+  }
+
+  .input[aria-invalid="true"]:focus-visible {
+    outline-color: var(--ds-color-border-error);
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border-error),
+      var(--ds-mix-direction) var(--ds-light-focus)
+    );
+  }
+
+  @media (forced-colors: active) {
     .input {
-      padding: var(--ds-spacing-10) var(--ds-spacing-14);
-      font-size: var(--ds-font-size-body);
-      border: var(--ds-border-width) solid var(--ds-color-border);
-      border-radius: var(--ds-radius);
-      outline: var(--ds-outline-width) solid transparent;
-      outline-offset: var(--ds-outline-offset);
-      transition-property: border-color, outline-color, background-color, color;
-      transition-duration: var(--ds-duration-200);
-      transition-timing-function: var(--ds-easing-out);
-      color: var(--ds-color-fg);
-      background: var(--ds-color-bg);
-      font-family: inherit;
-      field-sizing: content;
-      min-height: 4lh;
-      resize: vertical;
-    }
-
-    .input::placeholder {
-      color: var(--ds-color-muted);
-    }
-
-    .input:hover:not(:disabled) {
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-    }
-
-    .input:focus-visible {
-      outline-color: var(--ds-color-outline);
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-focus)
-      );
+      border-color: ButtonBorder;
+      color: FieldText;
+      background: Field;
     }
 
     .input:disabled {
-      background: color-mix(
-        in oklch,
-        var(--ds-color-bg),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-      color: var(--ds-color-muted);
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-disabled)
-      );
-      cursor: default;
+      border-color: GrayText;
+      color: GrayText;
     }
+  }
 
-    .input:disabled::placeholder {
-      color: var(--ds-color-muted);
-    }
-
-    .input:read-only {
-      background: color-mix(
-        in oklch,
-        var(--ds-color-bg),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-disabled)
-      );
-      cursor: default;
-    }
-
-    .input[aria-invalid="true"] {
-      border-color: var(--ds-color-error);
-    }
-
-    .input[aria-invalid="true"]:hover:not(:disabled) {
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-error),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-    }
-
-    .input[aria-invalid="true"]:focus-visible {
-      outline-color: var(--ds-color-error);
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-error),
-        var(--ds-mix-direction) var(--ds-light-focus)
-      );
-    }
-
-    @media (forced-colors: active) {
-      .input {
-        border-color: ButtonBorder;
-        color: FieldText;
-        background: Field;
-      }
-
-      .input:disabled {
-        border-color: GrayText;
-        color: GrayText;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .input {
-        transition: none;
-      }
+  @media (prefers-reduced-motion: reduce) {
+    .input {
+      transition: none;
     }
   }
 }

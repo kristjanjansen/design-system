@@ -1,0 +1,89 @@
+@scope (.ds-tabs) {
+  .ds-tabs-list {
+    display: flex;
+    gap: var(--ds-tab-gap);
+    box-shadow: var(--ds-tab-list-shadow);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .ds-tabs-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ds-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: var(--ds-tab-align);
+    gap: var(--ds-spacing-4);
+    position: relative;
+    padding: var(--ds-tab-padding-top) var(--ds-tab-padding-x) var(--ds-tab-padding-bottom);
+    font-family: inherit;
+    font-size: var(--ds-tab-font-size);
+    font-weight: var(--ds-tab-font-weight);
+    color: var(--ds-color-fg-muted);
+    background: none;
+    border: var(--ds-border-width) solid transparent;
+    border-bottom-color: var(--ds-tab-border-bottom-color);
+    border-radius: var(--ds-tab-border-radius) var(--ds-tab-border-radius) 0 0;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color var(--ds-duration-100) var(--ds-easing-out);
+  }
+
+  .ds-tab:hover:not(:disabled) {
+    color: var(--ds-color-fg);
+  }
+
+  .ds-tab--active {
+    color: var(--ds-tab-active-text-color);
+    font-weight: var(--ds-tab-active-font-weight);
+    border-color: var(--ds-tab-active-border-color);
+    border-bottom-color: var(--ds-tab-active-bottom-color);
+    background: var(--ds-tab-active-bg);
+    margin-bottom: var(--ds-tab-active-margin-bottom);
+  }
+
+  .ds-tab-label {
+    line-height: var(--ds-tab-line-height);
+  }
+
+  .ds-tab:has(.ds-tab-description) {
+    align-items: flex-start;
+  }
+
+  .ds-tab-description {
+    font-size: var(--ds-font-size-tiny);
+    line-height: var(--ds-line-height-tiny);
+    font-weight: 400;
+    color: var(--ds-color-fg-muted);
+  }
+
+  .ds-tab:focus-visible {
+    outline: var(--ds-outline-width) solid var(--ds-color-outline);
+    outline-offset: calc(-1 * var(--ds-outline-width));
+  }
+
+  .ds-tab:disabled {
+    color: var(--ds-color-fg-muted);
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .ds-tab-panel {
+    padding: var(--ds-spacing-20) 0;
+  }
+
+  @media (forced-colors: active) {
+    .ds-tab--active {
+      color: SelectedItem;
+      border-bottom-color: SelectedItem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ds-tab {
+      transition: none;
+    }
+  }
+}

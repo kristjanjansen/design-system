@@ -1,33 +1,31 @@
-@layer ds {
-  .ds-field-label {
-    display: flex;
-    align-items: center;
-    gap: var(--ds-spacing-8);
-    text-wrap: balance;
-    cursor: pointer;
-  }
+.ds-field-label {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-8);
+  text-wrap: balance;
+  cursor: pointer;
+}
 
-  .ds-field-label--disabled {
-    color: var(--ds-color-muted);
-    cursor: default;
-  }
+.ds-field-label--disabled {
+  color: var(--ds-color-fg-muted);
+  cursor: default;
+}
 
-  .ds-field-label-start {
-    display: flex;
-    flex-shrink: 0;
-  }
+.ds-field-label-start {
+  display: flex;
+  flex-shrink: 0;
+}
 
-  .ds-field-label-end {
-    display: flex;
-    flex-shrink: 0;
-    font-weight: 400;
-    color: var(--ds-color-muted);
-  }
+.ds-field-label-end {
+  display: flex;
+  flex-shrink: 0;
+  font-weight: 400;
+  color: var(--ds-color-fg-muted);
+}
 
-  .ds-required {
-    font-size: 0.6em;
-    color: var(--ds-color-error);
-    vertical-align: super;
-    margin-left: 0.125em;
-  }
+.ds-required {
+  font-size: 0.6em;
+  color: var(--ds-color-fg-error);
+  vertical-align: super;
+  margin-left: 0.125em;
 }

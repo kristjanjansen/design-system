@@ -1,134 +1,125 @@
-@layer ds {
-  .ds-radio-group {
+.ds-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-8);
+  padding: 0;
+  margin: 0;
+}
+
+.ds-radio-group .options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-8);
+  margin-top: var(--ds-spacing-8);
+}
+
+.ds-radio-group .options[data-direction="horizontal"] {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-14);
+}
+
+@scope (.ds-radio) {
+  :scope {
     display: flex;
-    flex-direction: column;
-    gap: var(--ds-spacing-8);
-    padding: 0;
+    align-items: flex-start;
+    gap: var(--ds-spacing-10);
+  }
+
+  .indicator {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    height: 1.5em;
+    flex-shrink: 0;
+    padding: 2px;
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: 50%;
+    background: var(--ds-color-bg);
+    transition-property: border-color, background-color;
+    transition-duration: var(--ds-duration-200);
+    transition-timing-function: var(--ds-easing-out);
+  }
+
+  .input {
+    appearance: none;
+    position: absolute;
+    inset: 0;
     margin: 0;
+    cursor: pointer;
+    outline: none;
+    border-radius: 50%;
   }
 
-  .ds-radio-group .options {
+  .icon {
+    display: flex;
+    pointer-events: none;
+    color: var(--ds-color-bg);
+    transition: color var(--ds-duration-200) var(--ds-easing-out);
+  }
+
+  .indicator:has(:checked) .icon {
+    color: var(--ds-color-fg-accent);
+  }
+
+  .indicator:has(.input:hover:not(:disabled)) {
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+  }
+
+  .indicator:has(.input:focus-visible) {
+    outline: var(--ds-outline-width) solid var(--ds-color-outline);
+    outline-offset: var(--ds-outline-offset);
+  }
+
+  .indicator:has(.input:active:not(:disabled)) {
+    background: var(--ds-color-bg-accent);
+    border-color: var(--ds-color-bg-accent);
+  }
+
+  .indicator:has(.input:active:not(:disabled)) .icon {
+    color: oklch(1 0 0);
+  }
+
+  .indicator:has(.input:disabled) {
+    cursor: default;
+  }
+
+  .input:disabled {
+    cursor: default;
+  }
+
+  .radio-content {
     display: flex;
     flex-direction: column;
-    gap: var(--ds-spacing-8);
-    margin-top: var(--ds-spacing-8);
+    justify-content: center;
+    min-height: 1.5em;
   }
 
-  .ds-radio-group .options[data-direction="horizontal"] {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: var(--ds-spacing-14);
-  }
-
-  @scope (.ds-radio) {
-    :scope {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--ds-spacing-10);
-    }
-
+  @media (forced-colors: active) {
     .indicator {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.5em;
-      height: 1.5em;
-      flex-shrink: 0;
-      padding: 2px;
-      border: var(--ds-border-width) solid var(--ds-color-border);
-      border-radius: 50%;
-      background: var(--ds-color-bg);
-      transition-property: border-color, background-color;
-      transition-duration: var(--ds-duration-200);
-      transition-timing-function: var(--ds-easing-out);
-    }
-
-    .input {
-      appearance: none;
-      position: absolute;
-      inset: 0;
-      margin: 0;
-      cursor: pointer;
-      outline: none;
-      border-radius: 50%;
-    }
-
-    .icon {
-      display: flex;
-      width: 1rem;
-      height: 1rem;
-      pointer-events: none;
-      color: var(--ds-color-bg);
-      transition: color var(--ds-duration-200) var(--ds-easing-out);
-    }
-
-    .icon svg {
-      width: 100%;
-      height: 100%;
+      border-color: ButtonBorder;
+      background: Field;
     }
 
     .indicator:has(:checked) .icon {
-      color: var(--ds-color-accent);
-    }
-
-    .indicator:has(.input:hover:not(:disabled)) {
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-    }
-
-    .indicator:has(.input:focus-visible) {
-      outline: var(--ds-outline-width) solid var(--ds-color-outline);
-      outline-offset: var(--ds-outline-offset);
-    }
-
-    .indicator:has(.input:active:not(:disabled)) {
-      background: var(--ds-color-accent);
-      border-color: var(--ds-color-accent);
-    }
-
-    .indicator:has(.input:active:not(:disabled)) .icon {
-      color: oklch(1 0 0);
+      color: Highlight;
     }
 
     .indicator:has(.input:disabled) {
-      cursor: default;
+      border-color: GrayText;
     }
+  }
 
-    .input:disabled {
-      cursor: default;
-    }
-
-    .radio-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 1.5em;
-    }
-
-    @media (forced-colors: active) {
-      .indicator {
-        border-color: ButtonBorder;
-        background: Field;
-      }
-
-      .indicator:has(:checked) .icon {
-        color: Highlight;
-      }
-
-      .indicator:has(.input:disabled) {
-        border-color: GrayText;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .indicator,
-      .icon {
-        transition: none;
-      }
+  @media (prefers-reduced-motion: reduce) {
+    .indicator,
+    .icon {
+      transition: none;
     }
   }
 }

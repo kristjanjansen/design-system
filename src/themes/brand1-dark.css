@@ -3,18 +3,28 @@
     color-scheme: dark;
     --ds-font-family: "Inter Variable", system-ui, sans-serif;
 
-    --ds-radius: 0.5rem;
     --ds-border-width: 2px;
     --ds-outline-width: 2px;
     --ds-outline-offset: 2px;
 
     --ds-color-fg: oklch(0.93 0 0);
-    --ds-color-muted: oklch(0.68 0.02 260);
-    --ds-color-error: oklch(0.72 0.22 25);
-    --ds-color-border: oklch(0.3 0.01 260);
+    --ds-color-fg-muted: oklch(0.68 0.02 260);
+    --ds-color-fg-accent: oklch(0.5 0.17 150);
+    --ds-color-fg-error: oklch(0.72 0.22 25);
+    --ds-color-fg-success: oklch(0.72 0.17 150);
+    --ds-color-fg-warning: oklch(0.75 0.14 85);
+
     --ds-color-bg: oklch(0.15 0 0);
-    --ds-color-page: oklch(0.13 0 0);
-    --ds-color-accent: oklch(0.5 0.17 150);
+    --ds-color-bg-page: oklch(0.13 0 0);
+    --ds-color-bg-accent: oklch(0.5 0.17 150);
+    --ds-color-bg-error: oklch(0.25 0.04 25);
+    --ds-color-bg-success: oklch(0.25 0.04 150);
+    --ds-color-bg-warning: oklch(0.25 0.04 85);
+    --ds-color-bg-info: oklch(0.25 0.04 150);
+    --ds-color-bg-neutral: oklch(0.22 0.01 260);
+
+    --ds-color-border: oklch(0.3 0.01 260);
+    --ds-color-border-error: oklch(0.72 0.22 25);
     --ds-color-outline: oklch(1 0 0);
 
     --ds-light-hover: 5%;

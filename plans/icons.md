@@ -74,16 +74,14 @@ Import and use. Icons use `fill="currentColor"` to inherit color from parent.
 - **IconEyeSm** — password toggle (visible)
 - **IconEyeHideSm** — password toggle (hidden)
 
-## pending: icon sizing
+## done: icon sizing
 
-current icons use no explicit width/height — they scale with parent font-size via `em` in component CSS (e.g. `width: 1.25em`). this causes parent scaling issues.
-
-proposal: set explicit `width` and `height` on each icon SVG element matching the viewBox:
+all icons now have explicit `width` and `height` on the SVG element matching the viewBox:
 
 - Xs icons: `width="16" height="16"`
 - Sm icons: `width="24" height="24"`
 
-consumer overrides size via CSS if needed. avoids unpredictable scaling.
+component CSS (`width: 1.25em` etc.) overrides these when icons are used inside components. standalone icons use the explicit dimensions.
 
 ## pending: icon buttons
 

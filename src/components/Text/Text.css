@@ -1,20 +1,18 @@
-@layer ds {
-  .ds-text {
-    font-family: inherit;
-  }
+.ds-text {
+  font-family: inherit;
+}
 
-  .ds-text--tiny {
-    font-size: var(--ds-font-size-tiny);
-    line-height: var(--ds-line-height-tiny);
-  }
+.ds-text--tiny {
+  font-size: var(--ds-font-size-tiny);
+  line-height: var(--ds-line-height-tiny);
+}
 
-  .ds-text--small {
-    font-size: var(--ds-font-size-small);
-    line-height: var(--ds-line-height-small);
-  }
+.ds-text--small {
+  font-size: var(--ds-font-size-small);
+  line-height: var(--ds-line-height-small);
+}
 
-  .ds-text--body {
-    font-size: var(--ds-font-size-body);
-    line-height: var(--ds-line-height-body);
-  }
+.ds-text--body {
+  font-size: var(--ds-font-size-body);
+  line-height: var(--ds-line-height-body);
 }

@@ -1,6 +1,13 @@
 export function IconEyeSm() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
       <path
         d="M21.93 11.48C21.09 9.37 17.55 5 12 5C6.45 5 2.92 9.37 2.07 11.48C1.97 11.73 1.98 12.02 2.09 12.27C3.12 14.49 6.51 18.7 12 18.7C17.49 18.7 20.88 14.49 21.91 12.27C22.03 12.02 22.03 11.73 21.93 11.48ZM12 16.7C7.74 16.7 5.05 13.49 4.11 11.83C4.98 10.22 7.8 7 12 7C16.2 7 19.02 10.22 19.89 11.83C18.96 13.49 16.27 16.7 12 16.7Z"
         fill="currentColor"

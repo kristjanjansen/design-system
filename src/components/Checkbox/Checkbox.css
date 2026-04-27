@@ -1,151 +1,142 @@
-@layer ds {
-  @scope (.ds-checkbox) {
-    :scope {
-      display: flex;
-      flex-direction: column;
-      gap: var(--ds-spacing-8);
-    }
+@scope (.ds-checkbox) {
+  :scope {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-spacing-8);
+  }
 
-    .control {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--ds-spacing-10);
-      cursor: pointer;
-    }
+  .control {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ds-spacing-10);
+    cursor: pointer;
+  }
 
+  .indicator {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    height: 1.5em;
+    flex-shrink: 0;
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-small);
+    background: var(--ds-color-bg);
+    transition-property: border-color, outline-color, background-color;
+    transition-duration: var(--ds-duration-200);
+    transition-timing-function: var(--ds-easing-out);
+  }
+
+  .indicator:has(:checked),
+  .indicator:has(:indeterminate) {
+    background: var(--ds-color-bg-accent);
+    border-color: var(--ds-color-bg-accent);
+  }
+
+  .input {
+    appearance: none;
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .indicator:has(.input:focus-visible) {
+    outline: var(--ds-outline-width) solid var(--ds-color-outline);
+    outline-offset: var(--ds-outline-offset);
+  }
+
+  .indicator:has(.input:hover:not(:disabled)) {
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+  }
+
+  .indicator:has(:checked:hover:not(:disabled)),
+  .indicator:has(:indeterminate:hover:not(:disabled)) {
+    background: color-mix(
+      in oklch,
+      var(--ds-color-bg-accent),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-bg-accent),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+  }
+
+  .indicator:has(.input:disabled) {
+    cursor: default;
+  }
+
+  .input:disabled {
+    cursor: default;
+  }
+
+  .indicator:has(.input[aria-invalid="true"]) {
+    border-color: var(--ds-color-border-error);
+  }
+
+  .indicator:has(.input[aria-invalid="true"]:checked) {
+    background: var(--ds-color-bg-error);
+    border-color: var(--ds-color-bg-error);
+  }
+
+  .icon {
+    position: absolute;
+    display: flex;
+    color: oklch(1 0 0);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--ds-duration-200) var(--ds-easing-out);
+  }
+
+  .indicator:has(:checked) .icon--check {
+    opacity: 1;
+  }
+
+  .indicator:has(:indeterminate) .icon--check {
+    opacity: 0;
+  }
+
+  .indicator:has(:indeterminate) .icon--indeterminate {
+    opacity: 1;
+  }
+
+  :scope:has(.input:disabled) .control {
+    cursor: default;
+  }
+
+  @media (forced-colors: active) {
     .indicator {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.5em;
-      height: 1.5em;
-      flex-shrink: 0;
-      border: var(--ds-border-width) solid var(--ds-color-border);
-      border-radius: calc(var(--ds-radius) * 0.5);
-      background: var(--ds-color-bg);
-      transition-property: border-color, outline-color, background-color;
-      transition-duration: var(--ds-duration-200);
-      transition-timing-function: var(--ds-easing-out);
+      border-color: ButtonBorder;
+      background: Field;
     }
 
     .indicator:has(:checked),
     .indicator:has(:indeterminate) {
-      background: var(--ds-color-accent);
-      border-color: var(--ds-color-accent);
-    }
-
-    .input {
-      appearance: none;
-      position: absolute;
-      inset: 0;
-      margin: 0;
-      cursor: pointer;
-      outline: none;
-    }
-
-    .indicator:has(.input:focus-visible) {
-      outline: var(--ds-outline-width) solid var(--ds-color-outline);
-      outline-offset: var(--ds-outline-offset);
-    }
-
-    .indicator:has(.input:hover:not(:disabled)) {
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-    }
-
-    .indicator:has(:checked:hover:not(:disabled)),
-    .indicator:has(:indeterminate:hover:not(:disabled)) {
-      background: color-mix(
-        in oklch,
-        var(--ds-color-accent),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-accent),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-    }
-
-    .indicator:has(.input:disabled) {
-      cursor: default;
-    }
-
-    .input:disabled {
-      cursor: default;
-    }
-
-    .indicator:has(.input[aria-invalid="true"]) {
-      border-color: var(--ds-color-error);
-    }
-
-    .indicator:has(.input[aria-invalid="true"]:checked) {
-      background: var(--ds-color-error);
-      border-color: var(--ds-color-error);
+      background: Highlight;
+      border-color: Highlight;
     }
 
     .icon {
-      position: absolute;
-      display: flex;
-      width: 65%;
-      height: 65%;
-      color: oklch(1 0 0);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--ds-duration-200) var(--ds-easing-out);
+      color: HighlightText;
     }
 
-    .icon svg {
-      width: 100%;
-      height: 100%;
+    .indicator:has(.input:disabled) {
+      border-color: GrayText;
     }
+  }
 
-    .indicator:has(:checked) .icon--check {
-      opacity: 1;
-    }
-
-    .indicator:has(:indeterminate) .icon--check {
-      opacity: 0;
-    }
-
-    .indicator:has(:indeterminate) .icon--indeterminate {
-      opacity: 1;
-    }
-
-    :scope:has(.input:disabled) .control {
-      cursor: default;
-    }
-
-    @media (forced-colors: active) {
-      .indicator {
-        border-color: ButtonBorder;
-        background: Field;
-      }
-
-      .indicator:has(:checked),
-      .indicator:has(:indeterminate) {
-        background: Highlight;
-        border-color: Highlight;
-      }
-
-      .icon {
-        color: HighlightText;
-      }
-
-      .indicator:has(.input:disabled) {
-        border-color: GrayText;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .indicator,
-      .icon {
-        transition: none;
-      }
+  @media (prefers-reduced-motion: reduce) {
+    .indicator,
+    .icon {
+      transition: none;
     }
   }
 }

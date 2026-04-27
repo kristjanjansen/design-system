@@ -42,6 +42,18 @@ No new components or props — just styling semantic HTML inside Text.
 }
 ```
 
+### Link component inside Text
+
+when using `<Link>` (our component or framework links) inside `<Text>`, they should get the same prose styling as native `<a>`. since Link renders as `<a>` by default (or via `as`), the `.ds-text a` rule covers it automatically.
+
+```tsx
+<Text>
+  Read the <Link href="/docs">documentation</Link> for details.
+</Text>
+```
+
+if Link uses a framework component (`as={NextLink}`), it still renders an `<a>` in the DOM — prose styles apply.
+
 ### Standalone Link component
 
 For navigation links outside prose. Consumers may need to pass custom components (e.g. Next.js `<Link>`, React Router `<Link>`). Options:

@@ -1,192 +1,183 @@
-@layer ds {
-  /* Ghost group: items separated by bottom borders */
-  .ds-accordion-group:has(.ds-accordion--display) {
-    display: flex;
-    flex-direction: column;
+/* Ghost group: items separated by bottom borders */
+.ds-accordion-group:has(.ds-accordion--display) {
+  display: flex;
+  flex-direction: column;
+}
+
+.ds-accordion-group:has(.ds-accordion--display) > .ds-accordion {
+  border: none;
+  border-bottom: var(--ds-border-width) solid var(--ds-color-border);
+}
+
+/* Default group: items spaced with gap */
+.ds-accordion-group:has(.ds-accordion--default) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-8);
+}
+
+@scope (.ds-accordion) {
+  :scope {
+    interpolate-size: allow-keywords;
+    transition: border-color var(--ds-duration-200) var(--ds-easing-out);
   }
 
-  .ds-accordion-group:has(.ds-accordion--display) > .ds-accordion {
+  /* Ghost standalone: no borders */
+  :scope.ds-accordion--display {
     border: none;
-    border-bottom: var(--ds-border-width) solid var(--ds-color-border);
   }
 
-  /* Default group: items spaced with gap */
-  .ds-accordion-group:has(.ds-accordion--default) {
+  /* Default: boxed with rounded corners */
+  :scope.ds-accordion--default {
+    border-radius: var(--ds-radius-main);
+  }
+
+  .trigger {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: var(--ds-spacing-8);
+    padding: 1em;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--ds-font-size-h6);
+    color: var(--ds-color-fg);
+    background: none;
+    border: none;
+    outline: none;
+    list-style: none;
   }
 
-  @scope (.ds-accordion) {
-    :scope {
-      interpolate-size: allow-keywords;
-      transition: border-color var(--ds-duration-200) var(--ds-easing-out);
-    }
+  .trigger::-webkit-details-marker {
+    display: none;
+  }
 
-    /* Ghost standalone: no borders */
-    :scope.ds-accordion--display {
-      border: none;
-    }
+  .trigger::marker {
+    content: none;
+  }
 
-    /* Default: boxed with rounded corners */
-    :scope.ds-accordion--default {
-      border-radius: var(--ds-radius);
-    }
+  /* Ghost: semi-bold title, icon right, small horizontal padding for outline alignment */
+  :scope.ds-accordion--display .trigger {
+    padding: 1em var(--ds-spacing-8);
+    font-weight: 600;
+  }
 
+  :scope.ds-accordion--display .icon {
+    order: 1;
+    margin-left: auto;
+    color: var(--ds-color-fg-muted);
+  }
+
+  :scope.ds-accordion--display:hover {
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+  }
+
+  /* Default: regular weight title, icon left, boxed trigger */
+  :scope.ds-accordion--default .trigger {
+    font-weight: 400;
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-main);
+    transition: border-color var(--ds-duration-200) var(--ds-easing-out);
+  }
+
+  :scope.ds-accordion--default[open] .trigger {
+    border-radius: var(--ds-radius-main) var(--ds-radius-main) 0 0;
+    border-bottom-color: var(--ds-color-border);
+  }
+
+  :scope.ds-accordion--default .content {
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-top: none;
+    border-radius: 0 0 var(--ds-radius-main) var(--ds-radius-main);
+    padding: 1em;
+  }
+
+  :scope.ds-accordion--default .icon {
+    color: var(--ds-color-fg);
+  }
+
+  :scope.ds-accordion--default .trigger:hover {
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+  }
+
+  .trigger:focus-visible {
+    outline: var(--ds-outline-width) solid var(--ds-color-outline);
+    outline-offset: 0px;
+  }
+
+  .title {
+    text-align: left;
+    text-wrap: balance;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  ::details-content {
+    height: 0;
+    opacity: 0;
+    overflow: clip;
+    transition:
+      height 0.25s var(--ds-easing-out),
+      opacity 0.25s var(--ds-easing-out),
+      content-visibility 0.25s var(--ds-easing-out) allow-discrete;
+  }
+
+  :scope[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
+
+  @starting-style {
+    :scope[open]::details-content {
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  .content {
+    padding: 1em;
+    font-size: var(--ds-font-size-body);
+    color: var(--ds-color-fg);
+  }
+
+  :scope.ds-accordion--display .content {
+    padding: 0.5em var(--ds-spacing-8) 1em;
+  }
+
+  :scope.ds-accordion--disabled {
+    pointer-events: none;
+    color: var(--ds-color-fg-muted);
+  }
+
+  @media (forced-colors: active) {
     .trigger {
-      display: flex;
-      align-items: center;
-      gap: var(--ds-spacing-8);
-      padding: 1em;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: var(--ds-font-size-h6);
-      color: var(--ds-color-fg);
-      background: none;
-      border: none;
-      outline: none;
-      list-style: none;
-    }
-
-    .trigger::-webkit-details-marker {
-      display: none;
-    }
-
-    .trigger::marker {
-      content: none;
-    }
-
-    /* Ghost: semi-bold title, icon right, small horizontal padding for outline alignment */
-    :scope.ds-accordion--display .trigger {
-      padding: 1em var(--ds-spacing-8);
-      font-weight: 600;
-    }
-
-    :scope.ds-accordion--display .icon {
-      order: 1;
-      margin-left: auto;
-      color: var(--ds-color-muted);
-    }
-
-    :scope.ds-accordion--display:hover {
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-    }
-
-    /* Default: regular weight title, icon left, boxed trigger */
-    :scope.ds-accordion--default .trigger {
-      font-weight: 400;
-      border: var(--ds-border-width) solid var(--ds-color-border);
-      border-radius: var(--ds-radius);
-      transition: border-color var(--ds-duration-200) var(--ds-easing-out);
-    }
-
-    :scope.ds-accordion--default[open] .trigger {
-      border-radius: var(--ds-radius) var(--ds-radius) 0 0;
-      border-bottom-color: var(--ds-color-border);
-    }
-
-    :scope.ds-accordion--default .content {
-      border: var(--ds-border-width) solid var(--ds-color-border);
-      border-top: none;
-      border-radius: 0 0 var(--ds-radius) var(--ds-radius);
-      padding: 1em;
-    }
-
-    :scope.ds-accordion--default .icon {
-      color: var(--ds-color-fg);
-    }
-
-    :scope.ds-accordion--default .trigger:hover {
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-    }
-
-    .trigger:focus-visible {
-      outline: var(--ds-outline-width) solid var(--ds-color-outline);
-      outline-offset: 0px;
-    }
-
-    .title {
-      text-align: left;
-      text-wrap: balance;
+      color: CanvasText;
     }
 
     .icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.25em;
-      height: 1.25em;
-      flex-shrink: 0;
+      color: CanvasText;
     }
 
-    .icon svg {
-      width: 100%;
-      height: 100%;
+    :scope {
+      border-color: ButtonBorder;
     }
+  }
 
+  @media (prefers-reduced-motion: reduce) {
     ::details-content {
-      height: 0;
-      opacity: 0;
-      overflow: clip;
-      transition:
-        height 0.25s var(--ds-easing-out),
-        opacity 0.25s var(--ds-easing-out),
-        content-visibility 0.25s var(--ds-easing-out) allow-discrete;
-    }
-
-    :scope[open]::details-content {
-      height: auto;
-      opacity: 1;
-    }
-
-    @starting-style {
-      :scope[open]::details-content {
-        height: 0;
-        opacity: 0;
-      }
-    }
-
-    .content {
-      padding: 1em;
-      font-size: var(--ds-font-size-body);
-      color: var(--ds-color-fg);
-    }
-
-    :scope.ds-accordion--display .content {
-      padding: 0.5em var(--ds-spacing-8) 1em;
-    }
-
-    :scope.ds-accordion--disabled {
-      pointer-events: none;
-      color: var(--ds-color-muted);
-    }
-
-    @media (forced-colors: active) {
-      .trigger {
-        color: CanvasText;
-      }
-
-      .icon {
-        color: CanvasText;
-      }
-
-      :scope {
-        border-color: ButtonBorder;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      ::details-content {
-        transition: none;
-      }
+      transition: none;
     }
   }
 }

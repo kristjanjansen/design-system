@@ -3,23 +3,73 @@
     color-scheme: dark;
     --ds-font-family: "Roboto Flex Variable", system-ui, sans-serif;
 
-    --ds-radius: 0.25rem;
+    --ds-radius-small: 2px;
+    --ds-radius-main: 0.25rem;
+    --ds-radius-modal: 0.5rem;
+
     --ds-border-width: 2px;
     --ds-outline-width: 2px;
     --ds-outline-offset: 2px;
 
     --ds-color-fg: oklch(0.92 0.02 250);
-    --ds-color-muted: oklch(0.68 0.04 250);
-    --ds-color-error: oklch(0.7 0.2 30);
-    --ds-color-border: oklch(0.32 0.04 250);
+    --ds-color-fg-muted: oklch(0.68 0.04 250);
+    --ds-color-fg-accent: oklch(0.52 0.2 260);
+    --ds-color-fg-error: oklch(0.7 0.2 30);
+    --ds-color-fg-success: oklch(0.72 0.15 150);
+    --ds-color-fg-warning: oklch(0.75 0.12 85);
+
     --ds-color-bg: oklch(0.18 0.04 250);
-    --ds-color-page: oklch(0.14 0.04 250);
-    --ds-color-accent: oklch(0.52 0.2 260);
+    --ds-color-bg-page: oklch(0.14 0.04 250);
+    --ds-color-bg-accent: oklch(0.52 0.2 260);
+    --ds-color-bg-error: oklch(0.25 0.04 30);
+    --ds-color-bg-success: oklch(0.25 0.04 150);
+    --ds-color-bg-warning: oklch(0.25 0.04 85);
+    --ds-color-bg-info: oklch(0.25 0.04 260);
+    --ds-color-bg-neutral: oklch(0.22 0.04 250);
+
+    --ds-color-border: oklch(0.32 0.04 250);
+    --ds-color-border-error: oklch(0.7 0.2 30);
     --ds-color-outline: oklch(0.7 0.2 260);
 
     --ds-light-hover: 5%;
     --ds-light-focus: 12%;
     --ds-light-disabled: 20%;
     --ds-mix-direction: white;
+
+    /* component overrides */
+    --ds-button-font-weight: 700;
+    --ds-button-padding-x: var(--ds-spacing-28);
+    --ds-button-font-size: var(--ds-font-size-h6);
+    --ds-button-sm-padding-y: var(--ds-spacing-14);
+    --ds-button-sm-padding-x: var(--ds-spacing-24);
+    --ds-button-sm-font-size: var(--ds-font-size-body);
+
+    --ds-badge-radius: var(--ds-radius-minimum);
+    --ds-badge-border: 1px solid oklch(1 0 0 / 0.1);
+
+    --ds-tab-font-weight: 400;
+    --ds-tab-active-font-weight: 700;
+    --ds-tab-active-text-color: var(--ds-color-bg-accent);
+    --ds-tab-border-radius: var(--ds-radius-small);
+    --ds-tab-active-border-color: var(--ds-color-bg-accent);
+    --ds-tab-active-bottom-color: var(--ds-color-bg-accent);
+    --ds-tab-active-margin-bottom: 0;
+    --ds-tab-align: center;
+    --ds-tab-active-bg: var(--ds-color-bg);
+    --ds-tab-gap: 0;
+    --ds-tab-padding-x: var(--ds-spacing-20);
+    --ds-tab-padding-top: var(--ds-spacing-12);
+    --ds-tab-padding-bottom: var(--ds-spacing-12);
+    --ds-tab-font-size: var(--ds-font-size-body);
+    --ds-tab-line-height: var(--ds-line-height-body);
+    --ds-tab-list-shadow: none;
+    --ds-tab-border-bottom-color: var(--ds-color-border);
+
+    --ds-table-header-bg: var(--ds-color-bg-accent);
+    --ds-table-header-color: oklch(1 0 0);
+    --ds-table-header-border: var(--ds-color-bg-accent);
+    --ds-table-header-padding: var(--ds-spacing-12) var(--ds-spacing-16);
+    --ds-table-container-radius: 0;
+    --ds-table-container-border: none;
   }
 }

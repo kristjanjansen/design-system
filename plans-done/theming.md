@@ -182,3 +182,74 @@ Implemented as planned with improvements:
 - `--ds-font-family`, `--ds-font-stretch` added as themed tokens
 - Brand2 has different `--ds-radius`, `--ds-border-width`, button sizing tokens
 - Figma: 4 variable modes matching CSS themes, text styles with variable-bound fontFamily
+
+---
+
+## pending: useTheme() hook
+
+react hook for consumer theme management. reference: [useDarkMode](https://usehooks-ts.com/react-hook/use-dark-mode).
+
+### API
+
+```tsx
+interface UseThemeOptions {
+  defaultTheme?: string; // default: "brand1-light"
+  localStorageKey?: string; // default: "ds-theme"
+  respectSystemPreference?: boolean; // default: true — auto dark mode from OS
+}
+
+interface UseThemeReturn {
+  theme: string; // current theme, e.g. "brand1-dark"
+  brand: string; // extracted brand, e.g. "brand1"
+  mode: "light" | "dark"; // extracted mode
+  isDark: boolean; // shorthand
+  setTheme: (theme: string) => void; // set explicit theme
+  toggleMode: () => void; // toggle light ↔ dark within same brand
+  setBrand: (brand: string) => void; // switch brand, keep current mode
+}
+```
+
+### behavior
+
+- sets `data-theme` on `document.documentElement` (matches existing CSS selectors)
+- persists to `localStorage` under configurable key
+- listens to `prefers-color-scheme` media query changes — auto-switches if no explicit override
+- `toggleMode()`: `brand1-light` → `brand1-dark`, `brand2-dark` → `brand2-light`
+- `setBrand()`: `brand1-light` + `setBrand("brand2")` → `brand2-light` (keeps mode)
+- SSR safe: reads localStorage only on client, falls back to `defaultTheme`
+
+### implementation notes
+
+- single `useState` + `useEffect` for DOM sync
+- `useMediaQuery("(prefers-color-scheme: dark)")` internally for system preference
+- `useEffect` listener on `storage` event for cross-tab sync
+- theme string parsed as `{brand}-{mode}` — convention enforced by naming
+- no dependency on usehooks-ts — standalone hook in our package
+
+### consumer usage
+
+```tsx
+import { useTheme } from "@kristjanjansen/design-system";
+
+function ThemeSwitcher() {
+  const { theme, isDark, toggleMode, setBrand } = useTheme();
+
+  return (
+    <div>
+      <button onClick={toggleMode}>{isDark ? "Light" : "Dark"}</button>
+      <select onChange={(e) => setBrand(e.target.value)}>
+        <option value="brand1">Brand 1</option>
+        <option value="brand2">Brand 2</option>
+      </select>
+    </div>
+  );
+}
+```
+
+### files
+
+| file                         | purpose             |
+| ---------------------------- | ------------------- |
+| `src/hooks/useTheme.ts`      | hook implementation |
+| `src/hooks/useTheme.test.ts` | tests               |
+| `src/index.ts`               | export hook         |

@@ -1,198 +1,182 @@
-@layer ds {
-  @scope (.ds-select) {
-    :scope {
-      display: flex;
-      flex-direction: column;
-      gap: var(--ds-spacing-8);
-    }
+@scope (.ds-select) {
+  :scope {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-spacing-8);
+  }
 
-    :scope.ds-select--custom-trigger .select-wrapper {
-      border: none;
-      background: none;
-      border-radius: 0;
-    }
+  :scope.ds-select--custom-trigger .select-wrapper {
+    border: none;
+    background: none;
+    border-radius: 0;
+  }
 
-    :scope.ds-select--custom-trigger .select-wrapper:has(:focus-visible) {
-      outline: none;
-    }
+  :scope.ds-select--custom-trigger .select-wrapper:has(:focus-visible) {
+    outline: none;
+  }
 
-    :scope.ds-select--custom-trigger .input {
-      padding: 0;
-    }
+  :scope.ds-select--custom-trigger .input {
+    padding: 0;
+  }
 
-    .select-wrapper {
-      display: flex;
-      align-items: center;
-      border: var(--ds-border-width) solid var(--ds-color-border);
-      border-radius: var(--ds-radius);
-      background: var(--ds-color-bg);
-      transition-property: border-color, outline-color, background-color;
-      transition-duration: var(--ds-duration-200);
-      transition-timing-function: var(--ds-easing-out);
-    }
+  .select-wrapper {
+    display: flex;
+    align-items: center;
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-main);
+    background: var(--ds-color-bg);
+    transition-property: border-color, outline-color, background-color;
+    transition-duration: var(--ds-duration-200);
+    transition-timing-function: var(--ds-easing-out);
+  }
 
-    .select-wrapper:hover:not(:has(:disabled)) {
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-    }
+  .select-wrapper:hover:not(:has(:disabled)) {
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+  }
 
-    .select-wrapper:has(:focus-visible) {
-      outline: var(--ds-outline-width) solid var(--ds-color-outline);
-      outline-offset: var(--ds-outline-offset);
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-focus)
-      );
-    }
+  .select-wrapper:has(:focus-visible) {
+    outline: var(--ds-outline-width) solid var(--ds-color-outline);
+    outline-offset: var(--ds-outline-offset);
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border),
+      var(--ds-mix-direction) var(--ds-light-focus)
+    );
+  }
 
-    .select-wrapper:has(:disabled) {
-      background: color-mix(
-        in oklch,
-        var(--ds-color-bg),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-disabled)
-      );
-    }
+  .select-wrapper:has(:disabled) {
+    border-color: color-mix(in oklch, var(--ds-color-border), transparent 50%);
+  }
 
-    .select-wrapper--error {
-      border-color: var(--ds-color-error);
-    }
+  .select-wrapper--error {
+    border-color: var(--ds-color-border-error);
+  }
 
-    .select-wrapper--error:has(:focus-visible) {
-      outline-color: var(--ds-color-error);
+  .select-wrapper--error:has(:focus-visible) {
+    outline-color: var(--ds-color-border-error);
+  }
+
+  .input {
+    appearance: none;
+    flex: 1;
+    min-width: 0;
+    padding: var(--ds-spacing-10) var(--ds-spacing-14);
+    font-size: var(--ds-font-size-body);
+    font-family: inherit;
+    color: var(--ds-color-fg);
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .input:disabled {
+    color: var(--ds-color-fg-muted);
+    cursor: default;
+  }
+
+  .input:invalid {
+    color: var(--ds-color-fg-muted);
+  }
+
+  .chevron {
+    display: flex;
+    align-items: center;
+    padding-right: var(--ds-spacing-14);
+    color: var(--ds-color-fg-muted);
+    pointer-events: none;
+  }
+
+  /* Customizable select — progressive enhancement */
+  @supports (appearance: base-select) {
+    .input,
+    .input::picker(select) {
+      appearance: base-select;
     }
 
     .input {
-      appearance: none;
-      flex: 1;
-      min-width: 0;
-      padding: var(--ds-spacing-10) var(--ds-spacing-14);
+      padding-right: var(--ds-spacing-14);
+    }
+
+    .input::picker-icon {
+      display: none;
+    }
+
+    .input::picker(select) {
+      border: 1px solid var(--ds-color-border);
+      border-radius: var(--ds-radius-main);
+      background: var(--ds-color-bg);
+      box-shadow: var(--ds-shadow-200);
+      padding: 0;
+      margin-top: var(--ds-spacing-8);
+      overflow: clip;
+    }
+
+    .input option {
+      padding: var(--ds-spacing-8) var(--ds-spacing-14);
       font-size: var(--ds-font-size-body);
       font-family: inherit;
       color: var(--ds-color-fg);
-      background: none;
-      border: none;
+      border-radius: 0;
+      transition: background-color var(--ds-duration-100) var(--ds-easing-out);
+    }
+
+    .input option + option {
+      border-top: 1px solid color-mix(in oklch, var(--ds-color-border), transparent 50%);
+    }
+
+    .input option:hover {
+      background: color-mix(in oklch, var(--ds-color-border), transparent 70%);
+    }
+
+    .input option:focus-visible {
+      box-shadow: inset 0 0 0 var(--ds-outline-width) var(--ds-color-outline);
       outline: none;
-      cursor: pointer;
     }
 
-    .input:disabled {
-      color: var(--ds-color-muted);
-      cursor: default;
+    .input option:checked {
+      background: color-mix(in oklch, var(--ds-color-border), transparent 85%);
     }
 
-    .input:invalid {
-      color: var(--ds-color-muted);
+    .input option:first-child[value=""] {
+      display: none;
+    }
+
+    .input option:disabled {
+      color: var(--ds-color-fg-muted);
+    }
+
+    .input option::checkmark {
+      display: none;
     }
 
     .chevron {
-      display: flex;
-      align-items: center;
-      padding-right: var(--ds-spacing-14);
-      color: var(--ds-color-muted);
       pointer-events: none;
     }
+  }
 
-    .chevron svg {
-      width: 1.25em;
-      height: 1.25em;
+  @media (forced-colors: active) {
+    .select-wrapper {
+      border-color: ButtonBorder;
+      background: Field;
     }
 
-    /* Customizable select — progressive enhancement */
-    @supports (appearance: base-select) {
-      .input,
-      .input::picker(select) {
-        appearance: base-select;
-      }
-
-      .input {
-        padding-right: var(--ds-spacing-14);
-      }
-
-      .input::picker-icon {
-        display: none;
-      }
-
-      .input::picker(select) {
-        border: 1px solid var(--ds-color-border);
-        border-radius: var(--ds-radius);
-        background: var(--ds-color-bg);
-        box-shadow: var(--ds-shadow-200);
-        padding: 0;
-        margin-top: var(--ds-spacing-8);
-        overflow: clip;
-      }
-
-      .input option {
-        padding: var(--ds-spacing-8) var(--ds-spacing-14);
-        font-size: var(--ds-font-size-body);
-        font-family: inherit;
-        color: var(--ds-color-fg);
-        border-radius: 0;
-        transition: background-color var(--ds-duration-100) var(--ds-easing-out);
-      }
-
-      .input option + option {
-        border-top: 1px solid color-mix(in oklch, var(--ds-color-border), transparent 50%);
-      }
-
-      .input option:hover {
-        background: color-mix(in oklch, var(--ds-color-border), transparent 70%);
-      }
-
-      .input option:focus-visible {
-        box-shadow: inset 0 0 0 var(--ds-outline-width) var(--ds-color-outline);
-        outline: none;
-      }
-
-      .input option:checked {
-        background: color-mix(in oklch, var(--ds-color-border), transparent 85%);
-      }
-
-      .input option:first-child[value=""] {
-        display: none;
-      }
-
-      .input option:disabled {
-        color: var(--ds-color-muted);
-      }
-
-      .input option::checkmark {
-        display: none;
-      }
-
-      .chevron {
-        pointer-events: none;
-      }
+    .input {
+      color: FieldText;
     }
 
-    @media (forced-colors: active) {
-      .select-wrapper {
-        border-color: ButtonBorder;
-        background: Field;
-      }
-
-      .input {
-        color: FieldText;
-      }
-
-      .input:disabled {
-        color: GrayText;
-      }
+    .input:disabled {
+      color: GrayText;
     }
+  }
 
-    @media (prefers-reduced-motion: reduce) {
-      .select-wrapper {
-        transition: none;
-      }
+  @media (prefers-reduced-motion: reduce) {
+    .select-wrapper {
+      transition: none;
     }
   }
 }

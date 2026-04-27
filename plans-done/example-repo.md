@@ -1,4 +1,4 @@
-# plan: consumer app
+# plan: example repo
 
 ## status: done
 

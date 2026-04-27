@@ -1,0 +1,59 @@
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-badge-gap);
+  border-radius: var(--ds-badge-radius);
+  border: var(--ds-badge-border);
+  font-weight: var(--ds-badge-font-weight);
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.ds-badge--default {
+  padding: var(--ds-badge-padding-y) var(--ds-badge-padding-x);
+  font-size: var(--ds-font-size-small);
+  line-height: 1rem;
+}
+
+.ds-badge--small {
+  padding: var(--ds-badge-sm-padding-y) var(--ds-badge-padding-x);
+  font-size: var(--ds-font-size-tiny);
+  line-height: 1rem;
+}
+
+/* variants */
+.ds-badge--neutral {
+  background: var(--ds-color-bg-neutral);
+  color: var(--ds-color-fg-muted);
+}
+
+.ds-badge--success {
+  background: var(--ds-color-bg-success);
+  color: var(--ds-color-fg-success);
+}
+
+.ds-badge--warning {
+  background: var(--ds-color-bg-warning);
+  color: var(--ds-color-fg-warning);
+}
+
+.ds-badge--error {
+  background: var(--ds-color-bg-error);
+  color: var(--ds-color-fg-error);
+}
+
+.ds-badge--info {
+  background: var(--ds-color-bg-info);
+  color: var(--ds-color-fg-accent);
+}
+
+.ds-badge-icon {
+  display: flex;
+  flex-shrink: 0;
+}
+
+@media (forced-colors: active) {
+  .ds-badge {
+    border: 1px solid CanvasText;
+  }
+}

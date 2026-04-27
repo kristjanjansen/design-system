@@ -1,142 +1,140 @@
-@layer ds {
-  @scope (.ds-switch) {
-    :scope {
-      display: flex;
-      flex-direction: column;
-      gap: var(--ds-spacing-8);
-    }
+@scope (.ds-switch) {
+  :scope {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-spacing-8);
+  }
 
-    .control {
-      display: flex;
-      align-items: center;
-      gap: var(--ds-spacing-10);
-    }
+  .control {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-spacing-10);
+  }
 
+  .track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 2.5rem;
+    height: 1.5rem;
+    padding: 0.1875rem;
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: 999px;
+    background: var(--ds-color-bg);
+    cursor: pointer;
+    transition-property: border-color, background-color;
+    transition-duration: var(--ds-duration-200);
+    transition-timing-function: var(--ds-easing-out);
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+
+  .input {
+    appearance: none;
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .thumb {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: var(--ds-color-fg-muted);
+    transition-property: margin, background-color;
+    transition-duration: var(--ds-duration-200);
+    transition-timing-function: var(--ds-easing-out);
+    pointer-events: none;
+  }
+
+  .input:checked ~ .thumb {
+    margin-left: auto;
+    background: var(--ds-color-bg);
+  }
+
+  .track:has(.input:checked) {
+    background: var(--ds-color-bg-accent);
+    border-color: var(--ds-color-bg-accent);
+  }
+
+  .track:hover:not(:has(.input:disabled)) {
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+  }
+
+  .track:has(.input:checked):hover:not(:has(.input:disabled)) {
+    background: color-mix(
+      in oklch,
+      var(--ds-color-bg-accent),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-bg-accent),
+      var(--ds-mix-direction) var(--ds-light-hover)
+    );
+  }
+
+  .track:has(.input:focus-visible) {
+    outline: var(--ds-outline-width) solid var(--ds-color-outline);
+    outline-offset: var(--ds-outline-offset);
+  }
+
+  .track:has(.input:disabled) {
+    border-color: color-mix(
+      in oklch,
+      var(--ds-color-border),
+      var(--ds-mix-direction) var(--ds-light-disabled)
+    );
+    background: color-mix(
+      in oklch,
+      var(--ds-color-bg),
+      var(--ds-mix-direction) var(--ds-light-disabled)
+    );
+    cursor: default;
+  }
+
+  .input:disabled {
+    cursor: default;
+  }
+
+  @media (forced-colors: active) {
     .track {
-      position: relative;
-      display: flex;
-      align-items: center;
-      width: 2.5rem;
-      height: 1.5rem;
-      padding: 0.1875rem;
-      border: var(--ds-border-width) solid var(--ds-color-border);
-      border-radius: 999px;
-      background: var(--ds-color-bg);
-      cursor: pointer;
-      transition-property: border-color, background-color;
-      transition-duration: var(--ds-duration-200);
-      transition-timing-function: var(--ds-easing-out);
-      flex-shrink: 0;
-      box-sizing: border-box;
-    }
-
-    .input {
-      appearance: none;
-      position: absolute;
-      inset: 0;
-      margin: 0;
-      cursor: pointer;
-      outline: none;
+      border-color: ButtonBorder;
+      background: Field;
     }
 
     .thumb {
-      width: 1rem;
-      height: 1rem;
-      border-radius: 50%;
-      background: var(--ds-color-muted);
-      transition-property: margin, background-color;
-      transition-duration: var(--ds-duration-200);
-      transition-timing-function: var(--ds-easing-out);
-      pointer-events: none;
-    }
-
-    .input:checked ~ .thumb {
-      margin-left: auto;
-      background: var(--ds-color-bg);
+      background: ButtonText;
     }
 
     .track:has(.input:checked) {
-      background: var(--ds-color-accent);
-      border-color: var(--ds-color-accent);
+      background: Highlight;
+      border-color: Highlight;
     }
 
-    .track:hover:not(:has(.input:disabled)) {
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-    }
-
-    .track:has(.input:checked):hover:not(:has(.input:disabled)) {
-      background: color-mix(
-        in oklch,
-        var(--ds-color-accent),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-accent),
-        var(--ds-mix-direction) var(--ds-light-hover)
-      );
-    }
-
-    .track:has(.input:focus-visible) {
-      outline: var(--ds-outline-width) solid var(--ds-color-outline);
-      outline-offset: var(--ds-outline-offset);
+    .input:checked ~ .thumb {
+      background: HighlightText;
     }
 
     .track:has(.input:disabled) {
-      border-color: color-mix(
-        in oklch,
-        var(--ds-color-border),
-        var(--ds-mix-direction) var(--ds-light-disabled)
-      );
-      background: color-mix(
-        in oklch,
-        var(--ds-color-bg),
-        var(--ds-mix-direction) var(--ds-light-disabled)
-      );
-      cursor: default;
+      border-color: GrayText;
     }
 
-    .input:disabled {
-      cursor: default;
+    .track:has(.input:disabled) .thumb {
+      background: GrayText;
     }
+  }
 
-    @media (forced-colors: active) {
-      .track {
-        border-color: ButtonBorder;
-        background: Field;
-      }
-
-      .thumb {
-        background: ButtonText;
-      }
-
-      .track:has(.input:checked) {
-        background: Highlight;
-        border-color: Highlight;
-      }
-
-      .input:checked ~ .thumb {
-        background: HighlightText;
-      }
-
-      .track:has(.input:disabled) {
-        border-color: GrayText;
-      }
-
-      .track:has(.input:disabled) .thumb {
-        background: GrayText;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .thumb,
-      .track {
-        transition: none;
-      }
+  @media (prefers-reduced-motion: reduce) {
+    .thumb,
+    .track {
+      transition: none;
     }
   }
 }

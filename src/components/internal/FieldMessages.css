@@ -1,35 +1,33 @@
-@layer ds {
-  .ds-field-messages {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ds-spacing-8);
-  }
+.ds-field-messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-8);
+}
 
+.ds-field-messages-error {
+  color: var(--ds-color-fg-error);
+  text-wrap: balance;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--ds-duration-200) var(--ds-easing-out),
+    transform var(--ds-duration-200) var(--ds-easing-out);
+}
+
+@starting-style {
   .ds-field-messages-error {
-    color: var(--ds-color-error);
-    text-wrap: balance;
-    opacity: 1;
-    transform: translateY(0);
-    transition:
-      opacity var(--ds-duration-200) var(--ds-easing-out),
-      transform var(--ds-duration-200) var(--ds-easing-out);
+    opacity: 0;
+    transform: translateY(-4px);
   }
+}
 
-  @starting-style {
-    .ds-field-messages-error {
-      opacity: 0;
-      transform: translateY(-4px);
-    }
-  }
+.ds-field-messages-description {
+  color: var(--ds-color-fg-muted);
+  text-wrap: balance;
+}
 
-  .ds-field-messages-description {
-    color: var(--ds-color-muted);
-    text-wrap: balance;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .ds-field-messages-error {
-      transition: none;
-    }
+@media (prefers-reduced-motion: reduce) {
+  .ds-field-messages-error {
+    transition: none;
   }
 }

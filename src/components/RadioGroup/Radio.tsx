@@ -1,3 +1,5 @@
+"use client";
+
 import { forwardRef, useId } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";

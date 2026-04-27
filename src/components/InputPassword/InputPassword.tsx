@@ -1,3 +1,5 @@
+"use client";
+
 import { type InputHTMLAttributes, type ReactNode, forwardRef, useId, useState } from "react";
 import { FieldLabel } from "../internal/FieldLabel.tsx";
 import { FieldMessages } from "../internal/FieldMessages.tsx";

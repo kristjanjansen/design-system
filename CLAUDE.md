@@ -130,29 +130,33 @@ Use `(value, event)` when wrapping a single native event. Use `(value)` when the
 ### CSS pattern
 
 ```css
-@layer ds {
-  @scope (.ds-component-name) {
-    :scope {
-      /* outer wrapper */
-    }
-    .input {
-      /* the actual form element */
-    }
+@scope (.ds-component-name) {
+  :scope {
+    /* outer wrapper */
+  }
+  .input {
+    /* the actual form element */
+  }
 
-    @media (forced-colors: active) {
-      /* Windows High Contrast */
-    }
-    @media (prefers-reduced-motion: reduce) {
-      /* disable transitions */
-    }
+  @media (forced-colors: active) {
+    /* Windows High Contrast */
+  }
+  @media (prefers-reduced-motion: reduce) {
+    /* disable transitions */
   }
 }
 ```
 
-- All values via `--ds-*` tokens
-- Dynamic colors via `oklch(from var(--ds-color-*) calc(l - var(--ds-l-hover)) c h)`
-- `@layer ds` for cascade control, `@scope` for class isolation
+- All values via `--ds-*` tokens — **never hardcode colors in component CSS**. Every color must reference a `--ds-color-*` variable so it adapts across themes. If a new color is needed, add it to all 4 theme files first.
+- Dynamic colors via `color-mix(in oklch, var(--ds-color-*), var(--ds-mix-direction) var(--ds-light-hover))`
+- **No `@layer ds` on component CSS** — component CSS is unlayered so it always beats Tailwind's `@layer base` preflight resets. `@layer ds` is only used in `variables.css` and theme files (custom properties don't conflict). `@scope` provides class isolation.
 - **Use rem everywhere** for sizing (font-size, padding, spacing, radius). Exceptions: `em` for values that must scale with parent font-size (e.g. icon size inside text), `px` for borders/outlines
+- **Follow EDS design for brand1, ELV for brand2.** Before implementing any component, **read the actual CSS source files** in `enefit-design-system/components/{Name}/` and `elektrilevi-public-ui/components/{Name}/`. Extract exact values: padding, font-size, font-weight, line-height, border-width, border-radius, gap, colors, transitions, and responsive breakpoints. Also read the token values from `output/variables/` in both codebases. Never guess — always read the CSS first.
+  - EDS paths: `enefit-design-system/components/{Name}/{Name}.css`, tokens in `output/variables/variables.css`
+  - ELV paths: `elektrilevi-public-ui/components/{Name}/{Name}.css`, tokens in `output/variables/spacing.css`, `colors.css`, `transitions.css`, `shadows.css`
+  - Map EDS/ELV token values to the closest `--ds-*` variable. If no match exists, add a new `--ds-spacing-*` or component var
+- **Component CSS vars for brand differences** — use `--ds-{component}-{property}` vars (e.g. `--ds-table-header-bg`, `--ds-button-font-weight`) defined in `variables.css` with overrides in brand2 theme files. **Never use `:is([data-theme="brand2-*"])` selectors** in component CSS — all brand logic belongs in theme files
+- Group component vars at the bottom of `variables.css` and theme files under `/* component overrides */`
 
 ### Test pattern
 
@@ -172,6 +176,35 @@ Every component test file includes: forwardRef test, label linking, onChange cal
 - `field-sizing: content` (Textarea): Chrome 123+, no Firefox/Safari fallback
 - `appearance: base-select` (Select popover): progressive enhancement via `@supports`
 - `::details-content` (Accordion animation): progressive enhancement
+- `:-webkit-autofill` override on all input components to prevent Chrome's lilac autofill background
+- `:read-only:not(:disabled)` — use this selector instead of `:read-only` alone, since disabled inputs match `:read-only` in some browsers
+
+### EDS/ELV deep-dive checklist
+
+Before implementing or fixing any component, extract these exact values from both source CSS files:
+
+1. **Padding** — check for inner element padding too (e.g. EDS badge has padding on both container AND inner label)
+2. **Font size, weight, line-height** — EDS uses typography tokens (e.g. `label-small-400`), line-heights often differ from our body text tokens
+3. **Border** — some components have border in one brand but not the other (e.g. badge: no border in EDS, `1px solid rgba(0,0,0,0.05)` in ELV)
+4. **Border-radius** — can differ fundamentally between brands (badge: 999px vs 2px)
+5. **Gap** — between items (e.g. tab gap: 1rem in EDS, 0 in ELV)
+6. **Active/selected state** — mechanism can differ (tabs: underline vs box-border)
+7. **Responsive breakpoints** — EDS scales tab font-size at laptop breakpoint, ELV doesn't
+8. **Alignment** — EDS tabs left-aligned, ELV centered; descriptions always left-aligned
+
+### Next.js integration
+
+- **CSS imports**: Import ALL DS CSS via `@import` in `globals.css`, before `@import "tailwindcss"`. Component CSS is unlayered so it beats Tailwind preflight. The `@theme` block in tailwind.css needs DS variables in the same CSS pipeline — importing DS CSS via JS won't work.
+  ```css
+  @import "@kristjanjansen/design-system/style.css";
+  @import "@kristjanjansen/design-system/brand1-light.css";
+  /* ... other themes ... */
+  @import "tailwindcss";
+  @import "@kristjanjansen/design-system/tailwind.css";
+  ```
+- **Fonts**: Use `next/font/google` for Inter + Roboto Flex. Map to DS via CSS: `[data-theme^="brand1"] { --ds-font-family: var(--font-inter), system-ui, sans-serif; }`
+- **`"use client"` on context files**: All `*Context.ts` files that use `createContext` must have `"use client"` directive, otherwise barrel imports fail in Next.js server components.
+- **Package updates**: Next.js app uses tarball install (`npm pack` + `npm install *.tgz`). After DS changes, must rebuild: `vp pack && npm pack`, then reinstall in the Next.js project.
 
 ## Build
 
@@ -182,23 +215,41 @@ Every component test file includes: forwardRef test, label linking, onChange cal
 
 ## Figma MCP
 
-- File: https://www.figma.com/design/NiBvhCdGieWhAcyuwn2K7W/Test
+- File: https://www.figma.com/design/NiBvhCdGieWhAcyuwn2K7W/design-system
 - **CRITICAL: always resize frames to fit content after changes.** Set `layoutSizingVertical = "HUG"` on all themed frames, component variants, and inner frames after creating or modifying content. Frames default to FIXED height after `resize()` — this causes excess whitespace.
 - **All text must bind `fontFamily` to `font/family` variable** so brand2 renders in Roboto Flex. Semi Bold text must also bind `fontStyle` to `font/style-semibold`
 - Text styles support `setBoundVariable()` for `fontFamily`, `fontSize`, `fontStyle` — use STRING vars for family/style, FLOAT for size
 - Don't assume Figma API limitations — test before claiming features don't exist
 - Font style names differ: Inter = "Semi Bold" (space), Roboto Flex = "SemiBold" (no space). Use `listAvailableFontsAsync()` to discover
 - Screenshot individual variants, not component sets (too zoomed out at set level)
+- **Never use `ALL_SCOPES` on variables.** Always set explicit scopes so variables only appear in relevant property pickers:
+  - Colors: `FRAME_FILL`/`SHAPE_FILL` for backgrounds, `TEXT_FILL` for text, `STROKE_COLOR` for borders
+  - Spacing: `WIDTH_HEIGHT`, `GAP`
+  - Radius: `CORNER_RADIUS`
+  - Border/outline width: `STROKE_FLOAT`
+  - Font: `FONT_FAMILY`, `FONT_STYLE`, `FONT_SIZE`
+
+### Page structure
+
+Pages mirror the example app sidebar order:
+Design System, Accordion, Badge, Button, Checkbox, Heading, Input, InputNumber, InputPassword, Radio, Select, Switch, Table, Tabs, Text, Textarea, Icons
+
+Merged pages:
+
+- CheckboxGroup instances merged into Checkbox page (single + group in same brand frames)
+- SwitchGroup instances merged into Switch page
+- RadioGroup renamed to Radio
+- Typography split into Heading + Text
 
 ### Component page rules
 
-1. Component set at x=2000, no background — out of view
-2. 4 themed frames in 2×2 grid (lights top, darks bottom). "All components" page: single row
-3. Frames: 400px wide, HUG height, 48px gap, 24px padding, no corner radius, fill bound to `color/page`
-4. Theme label: 11px muted 0.5 opacity. All states shown. Instances fill width
-5. Pages: "All components" first, alphabetical middle, "Icons" last
+1. Component set at x=3000, no background — out of view of brand frames
+2. 4 themed frames in a single row: brand1-light, brand2-light, brand1-dark, brand2-dark. 48px gap between frames.
+3. Frames: HUG height, 48px gap, 24px padding, no corner radius, fill bound to `color/page`
+4. **No brand labels inside frames** — the frame name is sufficient. All states shown. Instances fill width
+5. **Labels reflect component state** — use "Default", "Checked", "Error", "Disabled" etc. matching example app labels. Never generic "Label" or "Button" text.
 6. Disabled/readonly fills: `color/bg` at 0.7 opacity — never hardcoded colors
-7. Labels reflect state (e.g. "Email" for error, "Username" for disabled)
+7. Dark-mode-safe fills: never hardcode light colors for stripes/highlights — use variable-bound fills with low opacity
 
 ---
 

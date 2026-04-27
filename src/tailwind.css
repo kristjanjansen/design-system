@@ -1,13 +1,28 @@
 @theme {
+  /* text colors */
   --color-ds-fg: var(--ds-color-fg);
-  --color-ds-muted: var(--ds-color-muted);
-  --color-ds-error: var(--ds-color-error);
-  --color-ds-border: var(--ds-color-border);
+  --color-ds-fg-muted: var(--ds-color-fg-muted);
+  --color-ds-fg-accent: var(--ds-color-fg-accent);
+  --color-ds-fg-error: var(--ds-color-fg-error);
+  --color-ds-fg-success: var(--ds-color-fg-success);
+  --color-ds-fg-warning: var(--ds-color-fg-warning);
+
+  /* background colors */
   --color-ds-bg: var(--ds-color-bg);
-  --color-ds-page: var(--ds-color-page);
-  --color-ds-accent: var(--ds-color-accent);
+  --color-ds-bg-page: var(--ds-color-bg-page);
+  --color-ds-bg-accent: var(--ds-color-bg-accent);
+  --color-ds-bg-error: var(--ds-color-bg-error);
+  --color-ds-bg-success: var(--ds-color-bg-success);
+  --color-ds-bg-warning: var(--ds-color-bg-warning);
+  --color-ds-bg-info: var(--ds-color-bg-info);
+  --color-ds-bg-neutral: var(--ds-color-bg-neutral);
+
+  /* border colors */
+  --color-ds-border: var(--ds-color-border);
+  --color-ds-border-error: var(--ds-color-border-error);
   --color-ds-outline: var(--ds-color-outline);
 
+  /* typography */
   --font-size-ds-tiny: var(--ds-font-size-tiny);
   --font-size-ds-tiny--line-height: var(--ds-line-height-tiny);
   --font-size-ds-small: var(--ds-font-size-small);
@@ -27,6 +42,7 @@
   --font-size-ds-h1: var(--ds-font-size-h1);
   --font-size-ds-h1--line-height: var(--ds-line-height-h1);
 
+  /* spacing */
   --spacing-ds-8: var(--ds-spacing-8);
   --spacing-ds-10: var(--ds-spacing-10);
   --spacing-ds-14: var(--ds-spacing-14);
@@ -34,15 +50,31 @@
   --spacing-ds-24: var(--ds-spacing-24);
   --spacing-ds-28: var(--ds-spacing-28);
 
-  --radius-ds: var(--ds-radius);
+  /* breakpoints */
+  --breakpoint-mobile: 22.5rem;
+  --breakpoint-tablet: 48rem;
+  --breakpoint-laptop: 64rem;
+  --breakpoint-desktop: 72rem;
+  --breakpoint-widescreen: 105rem;
+
+  /* radius */
+  --radius-ds-none: var(--ds-radius-none);
+  --radius-ds-minimum: var(--ds-radius-minimum);
+  --radius-ds-small: var(--ds-radius-small);
+  --radius-ds: var(--ds-radius-main);
+  --radius-ds-modal: var(--ds-radius-modal);
+  --radius-ds-full: var(--ds-radius-full);
+
   --border-width-ds: var(--ds-border-width);
 
+  /* shadows */
   --shadow-ds-100: var(--ds-shadow-100);
   --shadow-ds-200: var(--ds-shadow-200);
   --shadow-ds-300: var(--ds-shadow-300);
   --shadow-ds-400: var(--ds-shadow-400);
   --shadow-ds-500: var(--ds-shadow-500);
 
+  /* animation */
   --duration-ds-100: var(--ds-duration-100);
   --duration-ds-200: var(--ds-duration-200);
   --duration-ds-300: var(--ds-duration-300);

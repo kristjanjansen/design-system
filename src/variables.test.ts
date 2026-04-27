@@ -41,10 +41,23 @@ function oklchApca(
 
 // --- CSS parser ---
 
-type ColorName = "fg" | "muted" | "error" | "border" | "bg" | "page" | "accent" | "outline";
-type ThemeColors = Record<ColorName, [number, number, number]>;
+type OklchTuple = [number, number, number];
 
-function parseOklch(str: string): [number, number, number] {
+interface ThemeColors {
+  fg: OklchTuple;
+  "fg-muted": OklchTuple;
+  "fg-accent": OklchTuple;
+  "fg-error": OklchTuple;
+  "fg-success": OklchTuple;
+  "fg-warning": OklchTuple;
+  bg: OklchTuple;
+  "bg-page": OklchTuple;
+  "bg-accent": OklchTuple;
+  border: OklchTuple;
+  outline: OklchTuple;
+}
+
+function parseOklch(str: string): OklchTuple {
   const match = str.match(/oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*\)/);
   if (!match) throw new Error(`Cannot parse oklch: ${str}`);
   return [Number(match[1]), Number(match[2]), Number(match[3])];
@@ -52,8 +65,20 @@ function parseOklch(str: string): [number, number, number] {
 
 function parseSingleThemeFile(filePath: string): ThemeColors {
   const css = readFileSync(filePath, "utf-8");
-  const names: ColorName[] = ["fg", "muted", "error", "border", "bg", "page", "accent", "outline"];
-  const colors: Record<string, [number, number, number]> = {};
+  const names: (keyof ThemeColors)[] = [
+    "fg",
+    "fg-muted",
+    "fg-accent",
+    "fg-error",
+    "fg-success",
+    "fg-warning",
+    "bg",
+    "bg-page",
+    "bg-accent",
+    "border",
+    "outline",
+  ];
+  const colors: Record<string, OklchTuple> = {};
 
   for (const name of names) {
     const re = new RegExp(`--ds-color-${name}:\\s*(oklch\\([^)]+\\))`);
@@ -89,7 +114,7 @@ const APCA_UI = 30;
 for (const { name, colors } of themes) {
   describe(`${name} contrast`, () => {
     test("fg on page ≥ 4.5:1", () => {
-      const ratio = oklchWcag(...colors.fg, ...colors.page);
+      const ratio = oklchWcag(...colors.fg, ...colors["bg-page"]);
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(AA_TEXT);
     });
 
@@ -98,28 +123,38 @@ for (const { name, colors } of themes) {
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(AA_TEXT);
     });
 
-    test("muted on page ≥ 4.5:1", () => {
-      const ratio = oklchWcag(...colors.muted, ...colors.page);
+    test("fg-muted on page ≥ 4.5:1", () => {
+      const ratio = oklchWcag(...colors["fg-muted"], ...colors["bg-page"]);
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(AA_TEXT);
     });
 
-    test("muted on bg ≥ 4.5:1", () => {
-      const ratio = oklchWcag(...colors.muted, ...colors.bg);
+    test("fg-muted on bg ≥ 4.5:1", () => {
+      const ratio = oklchWcag(...colors["fg-muted"], ...colors.bg);
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(AA_TEXT);
     });
 
-    test("error on page ≥ 4.5:1", () => {
-      const ratio = oklchWcag(...colors.error, ...colors.page);
+    test("fg-error on page ≥ 4.5:1", () => {
+      const ratio = oklchWcag(...colors["fg-error"], ...colors["bg-page"]);
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(AA_TEXT);
     });
 
-    test("error on bg ≥ 4.5:1", () => {
-      const ratio = oklchWcag(...colors.error, ...colors.bg);
+    test("fg-error on bg ≥ 4.5:1", () => {
+      const ratio = oklchWcag(...colors["fg-error"], ...colors.bg);
+      expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(AA_TEXT);
+    });
+
+    test("fg-success on page ≥ 4.5:1", () => {
+      const ratio = oklchWcag(...colors["fg-success"], ...colors["bg-page"]);
+      expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(AA_TEXT);
+    });
+
+    test("fg-warning on page ≥ 4.5:1", () => {
+      const ratio = oklchWcag(...colors["fg-warning"], ...colors["bg-page"]);
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(AA_TEXT);
     });
 
     test("border on page ≥ 1.4:1", () => {
-      const ratio = oklchWcag(...colors.border, ...colors.page);
+      const ratio = oklchWcag(...colors.border, ...colors["bg-page"]);
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(1.4);
     });
 
@@ -128,20 +163,20 @@ for (const { name, colors } of themes) {
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(1.4);
     });
 
-    test("white on accent ≥ 4.5:1", () => {
-      const ratio = oklchWcag(1, 0, 0, ...colors.accent);
+    test("white on bg-accent ≥ 4.5:1", () => {
+      const ratio = oklchWcag(1, 0, 0, ...colors["bg-accent"]);
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(AA_TEXT);
     });
 
     test("outline on page ≥ 3:1", () => {
-      const ratio = oklchWcag(...colors.outline, ...colors.page);
+      const ratio = oklchWcag(...colors.outline, ...colors["bg-page"]);
       expect(ratio, `ratio: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(AA_UI);
     });
   });
 
   describe(`${name} APCA`, () => {
     test("fg on page |Lc| ≥ 60", () => {
-      const lc = oklchApca(...colors.fg, ...colors.page);
+      const lc = oklchApca(...colors.fg, ...colors["bg-page"]);
       expect(lc, `|Lc|: ${lc.toFixed(1)}`).toBeGreaterThanOrEqual(APCA_BODY);
     });
 
@@ -150,28 +185,28 @@ for (const { name, colors } of themes) {
       expect(lc, `|Lc|: ${lc.toFixed(1)}`).toBeGreaterThanOrEqual(APCA_BODY);
     });
 
-    test("muted on page |Lc| ≥ 45", () => {
-      const lc = oklchApca(...colors.muted, ...colors.page);
+    test("fg-muted on page |Lc| ≥ 45", () => {
+      const lc = oklchApca(...colors["fg-muted"], ...colors["bg-page"]);
       expect(lc, `|Lc|: ${lc.toFixed(1)}`).toBeGreaterThanOrEqual(APCA_LARGE);
     });
 
-    test("muted on bg |Lc| ≥ 45", () => {
-      const lc = oklchApca(...colors.muted, ...colors.bg);
+    test("fg-muted on bg |Lc| ≥ 45", () => {
+      const lc = oklchApca(...colors["fg-muted"], ...colors.bg);
       expect(lc, `|Lc|: ${lc.toFixed(1)}`).toBeGreaterThanOrEqual(APCA_LARGE);
     });
 
-    test("error on page |Lc| ≥ 45", () => {
-      const lc = oklchApca(...colors.error, ...colors.page);
+    test("fg-error on page |Lc| ≥ 45", () => {
+      const lc = oklchApca(...colors["fg-error"], ...colors["bg-page"]);
       expect(lc, `|Lc|: ${lc.toFixed(1)}`).toBeGreaterThanOrEqual(APCA_LARGE);
     });
 
-    test("white on accent |Lc| ≥ 60", () => {
-      const lc = oklchApca(1, 0, 0, ...colors.accent);
+    test("white on bg-accent |Lc| ≥ 60", () => {
+      const lc = oklchApca(1, 0, 0, ...colors["bg-accent"]);
       expect(lc, `|Lc|: ${lc.toFixed(1)}`).toBeGreaterThanOrEqual(APCA_BODY);
     });
 
     test("outline on page |Lc| ≥ 30", () => {
-      const lc = oklchApca(...colors.outline, ...colors.page);
+      const lc = oklchApca(...colors.outline, ...colors["bg-page"]);
       expect(lc, `|Lc|: ${lc.toFixed(1)}`).toBeGreaterThanOrEqual(APCA_UI);
     });
   });

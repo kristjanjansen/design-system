@@ -1,3 +1,5 @@
+"use client";
+
 import { type ReactNode, createContext, forwardRef, useContext, useId } from "react";
 
 export const AccordionContext = createContext<string | undefined>(undefined);
